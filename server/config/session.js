@@ -28,7 +28,7 @@ export function createSessionMiddleware() {
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7,
       httpOnly: true,
-      sameSite: isProduction ? "none" : "lax",
+      sameSite: "lax",
       secure: isProduction,
     },
   });
