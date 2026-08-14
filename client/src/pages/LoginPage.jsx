@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
+import PasswordInput from "../components/forms/PasswordInput.jsx";
 import styles from "./AuthPages.module.css";
 
 function LoginPage() {
@@ -62,12 +63,11 @@ function LoginPage() {
 
         <div className={styles.field}>
           <label htmlFor="login-password">Password</label>
-          <input
+          <PasswordInput
             autoComplete="current-password"
             id="login-password"
             onChange={(event) => setPassword(event.target.value)}
             required
-            type="password"
             value={password}
           />
         </div>
