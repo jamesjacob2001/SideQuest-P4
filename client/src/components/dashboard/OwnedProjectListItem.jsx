@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import { DASHBOARD_ORIGIN } from "../../utils/navigationOrigin.js";
 import styles from "./OwnedProjectListItem.module.css";
 
 function OwnedProjectListItem({ project, showManageActions }) {
@@ -13,7 +14,11 @@ function OwnedProjectListItem({ project, showManageActions }) {
   return (
     <li className={styles.item}>
       <div className={styles.main}>
-        <Link className={styles.title} to={`/projects/${projectId}`}>
+        <Link
+          className={styles.title}
+          state={DASHBOARD_ORIGIN}
+          to={`/projects/${projectId}`}
+        >
           {project.title}
         </Link>
 
@@ -30,12 +35,20 @@ function OwnedProjectListItem({ project, showManageActions }) {
       </div>
 
       <div className={styles.actions}>
-        <Link className={styles.viewLink} to={`/projects/${projectId}`}>
+        <Link
+          className={styles.viewLink}
+          state={DASHBOARD_ORIGIN}
+          to={`/projects/${projectId}`}
+        >
           View
         </Link>
 
         {showManageActions ? (
-          <Link className={styles.editLink} to={`/projects/${projectId}/edit`}>
+          <Link
+            className={styles.editLink}
+            state={DASHBOARD_ORIGIN}
+            to={`/projects/${projectId}/edit`}
+          >
             Edit
           </Link>
         ) : null}

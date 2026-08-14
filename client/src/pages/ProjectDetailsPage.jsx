@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
 import ProjectOwner from "../components/projects/ProjectOwner.jsx";
 import ProjectRoleCard from "../components/projects/ProjectRoleCard.jsx";
 import { getProjectById, deleteProject } from "../services/projectApi.js";
+import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
 import styles from "./ProjectDetailsPage.module.css";
 
 function ProjectDetailsPage() {
   const { projectId } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const { user: currentUser, isAuthenticated } = useAuth();
+  const backNavigation = getProjectBackNavigation(location.state);
 
   const [project, setProject] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,7 +52,7 @@ function ProjectDetailsPage() {
 
     try {
       await deleteProject(projectId);
-      navigate("/projects");
+      navigate(backNavigation.to);
     } catch (error) {
       setDeleteError(error.message);
       setIsDeleting(false);
@@ -75,8 +78,8 @@ function ProjectDetailsPage() {
 
         <p>{errorMessage}</p>
 
-        <Link className={styles.backLink} to="/projects">
-          Return to projects
+        <Link className={styles.backLink} to={backNavigation.to}>
+          {backNavigation.shortLabel}
         </Link>
       </section>
     );
@@ -91,7 +94,7 @@ function ProjectDetailsPage() {
     technologies = [],
     roles = [],
     locationType,
-    location,
+    location: projectLocation,
     status,
     experienceLevel,
     weeklyCommitment,
@@ -105,8 +108,8 @@ function ProjectDetailsPage() {
 
   return (
     <main className={styles.page}>
-      <Link className={styles.backLink} to="/projects">
-        ← Back to projects
+      <Link className={styles.backLink} to={backNavigation.to}>
+        {backNavigation.label}
       </Link>
 
       <header className={styles.hero}>
@@ -129,6 +132,7 @@ function ProjectDetailsPage() {
             <div className={styles.projectActions}>
               <Link
                 className={styles.editLink}
+                state={location.state}
                 to={`/projects/${projectId}/edit`}
               >
                 Edit Project
@@ -207,10 +211,10 @@ function ProjectDetailsPage() {
                 <dd>{locationType}</dd>
               </div>
 
-              {location && (
+              {projectLocation && (
                 <div>
                   <dt>Location</dt>
-                  <dd>{location}</dd>
+                  <dd>{projectLocation}</dd>
                 </div>
               )}
 

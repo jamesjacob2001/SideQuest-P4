@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import { PROJECTS_ORIGIN } from "../../utils/navigationOrigin.js";
 import ProjectOwner from "./ProjectOwner.jsx";
 import styles from "./ProjectCard.module.css";
 
@@ -36,7 +37,9 @@ function ProjectCard({ project }) {
       <div className={styles.content}>
         <div>
           <h2 className={styles.title}>
-            <Link to={`/projects/${_id}`}>{title}</Link>
+            <Link state={PROJECTS_ORIGIN} to={`/projects/${_id}`}>
+              {title}
+            </Link>
           </h2>
 
           <p className={styles.tagline}>{tagline}</p>
@@ -88,7 +91,11 @@ function ProjectCard({ project }) {
           {totalPositions} {totalPositions === 1 ? "position" : "positions"}
         </span>
 
-        <Link className={styles.detailsLink} to={`/projects/${_id}`}>
+        <Link
+          className={styles.detailsLink}
+          state={PROJECTS_ORIGIN}
+          to={`/projects/${_id}`}
+        >
           View project
         </Link>
       </div>

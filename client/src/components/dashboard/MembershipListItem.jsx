@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { buildProfileAvatarUrl } from "../profiles/buildProfileAvatarUrl.js";
+import { DASHBOARD_ORIGIN } from "../../utils/navigationOrigin.js";
 import styles from "./MembershipListItem.module.css";
 
 function MembershipListItem({
@@ -26,7 +27,11 @@ function MembershipListItem({
   return (
     <li className={styles.item}>
       <div className={styles.main}>
-        <Link className={styles.title} to={`/projects/${projectId}`}>
+        <Link
+          className={styles.title}
+          state={DASHBOARD_ORIGIN}
+          to={`/projects/${projectId}`}
+        >
           {project.title}
         </Link>
 

@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
 import ProjectForm from "../components/forms/ProjectForm.jsx";
 import { getProjectById, updateProject } from "../services/projectApi.js";
+import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
 import styles from "./EditProjectPage.module.css";
 
 function EditProjectPage() {
   const { projectId } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const { user: currentUser } = useAuth();
+  const backNavigation = getProjectBackNavigation(location.state);
 
   const [project, setProject] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,7 +48,9 @@ function EditProjectPage() {
     try {
       const updatedProject = await updateProject(projectId, projectData);
 
-      navigate(`/projects/${updatedProject._id}`);
+      navigate(`/projects/${updatedProject._id}`, {
+        state: location.state,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -64,8 +75,8 @@ function EditProjectPage() {
 
         <p>{errorMessage}</p>
 
-        <Link className={styles.link} to="/projects">
-          Return to projects
+        <Link className={styles.link} to={backNavigation.to}>
+          {backNavigation.shortLabel}
         </Link>
       </section>
     );
@@ -74,12 +85,18 @@ function EditProjectPage() {
   const isOwner = currentUser?._id?.toString() === String(project.ownerId);
 
   if (!isOwner) {
-    return <Navigate replace to={`/projects/${projectId}`} />;
+    return (
+      <Navigate replace state={location.state} to={`/projects/${projectId}`} />
+    );
   }
 
   return (
     <main className={styles.page}>
-      <Link className={styles.link} to={`/projects/${projectId}`}>
+      <Link
+        className={styles.link}
+        state={location.state}
+        to={`/projects/${projectId}`}
+      >
         ← Cancel editing
       </Link>
 
