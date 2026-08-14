@@ -10,6 +10,45 @@ import {
   buildUpdatedProjectDocument,
 } from "../utils/buildProjectDocument.js";
 import { validateProject } from "../utils/validators/projectValidator.js";
+import { PROJECT_CATEGORIES } from "../constants/categories.js";
+import { TECHNOLOGY_LIST } from "../constants/technologyList.js";
+import { PROJECT_STATUSES } from "../constants/projectStatuses.js";
+import { LOCATION_TYPES } from "../constants/locationTypes.js";
+import { EXPERIENCE_LEVELS } from "../constants/experienceLevels.js";
+
+const BROWSEABLE_STATUSES = PROJECT_STATUSES.filter(
+  (status) => status !== "Completed",
+);
+const COMPENSATION_FILTERS = new Set(["paid", "unpaid"]);
+
+function pickAllowedValue(value, allowedValues) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  const trimmedValue = value.trim();
+  return allowedValues.includes(trimmedValue) ? trimmedValue : "";
+}
+
+function parseProjectListQuery(query) {
+  const rawSearch = typeof query.search === "string" ? query.search : "";
+
+  const compensation =
+    typeof query.compensation === "string" &&
+    COMPENSATION_FILTERS.has(query.compensation.trim().toLowerCase())
+      ? query.compensation.trim().toLowerCase()
+      : "";
+
+  return {
+    search: rawSearch.trim().slice(0, 100),
+    category: pickAllowedValue(query.category, PROJECT_CATEGORIES),
+    technology: pickAllowedValue(query.technology, TECHNOLOGY_LIST),
+    status: pickAllowedValue(query.status, BROWSEABLE_STATUSES),
+    locationType: pickAllowedValue(query.locationType, LOCATION_TYPES),
+    experienceLevel: pickAllowedValue(query.experienceLevel, EXPERIENCE_LEVELS),
+    compensation,
+  };
+}
 
 export async function listProjects(request, response, next) {
   try {
@@ -25,14 +64,12 @@ export async function listProjects(request, response, next) {
         ? Math.min(requestedLimit, 100)
         : 24;
 
-    const rawSearch =
-      typeof request.query.search === "string" ? request.query.search : "";
-    const search = rawSearch.trim().slice(0, 100);
+    const listQuery = parseProjectListQuery(request.query);
 
     const { projects, totalProjects } = await getPublicProjects(
       page,
       limit,
-      search,
+      listQuery,
     );
 
     const totalPages = Math.max(1, Math.ceil(totalProjects / limit));

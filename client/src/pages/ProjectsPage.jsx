@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
 
+import ProjectFilters, {
+  EMPTY_FILTERS,
+} from "../components/projects/ProjectFilters.jsx";
 import ProjectGrid from "../components/projects/ProjectGrid.jsx";
+import ProjectPagination from "../components/projects/ProjectPagination.jsx";
 import { getProjects } from "../services/projectApi.js";
 import styles from "./ProjectsPage.module.css";
-import ProjectPagination from "../components/projects/ProjectPagination.jsx";
 
 const PROJECTS_PER_PAGE = 24;
+
+function hasActiveFilters(filters) {
+  return Object.values(filters).some((value) => value !== "");
+}
 
 function ProjectsPage() {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [activeSearch, setActiveSearch] = useState("");
+  const [filters, setFilters] = useState(EMPTY_FILTERS);
   const [pagination, setPagination] = useState({
     page: 1,
     limit: PROJECTS_PER_PAGE,
@@ -22,6 +30,11 @@ function ProjectsPage() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [areFiltersOpen, setAreFiltersOpen] = useState(false);
+
+  const filtersActive = hasActiveFilters(filters);
+  const queryActive = Boolean(activeSearch) || filtersActive;
+  const activeFilterCount = Object.values(filters).filter(Boolean).length;
 
   useEffect(() => {
     async function loadProjects() {
@@ -29,11 +42,10 @@ function ProjectsPage() {
       setErrorMessage("");
 
       try {
-        const projectData = await getProjects(
-          currentPage,
-          PROJECTS_PER_PAGE,
-          activeSearch,
-        );
+        const projectData = await getProjects(currentPage, PROJECTS_PER_PAGE, {
+          search: activeSearch,
+          ...filters,
+        });
 
         setProjects(projectData.projects);
         setPagination(projectData.pagination);
@@ -45,7 +57,7 @@ function ProjectsPage() {
     }
 
     loadProjects();
-  }, [currentPage, activeSearch]);
+  }, [currentPage, activeSearch, filters]);
 
   function handleSearchSubmit(event) {
     event.preventDefault();
@@ -60,6 +72,19 @@ function ProjectsPage() {
     setSearchInput("");
     setCurrentPage(1);
     setActiveSearch("");
+  }
+
+  function handleFilterChange(name, value) {
+    setCurrentPage(1);
+    setFilters((currentFilters) => ({
+      ...currentFilters,
+      [name]: value,
+    }));
+  }
+
+  function handleClearFilters() {
+    setCurrentPage(1);
+    setFilters(EMPTY_FILTERS);
   }
 
   function handlePageChange(nextPage) {
@@ -96,12 +121,12 @@ function ProjectsPage() {
   } else if (projects.length === 0) {
     pageContent = (
       <div className={styles.message}>
-        {activeSearch ? (
+        {queryActive ? (
           <>
-            <h2>No projects match your search</h2>
+            <h2>No projects match your filters</h2>
             <p>
-              Try a different title, technology, or category — or clear the
-              search to browse all projects.
+              Try adjusting search or filters — or clear them to browse all
+              projects.
             </p>
           </>
         ) : (
@@ -144,7 +169,7 @@ function ProjectsPage() {
           <p className={styles.projectCount}>
             {pagination.totalProjects}{" "}
             {pagination.totalProjects === 1 ? "project" : "projects"}
-            {activeSearch ? " found" : ""}
+            {queryActive ? " found" : ""}
           </p>
         )}
       </header>
@@ -163,6 +188,37 @@ function ProjectsPage() {
           maxLength={100}
         />
         <div className={styles.searchActions}>
+          <button
+            className={`${styles.filterToggle}${
+              areFiltersOpen || filtersActive ? ` ${styles.filterToggleActive}` : ""
+            }`}
+            type="button"
+            aria-expanded={areFiltersOpen}
+            aria-controls="project-filters"
+            aria-label={
+              areFiltersOpen ? "Hide project filters" : "Show project filters"
+            }
+            title="Filters"
+            onClick={() => setAreFiltersOpen((isOpen) => !isOpen)}
+          >
+            <svg
+              className={styles.filterIcon}
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M4 6h16M7 12h10M10 18h4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+            {filtersActive && (
+              <span className={styles.filterBadge}>{activeFilterCount}</span>
+            )}
+          </button>
           <button className={styles.searchButton} type="submit">
             Search
           </button>
@@ -177,6 +233,17 @@ function ProjectsPage() {
           )}
         </div>
       </form>
+
+      {areFiltersOpen && (
+        <div id="project-filters">
+          <ProjectFilters
+            filters={filters}
+            onChange={handleFilterChange}
+            onClear={handleClearFilters}
+            hasActiveFilters={filtersActive}
+          />
+        </div>
+      )}
 
       {pageContent}
     </section>

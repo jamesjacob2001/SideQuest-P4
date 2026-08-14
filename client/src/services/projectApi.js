@@ -2,7 +2,8 @@ import apiRequest from "./apiClient.js";
 
 const PROJECTS_ENDPOINT = "/api/projects";
 
-export async function getProjects(page = 1, limit = 24, search = "") {
+export async function getProjects(page = 1, limit = 24, options = {}) {
+  const { search = "", ...filters } = options;
   const searchParameters = new URLSearchParams({
     page: String(page),
     limit: String(limit),
@@ -12,6 +13,12 @@ export async function getProjects(page = 1, limit = 24, search = "") {
 
   if (trimmedSearch) {
     searchParameters.set("search", trimmedSearch);
+  }
+
+  for (const [key, value] of Object.entries(filters)) {
+    if (typeof value === "string" && value.trim()) {
+      searchParameters.set(key, value.trim());
+    }
   }
 
   const response = await apiRequest(

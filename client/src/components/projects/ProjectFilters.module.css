@@ -1,0 +1,75 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filtersHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.filtersTitle {
+  margin: 0;
+  color: #e4e4e9;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.clearFiltersButton {
+  padding: 0.45rem 0.8rem;
+  color: #d8d9df;
+  background-color: #292b38;
+  border: 1px solid #3d3f4d;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.clearFiltersButton:hover {
+  background-color: #343645;
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.filterField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  color: #c6c7d0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.filterField select {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  color: #f4f4f7;
+  background-color: #181923;
+  border: 1px solid #454756;
+  border-radius: 8px;
+}
+
+.filterField select:focus {
+  border-color: #8d90f5;
+  outline: 2px solid rgb(141 144 245 / 25%);
+  outline-offset: 1px;
+}
+
+@media (max-width: 900px) {
+  .filterGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .filterGrid {
+    grid-template-columns: 1fr;
+  }
+}

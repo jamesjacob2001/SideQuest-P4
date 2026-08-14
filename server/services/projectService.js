@@ -80,42 +80,94 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function buildPublicProjectsFilter(search) {
-  const filter = {
-    status: {
+function buildPublicProjectsFilter({
+  search = "",
+  category = "",
+  technology = "",
+  status = "",
+  locationType = "",
+  experienceLevel = "",
+  compensation = "",
+} = {}) {
+  const filter = {};
+
+  if (status) {
+    filter.status = status;
+  } else {
+    filter.status = {
       $ne: "Completed",
-    },
-  };
+    };
+  }
+
+  if (category) {
+    filter.categories = category;
+  }
+
+  if (technology) {
+    filter.technologies = technology;
+  }
+
+  if (locationType) {
+    filter.locationType = locationType;
+  }
+
+  if (experienceLevel) {
+    filter.experienceLevel = experienceLevel;
+  }
+
+  if (compensation === "unpaid") {
+    filter.$and = [
+      ...(filter.$and ?? []),
+      {
+        $or: [
+          { compensation: null },
+          { compensation: { $exists: false } },
+          { "compensation.type": { $regex: /^unpaid$/i } },
+        ],
+      },
+    ];
+  } else if (compensation === "paid") {
+    filter.compensation = { $ne: null };
+    filter["compensation.type"] = {
+      $exists: true,
+      $not: /^unpaid$/i,
+    };
+  }
 
   const trimmedSearch = typeof search === "string" ? search.trim() : "";
 
-  if (!trimmedSearch) {
-    return filter;
+  if (trimmedSearch) {
+    // Word boundaries avoid substring false positives (e.g. "Unity" in "community").
+    const searchPattern = new RegExp(
+      `\\b${escapeRegExp(trimmedSearch)}\\b`,
+      "i",
+    );
+
+    const searchClause = {
+      $or: [
+        { title: searchPattern },
+        { tagline: searchPattern },
+        { "description.overview": searchPattern },
+        { "description.goals": searchPattern },
+        { "description.currentProgress": searchPattern },
+        { "description.lookingFor": searchPattern },
+        { categories: searchPattern },
+        { customCategories: searchPattern },
+        { technologies: searchPattern },
+      ],
+    };
+
+    filter.$and = [...(filter.$and ?? []), searchClause];
   }
-
-  // Word boundaries avoid substring false positives (e.g. "Unity" in "community").
-  const searchPattern = new RegExp(`\\b${escapeRegExp(trimmedSearch)}\\b`, "i");
-
-  filter.$or = [
-    { title: searchPattern },
-    { tagline: searchPattern },
-    { "description.overview": searchPattern },
-    { "description.goals": searchPattern },
-    { "description.currentProgress": searchPattern },
-    { "description.lookingFor": searchPattern },
-    { categories: searchPattern },
-    { customCategories: searchPattern },
-    { technologies: searchPattern },
-  ];
 
   return filter;
 }
 
-export async function getPublicProjects(page, limit, search = "") {
+export async function getPublicProjects(page, limit, query = {}) {
   const database = getDatabase();
   const projectsCollection = database.collection("projects");
 
-  const filter = buildPublicProjectsFilter(search);
+  const filter = buildPublicProjectsFilter(query);
   const skip = (page - 1) * limit;
 
   const [projects, totalProjects] = await Promise.all([

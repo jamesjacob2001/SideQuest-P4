@@ -73,7 +73,58 @@
 .searchActions {
   display: flex;
   flex-shrink: 0;
+  align-items: center;
   gap: 0.6rem;
+}
+
+.filterToggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  color: #d8d9df;
+  background-color: #292b38;
+  border: 1px solid #3d3f4d;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filterToggle:hover {
+  background-color: #343645;
+}
+
+.filterToggleActive {
+  color: #ffffff;
+  background-color: #6669c5;
+  border-color: #6669c5;
+}
+
+.filterToggleActive:hover {
+  background-color: #7578d8;
+}
+
+.filterIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.filterBadge {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.35rem;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  padding: 0 0.3rem;
+  color: #171821;
+  background-color: #adafff;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  text-align: center;
 }
 
 .searchButton,
@@ -154,6 +205,10 @@
 
   .searchActions {
     width: 100%;
+  }
+
+  .filterToggle {
+    flex-shrink: 0;
   }
 
   .searchButton,
