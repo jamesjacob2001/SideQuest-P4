@@ -6,6 +6,9 @@
 
 .formSection,
 .errorSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   padding: 1.75rem;
   background-color: #22232f;
   border: 1px solid #343645;
@@ -13,7 +16,7 @@
 }
 
 .sectionHeading {
-  margin-bottom: 1.5rem;
+  margin: 0;
 }
 
 .sectionHeading h2 {
@@ -24,6 +27,7 @@
 .sectionHeading p {
   margin: 0.5rem 0 0;
   color: #aeb0ba;
+  line-height: 1.5;
 }
 
 .field,
@@ -31,13 +35,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-.field + .field,
-.fieldset + .field,
-.field + .fieldset,
-.fieldset + .fieldset {
-  margin-top: 1.25rem;
+  min-width: 0;
 }
 
 .field label,
@@ -45,12 +43,14 @@
 .roleCard legend {
   color: #e4e4e9;
   font-weight: 700;
+  line-height: 1.4;
 }
 
 .field input,
 .field textarea,
 .field select {
   width: 100%;
+  min-height: 2.85rem;
   padding: 0.8rem 0.9rem;
   color: #f4f4f7;
   background-color: #181923;
@@ -60,6 +60,7 @@
 }
 
 .field textarea {
+  min-height: 110px;
   resize: vertical;
 }
 
@@ -75,6 +76,7 @@
   margin: 0;
   color: #9ea0ab;
   font-size: 0.85rem;
+  line-height: 1.4;
 }
 
 .fieldset,
@@ -82,36 +84,40 @@
   margin: 0;
   padding: 0;
   border: 0;
+  min-inline-size: 0;
 }
 
 .checkboxGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 0.65rem;
-  margin-top: 0.65rem;
 }
 
 .checkboxLabel {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.55rem;
+  min-height: 2.85rem;
   padding: 0.7rem;
   color: #d8d9df;
   background-color: #2b2d3a;
   border: 1px solid #3f4150;
   border-radius: 8px;
   cursor: pointer;
+  line-height: 1.4;
 }
 
 .checkboxLabel input {
   width: auto;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
 }
 
 .twoColumnFields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 1.25rem;
+  gap: 1.25rem;
+  align-items: start;
 }
 
 .roleList {
@@ -121,6 +127,9 @@
 }
 
 .roleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   padding: 1.35rem;
   background-color: #1b1c26;
   border: 1px solid #3b3d4c;
@@ -136,7 +145,6 @@
   display: flex;
   align-items: end;
   gap: 1rem;
-  margin-top: 1.25rem;
 }
 
 .inlineField .field {
@@ -147,7 +155,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1rem;
 }
 
 .skillButton {
@@ -170,13 +177,14 @@
 }
 
 .secondaryButton {
+  align-self: flex-start;
   color: #dedff4;
   background-color: transparent;
   border: 1px solid #6669c5;
 }
 
 .dangerButton {
-  margin-top: 1.25rem;
+  align-self: flex-start;
   color: #ffc8ce;
   background-color: transparent;
   border: 1px solid #9f4f59;
@@ -203,13 +211,19 @@
 }
 
 .errorSummary h2 {
-  margin-top: 0;
+  margin: 0;
   color: #ffd8dc;
 }
 
 .errorSummary p,
 .errorSummary li {
+  margin: 0;
   color: #f0c8cd;
+}
+
+.errorSummary ul {
+  margin: 0;
+  padding-left: 1.2rem;
 }
 
 @media (max-width: 800px) {
@@ -220,5 +234,9 @@
   .inlineField {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .inlineField .secondaryButton {
+    width: 100%;
   }
 }
