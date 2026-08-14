@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 import { YEAR_LABELS } from "../../constants/userOptions.js";
+import { FieldLabel } from "./FormFieldLabels.jsx";
 import styles from "./ProfileForm.module.css";
 
 function AcademicFields({ values, onChange }) {
@@ -17,7 +18,7 @@ function AcademicFields({ values, onChange }) {
 
       <div className={styles.fieldRow}>
         <div className={styles.field}>
-          <label htmlFor="profile-university">University</label>
+          <FieldLabel htmlFor="profile-university">University</FieldLabel>
           <input
             id="profile-university"
             onChange={(event) => updateField("university", event.target.value)}
@@ -27,7 +28,7 @@ function AcademicFields({ values, onChange }) {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="profile-major">Major / focus</label>
+          <FieldLabel htmlFor="profile-major">Major / focus</FieldLabel>
           <input
             id="profile-major"
             onChange={(event) => updateField("major", event.target.value)}
@@ -39,7 +40,7 @@ function AcademicFields({ values, onChange }) {
 
       <div className={styles.fieldRow}>
         <div className={styles.field}>
-          <label htmlFor="profile-year-label">Year</label>
+          <FieldLabel htmlFor="profile-year-label">Year</FieldLabel>
           <select
             id="profile-year-label"
             onChange={(event) => updateField("yearLabel", event.target.value)}
@@ -55,7 +56,9 @@ function AcademicFields({ values, onChange }) {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="profile-graduation-year">Graduation year</label>
+          <FieldLabel htmlFor="profile-graduation-year">
+            Graduation year
+          </FieldLabel>
           <input
             id="profile-graduation-year"
             onChange={(event) => {

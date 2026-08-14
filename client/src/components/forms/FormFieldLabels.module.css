@@ -1,0 +1,19 @@
+.requiredMark {
+  color: #f0a8b0;
+  font-weight: 700;
+}
+
+.optionalMark {
+  color: #9ea0ab;
+  font-weight: 500;
+}
+
+.requiredNote {
+  margin: 0;
+  color: #c6c7d0;
+  font-size: 0.9rem;
+}
+
+.requiredNote .requiredMark {
+  margin-right: 0.15rem;
+}

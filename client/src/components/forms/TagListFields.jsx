@@ -1,9 +1,17 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+import { FieldLabel } from "./FormFieldLabels.jsx";
 import styles from "./ProfileForm.module.css";
 
-function TagListFields({ id, label, values, onChange, placeholder }) {
+function TagListFields({
+  id,
+  label,
+  values,
+  onChange,
+  placeholder,
+  required = false,
+}) {
   const [draft, setDraft] = useState("");
 
   function handleAdd(event) {
@@ -32,7 +40,9 @@ function TagListFields({ id, label, values, onChange, placeholder }) {
 
   return (
     <div className={styles.field}>
-      <label htmlFor={id}>{label}</label>
+      <FieldLabel htmlFor={id} required={required}>
+        {label}
+      </FieldLabel>
 
       {values.length > 0 ? (
         <ul className={styles.tagRow}>
@@ -73,6 +83,7 @@ TagListFields.propTypes = {
   values: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
+  required: PropTypes.bool,
 };
 
 export default TagListFields;

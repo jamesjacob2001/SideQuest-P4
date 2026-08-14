@@ -8,6 +8,11 @@ import {
   PROJECT_STATUSES,
   TECHNOLOGY_OPTIONS,
 } from "../../constants/projectOptions.js";
+import {
+  FieldLabel,
+  FieldLegend,
+  RequiredFieldsNote,
+} from "./FormFieldLabels.jsx";
 import styles from "./ProjectForm.module.css";
 
 function createEmptyRole() {
@@ -283,11 +288,105 @@ function ProjectForm({
     };
   }
 
+  function validateProjectForm() {
+    const errors = [];
+
+    if (!formData.title.trim()) {
+      errors.push("Project title is required.");
+    }
+
+    if (!formData.tagline.trim()) {
+      errors.push("Project tagline is required.");
+    }
+
+    if (!formData.description.overview.trim()) {
+      errors.push("Description overview is required.");
+    }
+
+    if (!formData.description.goals.trim()) {
+      errors.push("Description goals is required.");
+    }
+
+    if (!formData.description.currentProgress.trim()) {
+      errors.push("Description currentProgress is required.");
+    }
+
+    if (!formData.description.lookingFor.trim()) {
+      errors.push("Description lookingFor is required.");
+    }
+
+    if (formData.categories.length === 0) {
+      errors.push("At least one project category is required.");
+    }
+
+    if (
+      formData.categories.includes("Other") &&
+      !formData.customCategory.trim()
+    ) {
+      errors.push(
+        "At least one custom category is required when Other is selected.",
+      );
+    }
+
+    if (
+      formData.technologies.length === 0 &&
+      !formData.customTechnology.trim()
+    ) {
+      errors.push("At least one technology is required.");
+    }
+
+    if (formData.roles.length === 0) {
+      errors.push("At least one project role is required.");
+    }
+
+    formData.roles.forEach((role, index) => {
+      const label = `Role ${index + 1}`;
+
+      if (!role.title.trim()) {
+        errors.push(`${label} must have a title.`);
+      }
+
+      if (role.requiredSkills.length === 0) {
+        errors.push(`${label} must have at least one required skill.`);
+      }
+
+      if (!EXPERIENCE_LEVELS.includes(role.experienceLevel)) {
+        errors.push(`${label} must have a valid experience level.`);
+      }
+
+      const totalPositions = Number(role.totalPositions);
+
+      if (!Number.isInteger(totalPositions) || totalPositions < 1) {
+        errors.push(
+          `${label} totalPositions must be an integer of at least 1.`,
+        );
+      }
+    });
+
+    if (!LOCATION_TYPES.includes(formData.locationType)) {
+      errors.push("A valid location type is required.");
+    }
+
+    if (!PROJECT_STATUSES.includes(formData.status)) {
+      errors.push("A valid project status is required.");
+    }
+
+    return errors;
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
     setFormError("");
     setValidationErrors([]);
+
+    const clientErrors = validateProjectForm();
+
+    if (clientErrors.length > 0) {
+      setFormError("Please fix the highlighted issues before saving.");
+      setValidationErrors(clientErrors);
+      return;
+    }
 
     try {
       await onSubmit(buildProjectPayload());
@@ -297,7 +396,9 @@ function ProjectForm({
     }
   }
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit} noValidate>
+      <RequiredFieldsNote />
+
       {formError && (
         <div className={styles.errorSummary} role="alert">
           <h2>{errorTitle}</h2>
@@ -320,7 +421,9 @@ function ProjectForm({
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="title">Project title</label>
+          <FieldLabel htmlFor="title" required>
+            Project title
+          </FieldLabel>
           <input
             id="title"
             name="title"
@@ -332,7 +435,9 @@ function ProjectForm({
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="tagline">Tagline</label>
+          <FieldLabel htmlFor="tagline" required>
+            Tagline
+          </FieldLabel>
           <input
             id="tagline"
             name="tagline"
@@ -356,7 +461,9 @@ function ProjectForm({
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="overview">Overview</label>
+          <FieldLabel htmlFor="overview" required>
+            Overview
+          </FieldLabel>
           <textarea
             id="overview"
             name="overview"
@@ -368,7 +475,9 @@ function ProjectForm({
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="goals">Goals</label>
+          <FieldLabel htmlFor="goals" required>
+            Goals
+          </FieldLabel>
           <textarea
             id="goals"
             name="goals"
@@ -380,7 +489,9 @@ function ProjectForm({
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="currentProgress">Current progress</label>
+          <FieldLabel htmlFor="currentProgress" required>
+            Current progress
+          </FieldLabel>
           <textarea
             id="currentProgress"
             name="currentProgress"
@@ -392,7 +503,9 @@ function ProjectForm({
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="lookingFor">Who is the team looking for?</label>
+          <FieldLabel htmlFor="lookingFor" required>
+            Who is the team looking for?
+          </FieldLabel>
           <textarea
             id="lookingFor"
             name="lookingFor"
@@ -410,7 +523,7 @@ function ProjectForm({
         </div>
 
         <fieldset className={styles.fieldset}>
-          <legend>Categories</legend>
+          <FieldLegend required>Categories</FieldLegend>
 
           <div className={styles.checkboxGrid}>
             {PROJECT_CATEGORIES.map((category) => (
@@ -431,7 +544,9 @@ function ProjectForm({
 
         {formData.categories.includes("Other") && (
           <div className={styles.field}>
-            <label htmlFor="customCategory">Custom category</label>
+            <FieldLabel htmlFor="customCategory" required>
+              Custom category
+            </FieldLabel>
             <input
               id="customCategory"
               name="customCategory"
@@ -444,7 +559,7 @@ function ProjectForm({
         )}
 
         <fieldset className={styles.fieldset}>
-          <legend>Technologies</legend>
+          <FieldLegend required>Technologies</FieldLegend>
 
           <div className={styles.checkboxGrid}>
             {TECHNOLOGY_OPTIONS.map((technology) => (
@@ -464,7 +579,9 @@ function ProjectForm({
         </fieldset>
 
         <div className={styles.field}>
-          <label htmlFor="customTechnology">Additional technology</label>
+          <FieldLabel htmlFor="customTechnology">
+            Additional technology
+          </FieldLabel>
           <input
             id="customTechnology"
             name="customTechnology"
@@ -486,7 +603,9 @@ function ProjectForm({
               <legend>Role {roleIndex + 1}</legend>
 
               <div className={styles.field}>
-                <label htmlFor={`role-title-${roleIndex}`}>Role title</label>
+                <FieldLabel htmlFor={`role-title-${roleIndex}`} required>
+                  Role title
+                </FieldLabel>
                 <input
                   id={`role-title-${roleIndex}`}
                   name="title"
@@ -498,9 +617,9 @@ function ProjectForm({
               </div>
 
               <div className={styles.field}>
-                <label htmlFor={`role-description-${roleIndex}`}>
+                <FieldLabel htmlFor={`role-description-${roleIndex}`}>
                   Role description
-                </label>
+                </FieldLabel>
                 <textarea
                   id={`role-description-${roleIndex}`}
                   name="description"
@@ -512,14 +631,15 @@ function ProjectForm({
 
               <div className={styles.twoColumnFields}>
                 <div className={styles.field}>
-                  <label htmlFor={`role-level-${roleIndex}`}>
+                  <FieldLabel htmlFor={`role-level-${roleIndex}`} required>
                     Experience level
-                  </label>
+                  </FieldLabel>
                   <select
                     id={`role-level-${roleIndex}`}
                     name="experienceLevel"
                     value={role.experienceLevel}
                     onChange={(event) => handleRoleChange(roleIndex, event)}
+                    required
                   >
                     {EXPERIENCE_LEVELS.map((level) => (
                       <option value={level} key={level}>
@@ -530,9 +650,9 @@ function ProjectForm({
                 </div>
 
                 <div className={styles.field}>
-                  <label htmlFor={`role-positions-${roleIndex}`}>
+                  <FieldLabel htmlFor={`role-positions-${roleIndex}`} required>
                     Number of positions
-                  </label>
+                  </FieldLabel>
                   <input
                     id={`role-positions-${roleIndex}`}
                     name="totalPositions"
@@ -545,7 +665,7 @@ function ProjectForm({
                 </div>
               </div>
               <fieldset className={styles.fieldset}>
-                <legend>Required skills</legend>
+                <FieldLegend required>Required skills</FieldLegend>
 
                 <div className={styles.checkboxGrid}>
                   {TECHNOLOGY_OPTIONS.map((skill) => (
@@ -566,9 +686,9 @@ function ProjectForm({
 
               <div className={styles.inlineField}>
                 <div className={styles.field}>
-                  <label htmlFor={`custom-skill-${roleIndex}`}>
+                  <FieldLabel htmlFor={`custom-skill-${roleIndex}`}>
                     Custom skill
-                  </label>
+                  </FieldLabel>
                   <input
                     id={`custom-skill-${roleIndex}`}
                     name="customSkill"
@@ -631,7 +751,9 @@ function ProjectForm({
 
         <div className={styles.twoColumnFields}>
           <div className={styles.field}>
-            <label htmlFor="experienceLevel">Overall experience level</label>
+            <FieldLabel htmlFor="experienceLevel">
+              Overall experience level
+            </FieldLabel>
             <select
               id="experienceLevel"
               name="experienceLevel"
@@ -647,12 +769,15 @@ function ProjectForm({
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="locationType">Location type</label>
+            <FieldLabel htmlFor="locationType" required>
+              Location type
+            </FieldLabel>
             <select
               id="locationType"
               name="locationType"
               value={formData.locationType}
               onChange={handleFieldChange}
+              required
             >
               {LOCATION_TYPES.map((type) => (
                 <option value={type} key={type}>
@@ -664,7 +789,7 @@ function ProjectForm({
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="location">Location</label>
+          <FieldLabel htmlFor="location">Location</FieldLabel>
           <input
             id="location"
             name="location"
@@ -677,7 +802,7 @@ function ProjectForm({
 
         <div className={styles.twoColumnFields}>
           <div className={styles.field}>
-            <label htmlFor="weeklyCommitment">Weekly commitment</label>
+            <FieldLabel htmlFor="weeklyCommitment">Weekly commitment</FieldLabel>
             <input
               id="weeklyCommitment"
               name="weeklyCommitment"
@@ -689,7 +814,7 @@ function ProjectForm({
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="duration">Expected duration</label>
+            <FieldLabel htmlFor="duration">Expected duration</FieldLabel>
             <input
               id="duration"
               name="duration"
@@ -703,7 +828,7 @@ function ProjectForm({
 
         <div className={styles.twoColumnFields}>
           <div className={styles.field}>
-            <label htmlFor="compensation">Compensation</label>
+            <FieldLabel htmlFor="compensation">Compensation</FieldLabel>
             <input
               id="compensation"
               name="compensation"
@@ -715,12 +840,15 @@ function ProjectForm({
           </div>
 
           <div className={styles.field}>
-            <label htmlFor="status">Initial status</label>
+            <FieldLabel htmlFor="status" required>
+              Initial status
+            </FieldLabel>
             <select
               id="status"
               name="status"
               value={formData.status}
               onChange={handleFieldChange}
+              required
             >
               {PROJECT_STATUSES.map((status) => (
                 <option value={status} key={status}>

@@ -4,6 +4,7 @@ import {
   AVAILABILITY_OPTIONS,
   USER_EXPERIENCE_LEVELS,
 } from "../../constants/userOptions.js";
+import { FieldLabel } from "./FormFieldLabels.jsx";
 import styles from "./ProfileForm.module.css";
 
 function AvailabilityFields({ values, onChange }) {
@@ -20,7 +21,9 @@ function AvailabilityFields({ values, onChange }) {
 
       <div className={styles.fieldRow}>
         <div className={styles.field}>
-          <label htmlFor="profile-availability">Weekly availability</label>
+          <FieldLabel htmlFor="profile-availability">
+            Weekly availability
+          </FieldLabel>
           <select
             id="profile-availability"
             onChange={(event) =>
@@ -38,7 +41,7 @@ function AvailabilityFields({ values, onChange }) {
         </div>
 
         <div className={styles.field}>
-          <label htmlFor="profile-experience">Experience level</label>
+          <FieldLabel htmlFor="profile-experience">Experience level</FieldLabel>
           <select
             id="profile-experience"
             onChange={(event) =>
@@ -64,7 +67,8 @@ function AvailabilityFields({ values, onChange }) {
           }
           type="checkbox"
         />
-        Open to collaborate on projects
+        Open to collaborate on projects{" "}
+        <span className={styles.optionalInline}>(optional)</span>
       </label>
     </section>
   );

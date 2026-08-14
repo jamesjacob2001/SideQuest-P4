@@ -71,6 +71,23 @@
   color: #d8d9df;
 }
 
+.optionalInline {
+  color: #9ea0ab;
+  font-weight: 500;
+}
+
+.errorSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.errorList {
+  margin: 0;
+  padding: 0 0 0 1.2rem;
+  color: #ffd4d8;
+}
+
 .tagRow {
   display: flex;
   flex-wrap: wrap;

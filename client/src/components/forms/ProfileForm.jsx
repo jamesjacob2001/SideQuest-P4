@@ -4,6 +4,7 @@ import { useState } from "react";
 import AcademicFields from "./AcademicFields.jsx";
 import AvailabilityFields from "./AvailabilityFields.jsx";
 import BasicInfoFields from "./BasicInfoFields.jsx";
+import { RequiredFieldsNote } from "./FormFieldLabels.jsx";
 import PortfolioFields from "./PortfolioFields.jsx";
 import TagListFields from "./TagListFields.jsx";
 import styles from "./ProfileForm.module.css";
@@ -33,9 +34,36 @@ function buildInitialValues(user) {
   };
 }
 
+function isNonEmptyString(value) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+function isValidEmail(value) {
+  return isNonEmptyString(value) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function validateProfileValues(values) {
+  const errors = [];
+
+  if (!isNonEmptyString(values.name)) {
+    errors.push("Name is required.");
+  }
+
+  if (!isNonEmptyString(values.username)) {
+    errors.push("Username is required.");
+  }
+
+  if (!isValidEmail(values.email)) {
+    errors.push("A valid email is required.");
+  }
+
+  return errors;
+}
+
 function ProfileForm({ user, onSubmit, isSubmitting }) {
   const [values, setValues] = useState(() => buildInitialValues(user));
   const [errorMessage, setErrorMessage] = useState("");
+  const [validationErrors, setValidationErrors] = useState([]);
 
   function updateValues(partialValues) {
     setValues((currentValues) => ({
@@ -47,15 +75,24 @@ function ProfileForm({ user, onSubmit, isSubmitting }) {
   async function handleSubmit(event) {
     event.preventDefault();
     setErrorMessage("");
+    setValidationErrors([]);
+
+    const clientErrors = validateProfileValues(values);
+
+    if (clientErrors.length > 0) {
+      setErrorMessage("Please fix the highlighted issues before saving.");
+      setValidationErrors(clientErrors);
+      return;
+    }
 
     const payload = {
-      name: values.name,
-      username: values.username,
-      email: values.email,
-      bio: values.bio || null,
-      location: values.location || null,
-      university: values.university || null,
-      major: values.major || null,
+      name: values.name.trim(),
+      username: values.username.trim(),
+      email: values.email.trim(),
+      bio: values.bio.trim() || null,
+      location: values.location.trim() || null,
+      university: values.university.trim() || null,
+      major: values.major.trim() || null,
       yearLabel: values.yearLabel || null,
       graduationYear:
         values.graduationYear === "" ? null : values.graduationYear,
@@ -66,9 +103,9 @@ function ProfileForm({ user, onSubmit, isSubmitting }) {
       interests: values.interests,
       rolePreferences: values.rolePreferences,
       portfolioLinks: {
-        github: values.portfolioLinks.github || null,
-        linkedin: values.portfolioLinks.linkedin || null,
-        personalSite: values.portfolioLinks.personalSite || null,
+        github: values.portfolioLinks.github.trim() || null,
+        linkedin: values.portfolioLinks.linkedin.trim() || null,
+        personalSite: values.portfolioLinks.personalSite.trim() || null,
       },
     };
 
@@ -76,15 +113,25 @@ function ProfileForm({ user, onSubmit, isSubmitting }) {
       await onSubmit(payload);
     } catch (error) {
       setErrorMessage(error.message);
+      setValidationErrors(error.details ?? []);
     }
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit} noValidate>
+      <RequiredFieldsNote />
+
       {errorMessage ? (
-        <p className={styles.errorMessage} role="alert">
-          {errorMessage}
-        </p>
+        <div className={styles.errorSummary} role="alert">
+          <p className={styles.errorMessage}>{errorMessage}</p>
+          {validationErrors.length > 0 ? (
+            <ul className={styles.errorList}>
+              {validationErrors.map((error, index) => (
+                <li key={`${error}-${index}`}>{error}</li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
       ) : null}
 
       <BasicInfoFields

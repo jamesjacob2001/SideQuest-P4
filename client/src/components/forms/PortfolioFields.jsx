@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 
+import { FieldLabel } from "./FormFieldLabels.jsx";
 import styles from "./ProfileForm.module.css";
 
 function PortfolioFields({ values, onChange }) {
@@ -15,7 +16,7 @@ function PortfolioFields({ values, onChange }) {
       <h2 className={styles.sectionHeading}>Portfolio links</h2>
 
       <div className={styles.field}>
-        <label htmlFor="profile-github">GitHub</label>
+        <FieldLabel htmlFor="profile-github">GitHub</FieldLabel>
         <input
           id="profile-github"
           onChange={(event) => updateField("github", event.target.value)}
@@ -25,7 +26,7 @@ function PortfolioFields({ values, onChange }) {
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="profile-linkedin">LinkedIn</label>
+        <FieldLabel htmlFor="profile-linkedin">LinkedIn</FieldLabel>
         <input
           id="profile-linkedin"
           onChange={(event) => updateField("linkedin", event.target.value)}
@@ -35,7 +36,7 @@ function PortfolioFields({ values, onChange }) {
       </div>
 
       <div className={styles.field}>
-        <label htmlFor="profile-site">Personal site</label>
+        <FieldLabel htmlFor="profile-site">Personal site</FieldLabel>
         <input
           id="profile-site"
           onChange={(event) => updateField("personalSite", event.target.value)}
