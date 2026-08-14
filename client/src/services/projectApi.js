@@ -2,11 +2,17 @@ import apiRequest from "./apiClient.js";
 
 const PROJECTS_ENDPOINT = "/api/projects";
 
-export async function getProjects(page = 1, limit = 24) {
+export async function getProjects(page = 1, limit = 24, search = "") {
   const searchParameters = new URLSearchParams({
     page: String(page),
     limit: String(limit),
   });
+
+  const trimmedSearch = search.trim();
+
+  if (trimmedSearch) {
+    searchParameters.set("search", trimmedSearch);
+  }
 
   const response = await apiRequest(
     `${PROJECTS_ENDPOINT}?${searchParameters.toString()}`,

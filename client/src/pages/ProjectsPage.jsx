@@ -10,6 +10,8 @@ const PROJECTS_PER_PAGE = 24;
 function ProjectsPage() {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchInput, setSearchInput] = useState("");
+  const [activeSearch, setActiveSearch] = useState("");
   const [pagination, setPagination] = useState({
     page: 1,
     limit: PROJECTS_PER_PAGE,
@@ -27,7 +29,11 @@ function ProjectsPage() {
       setErrorMessage("");
 
       try {
-        const projectData = await getProjects(currentPage, PROJECTS_PER_PAGE);
+        const projectData = await getProjects(
+          currentPage,
+          PROJECTS_PER_PAGE,
+          activeSearch,
+        );
 
         setProjects(projectData.projects);
         setPagination(projectData.pagination);
@@ -39,7 +45,22 @@ function ProjectsPage() {
     }
 
     loadProjects();
-  }, [currentPage]);
+  }, [currentPage, activeSearch]);
+
+  function handleSearchSubmit(event) {
+    event.preventDefault();
+
+    const nextSearch = searchInput.trim();
+
+    setCurrentPage(1);
+    setActiveSearch(nextSearch);
+  }
+
+  function handleClearSearch() {
+    setSearchInput("");
+    setCurrentPage(1);
+    setActiveSearch("");
+  }
 
   function handlePageChange(nextPage) {
     if (
@@ -75,8 +96,20 @@ function ProjectsPage() {
   } else if (projects.length === 0) {
     pageContent = (
       <div className={styles.message}>
-        <h2>No projects are currently available</h2>
-        <p>Check back later or create the first SideQuest project.</p>
+        {activeSearch ? (
+          <>
+            <h2>No projects match your search</h2>
+            <p>
+              Try a different title, technology, or category — or clear the
+              search to browse all projects.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>No projects are currently available</h2>
+            <p>Check back later or create the first SideQuest project.</p>
+          </>
+        )}
       </div>
     );
   } else {
@@ -107,13 +140,43 @@ function ProjectsPage() {
           </p>
         </div>
 
-        {!isLoading && !errorMessage && projects.length > 0 && (
+        {!isLoading && !errorMessage && (
           <p className={styles.projectCount}>
             {pagination.totalProjects}{" "}
             {pagination.totalProjects === 1 ? "project" : "projects"}
+            {activeSearch ? " found" : ""}
           </p>
         )}
       </header>
+
+      <form className={styles.searchForm} onSubmit={handleSearchSubmit}>
+        <label className={styles.visuallyHidden} htmlFor="project-search">
+          Search projects
+        </label>
+        <input
+          id="project-search"
+          className={styles.searchInput}
+          type="search"
+          value={searchInput}
+          onChange={(event) => setSearchInput(event.target.value)}
+          placeholder="Search by title, description, technology, or category"
+          maxLength={100}
+        />
+        <div className={styles.searchActions}>
+          <button className={styles.searchButton} type="submit">
+            Search
+          </button>
+          {activeSearch && (
+            <button
+              className={styles.clearButton}
+              type="button"
+              onClick={handleClearSearch}
+            >
+              Clear
+            </button>
+          )}
+        </div>
+      </form>
 
       {pageContent}
     </section>

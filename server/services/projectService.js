@@ -76,16 +76,46 @@ async function attachOwner(project) {
   return projectWithOwner;
 }
 
-export async function getPublicProjects(page, limit) {
-  const database = getDatabase();
-  const projectsCollection = database.collection("projects");
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
+function buildPublicProjectsFilter(search) {
   const filter = {
     status: {
       $ne: "Completed",
     },
   };
 
+  const trimmedSearch = typeof search === "string" ? search.trim() : "";
+
+  if (!trimmedSearch) {
+    return filter;
+  }
+
+  // Word boundaries avoid substring false positives (e.g. "Unity" in "community").
+  const searchPattern = new RegExp(`\\b${escapeRegExp(trimmedSearch)}\\b`, "i");
+
+  filter.$or = [
+    { title: searchPattern },
+    { tagline: searchPattern },
+    { "description.overview": searchPattern },
+    { "description.goals": searchPattern },
+    { "description.currentProgress": searchPattern },
+    { "description.lookingFor": searchPattern },
+    { categories: searchPattern },
+    { customCategories: searchPattern },
+    { technologies: searchPattern },
+  ];
+
+  return filter;
+}
+
+export async function getPublicProjects(page, limit, search = "") {
+  const database = getDatabase();
+  const projectsCollection = database.collection("projects");
+
+  const filter = buildPublicProjectsFilter(search);
   const skip = (page - 1) * limit;
 
   const [projects, totalProjects] = await Promise.all([

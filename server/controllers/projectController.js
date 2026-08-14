@@ -25,7 +25,15 @@ export async function listProjects(request, response, next) {
         ? Math.min(requestedLimit, 100)
         : 24;
 
-    const { projects, totalProjects } = await getPublicProjects(page, limit);
+    const rawSearch =
+      typeof request.query.search === "string" ? request.query.search : "";
+    const search = rawSearch.trim().slice(0, 100);
+
+    const { projects, totalProjects } = await getPublicProjects(
+      page,
+      limit,
+      search,
+    );
 
     const totalPages = Math.max(1, Math.ceil(totalProjects / limit));
 
