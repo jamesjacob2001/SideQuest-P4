@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { createMembership } from "../../services/membershipApi.js";
+import ui from "../../styles/ui.module.css";
 import styles from "./ProjectRoleCard.module.css";
 
 function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
@@ -67,7 +68,7 @@ function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
 
       <div className={styles.applicationSection}>
         {!isAuthenticated ? (
-          <Link className={styles.loginLink} to="/login">
+          <Link className={ui.primaryButton} to="/login">
             Log in to apply
           </Link>
         ) : isOwner ? (
@@ -78,7 +79,7 @@ function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
           </p>
         ) : (
           <button
-            className={styles.applyButton}
+            className={ui.primaryButton}
             type="button"
             onClick={handleApply}
             disabled={isApplying}
@@ -88,7 +89,7 @@ function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
         )}
 
         {applicationError && (
-          <p className={styles.errorMessage} role="alert">
+          <p className={`${ui.errorBanner} ${styles.errorMessage}`} role="alert">
             {applicationError}
           </p>
         )}

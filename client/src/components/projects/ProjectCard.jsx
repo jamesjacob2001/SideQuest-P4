@@ -25,6 +25,14 @@ function ProjectCard({ project }) {
     <article className={styles.card}>
       <div className={styles.content}>
         <div className={styles.identity}>
+          <h2 className={styles.title}>
+            <Link state={PROJECTS_ORIGIN} to={`/projects/${_id}`}>
+              {title}
+            </Link>
+          </h2>
+
+          <p className={styles.tagline}>{tagline}</p>
+
           <div className={styles.badges}>
             <span
               className={ui.statusBadge}
@@ -35,14 +43,6 @@ function ProjectCard({ project }) {
             </span>
             <span className={styles.locationBadge}>{locationType}</span>
           </div>
-
-          <h2 className={styles.title}>
-            <Link state={PROJECTS_ORIGIN} to={`/projects/${_id}`}>
-              {title}
-            </Link>
-          </h2>
-
-          <p className={styles.tagline}>{tagline}</p>
         </div>
 
         {owner ? (

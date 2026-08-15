@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../auth/useAuth.js";
 import { deleteUser } from "../../services/userApi.js";
+import ui from "../../styles/ui.module.css";
 import styles from "./DeleteAccountButton.module.css";
 
 function DeleteAccountButton({ userId, userName }) {
@@ -37,7 +38,7 @@ function DeleteAccountButton({ userId, userName }) {
   return (
     <div className={styles.wrapper}>
       <button
-        className={styles.deleteButton}
+        className={ui.dangerButton}
         disabled={isDeleting}
         onClick={handleDelete}
         type="button"

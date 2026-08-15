@@ -1,5 +1,5 @@
 .requiredMark {
-  color: #ff8f9c;
+  color: var(--color-danger);
   font-weight: 800;
 }
 

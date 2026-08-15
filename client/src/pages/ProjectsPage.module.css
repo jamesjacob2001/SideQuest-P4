@@ -16,18 +16,21 @@
   display: flex;
   flex-shrink: 0;
   align-items: flex-start;
+  /* Sit beside the page title (below eyebrow) */
+  padding-top: calc(var(--font-size-eyebrow) + var(--space-tight) + 0.15rem);
 }
 
 .projectCount {
   flex-shrink: 0;
   margin: 0;
-  padding: 0.55rem 0.85rem;
-  color: var(--color-text-subtle);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  padding: 0;
+  color: var(--color-text-faint);
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
   font-size: 0.9rem;
   font-weight: 600;
+  line-height: 1.2;
 }
 
 .discoveryTools {
@@ -39,14 +42,15 @@
 
 .searchForm {
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
+  align-items: stretch;
+  gap: var(--space-group);
 }
 
 .searchInput {
   flex: 1;
   min-width: 0;
-  padding: 0.8rem 0.95rem;
+  min-height: var(--control-height);
+  padding: var(--input-padding);
   color: var(--color-text);
   background-color: var(--color-surface-sunken);
   border: 1px solid var(--color-border-input);
@@ -66,7 +70,7 @@
 .searchActions {
   display: flex;
   flex-shrink: 0;
-  align-items: center;
+  align-items: stretch;
   gap: 0.5rem;
 }
 
@@ -75,8 +79,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: var(--control-height);
+  min-height: var(--control-height);
   padding: 0;
   color: var(--color-text-faint);
   background-color: transparent;
@@ -129,7 +133,7 @@
 .results {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--layout-column-gap);
   animation: riseIn var(--motion-rise) 140ms both;
 }
 
@@ -183,6 +187,7 @@
   .headerActions {
     width: 100%;
     justify-content: flex-start;
+    padding-top: 0;
   }
 
   .searchForm {

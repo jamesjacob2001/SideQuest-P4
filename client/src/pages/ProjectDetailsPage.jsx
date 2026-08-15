@@ -118,6 +118,9 @@ function ProjectDetailsPage() {
         <div className={styles.heroTop}>
           <div className={styles.heroMain}>
             <div className={styles.identity}>
+              <h1>{title}</h1>
+              <p className={styles.tagline}>{tagline}</p>
+
               <div className={styles.badges}>
                 <span
                   className={ui.statusBadge}
@@ -128,9 +131,6 @@ function ProjectDetailsPage() {
                 </span>
                 <span className={styles.metaBadge}>{locationType}</span>
               </div>
-
-              <h1>{title}</h1>
-              <p className={styles.tagline}>{tagline}</p>
             </div>
 
             {isOwner ? (
@@ -171,17 +171,7 @@ function ProjectDetailsPage() {
 
       <div className={styles.layout}>
         <div className={styles.mainContent}>
-          <section className={styles.contentSection}>
-            <h2>Project overview</h2>
-            <p>{description.overview}</p>
-          </section>
-
-          <section className={styles.contentSection}>
-            <h2>Who the team is looking for</h2>
-            <p>{description.lookingFor}</p>
-          </section>
-
-          <section className={styles.contentSection}>
+          <section className={`${styles.contentSection} ${styles.prioritySection}`}>
             <h2>Open roles</h2>
             <p className={styles.sectionHint}>
               Choose a role to apply — this is how you join the project.
@@ -198,6 +188,16 @@ function ProjectDetailsPage() {
                 />
               ))}
             </div>
+          </section>
+
+          <section className={styles.contentSection}>
+            <h2>Project overview</h2>
+            <p>{description.overview}</p>
+          </section>
+
+          <section className={styles.contentSection}>
+            <h2>Who the team is looking for</h2>
+            <p>{description.lookingFor}</p>
           </section>
 
           <section className={styles.contentSection}>

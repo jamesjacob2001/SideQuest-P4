@@ -655,3 +655,11 @@ This design allows us to represent both join requests and active team members us
 - Separate UI, business logic, and database operations whenever possible.
 - Favor reusable components over duplicated code.
 - Organize code by feature on the frontend and by responsibility on the backend.
+
+---
+
+# Design Decisions
+- **Hierarchy:** Pages read top-left first — brand or page title is largest, then supporting copy, then primary actions. Project cards lead with title/tagline; project details put the title in the hero and Open roles first in the main column. Nav keeps the brand left and treats Create project / Sign up as the strong CTAs.
+- **Layout & spacing:** One layout system (`--layout-max-width`, gutters, column gap, spacing tokens) keeps nav and content aligned. Cards and filters use grids; forms use shared panel padding and control heights. Related items sit closer together than separate sections.
+- **Color:** A galaxy / night-sky palette (navy surfaces, cobalt actions, lavender accents) matches the SideQuest collaboration theme. Cobalt is for primary actions (Accept, Apply, Create, Search); outline secondary for Decline / Withdraw / cancel-style actions; rose danger for deletes. Tags and links stay lavender so they are not confused with CTAs.
+- **Typography:** Metal (display) paired with EB Garamond (body), loaded from Google Fonts — not default system stacks. Display is used for brand and titles; Garamond for body and forms, via `--font-display` and `--font-body`.
