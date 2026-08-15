@@ -110,36 +110,47 @@ export const EXPERIENCE_LEVELS = [
 
 export const LOCATION_TYPES = ["Remote", "Hybrid", "In Person"];
 
+export const WEEKLY_COMMITMENTS = [
+  "1 – 3 hours",
+  "2 – 4 hours",
+  "4 – 6 hours",
+  "5 – 8 hours",
+  "8 – 10 hours",
+];
+
+export const PROJECT_DURATIONS = [
+  "1 month",
+  "1–3 months",
+  "3–6 months",
+  "6–12 months",
+  "Ongoing",
+];
+
 export const PROJECT_STATUS_OPTIONS = [
   {
     value: "Recruiting",
     description: "Looking for new teammates",
   },
   {
-    value: "Active",
-    description: "Work is underway",
+    value: "In progress",
+    description: "Team is working; not taking new people",
   },
   {
-    value: "Paused",
-    description: "Temporarily on hold",
+    value: "On hold",
+    description: "Temporarily stopped",
+  },
+  {
+    value: "Finished",
+    description: "Project is done",
   },
 ];
 
-export const ALL_PROJECT_STATUS_OPTIONS = [
-  ...PROJECT_STATUS_OPTIONS,
-  {
-    value: "Completed",
-    description: "Finished",
-  },
-];
+export const ALL_PROJECT_STATUS_OPTIONS = PROJECT_STATUS_OPTIONS;
 
 export const PROJECT_STATUSES = PROJECT_STATUS_OPTIONS.map(
   (status) => status.value,
 );
 
 export const PROJECT_STATUS_DESCRIPTIONS = Object.fromEntries(
-  ALL_PROJECT_STATUS_OPTIONS.map((status) => [
-    status.value,
-    status.description,
-  ]),
+  PROJECT_STATUS_OPTIONS.map((status) => [status.value, status.description]),
 );

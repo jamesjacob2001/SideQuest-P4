@@ -52,8 +52,8 @@ export async function getUserDashboard(userId) {
     pendingIncoming,
     owned,
     recruiting: owned.filter((project) => project.status === "Recruiting"),
-    active: owned.filter((project) => project.status === "Active"),
-    paused: owned.filter((project) => project.status === "Paused"),
-    completed: owned.filter((project) => project.status === "Completed"),
+    inProgress: owned.filter((project) => project.status === "In progress"),
+    onHold: owned.filter((project) => project.status === "On hold"),
+    finished: owned.filter((project) => project.status === "Finished"),
   };
 }

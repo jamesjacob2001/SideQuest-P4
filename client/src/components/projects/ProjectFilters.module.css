@@ -1,25 +1,34 @@
 .filters {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-group);
+  padding: 1.15rem 1.25rem 1.35rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  animation: riseIn var(--motion-rise) both;
 }
 
 .filtersHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: var(--space-group);
+  padding-bottom: var(--space-group);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .filtersTitle {
   margin: 0;
   color: var(--color-text);
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 
 .clearFiltersButton {
+  flex-shrink: 0;
   padding: 0.35rem 0.5rem;
   color: var(--color-text-faint);
   background-color: transparent;
@@ -35,17 +44,46 @@
   color: var(--color-text-muted);
 }
 
-.filterGrid {
+.filterGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.groupTitle {
+  margin: 0;
+  color: var(--color-text-faint);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.filterGrid,
+.filterGridWide {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem var(--layout-column-gap);
+}
+
+.filterGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.filterGridWide {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .filterField {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-subtle);
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -65,14 +103,15 @@
   outline-offset: 1px;
 }
 
-@media (max-width: 900px) {
-  .filterGrid {
+@media (max-width: 1000px) {
+  .filterGridWide {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 600px) {
-  .filterGrid {
+  .filterGrid,
+  .filterGridWide {
     grid-template-columns: 1fr;
   }
 }

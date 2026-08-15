@@ -39,6 +39,18 @@
   line-height: 1.65;
 }
 
+.metaText {
+  color: var(--color-text-subtle);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.chromeText {
+  color: var(--color-text-faint);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 .surface {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -176,6 +188,37 @@
 .accentLink:hover {
   text-decoration: underline;
   text-underline-offset: 0.2rem;
+}
+
+/* Project status badges — each status gets its own hue */
+.statusBadge {
+  display: inline-flex;
+  padding: 0.35rem 0.7rem;
+  color: #ffffff;
+  background-color: #5a6b8c;
+  border: 0;
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.statusBadge[data-status="Recruiting"] {
+  background-color: #9879d9;
+}
+
+.statusBadge[data-status="In progress"] {
+  background-color: #2f9d6e;
+}
+
+.statusBadge[data-status="On hold"] {
+  background-color: #c4923a;
+}
+
+.statusBadge[data-status="Finished"] {
+  background-color: #5a6b8c;
 }
 
 /* Filled tags for categories */

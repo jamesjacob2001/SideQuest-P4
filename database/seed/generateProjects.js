@@ -3,8 +3,10 @@ import { randomUUID } from "node:crypto";
 import { PROJECT_CATEGORIES } from "../../server/constants/categories.js";
 import { EXPERIENCE_LEVELS } from "../../server/constants/experienceLevels.js";
 import { LOCATION_TYPES } from "../../server/constants/locationTypes.js";
-import { PROJECT_STATUSES } from "../../server/constants/projectStatuses.js";
 import { TECHNOLOGY_LIST } from "../../server/constants/technologyList.js";
+
+import { WEEKLY_COMMITMENTS } from "../../server/constants/weeklyCommitments.js";
+import { PROJECT_DURATIONS } from "../../server/constants/projectDurations.js";
 
 import { PROJECT_THEMES } from "./data/projectThemes.js";
 import { PROJECT_TAGLINES } from "./data/projectTaglines.js";
@@ -13,22 +15,6 @@ import { PROJECT_GOALS } from "./data/projectGoals.js";
 import { PROJECT_PROGRESS } from "./data/projectProgress.js";
 import { PROJECT_LOOKING_FOR } from "./data/projectLookingFor.js";
 import { ROLE_TEMPLATES } from "./data/roleTemplates.js";
-
-const WEEKLY_COMMITMENTS = [
-  "1 – 3 hours",
-  "2 – 4 hours",
-  "4 – 6 hours",
-  "5 – 8 hours",
-  "8 – 10 hours",
-];
-
-const DURATIONS = [
-  "1 month",
-  "1–3 months",
-  "3–6 months",
-  "6–12 months",
-  "Ongoing",
-];
 
 const LOCATIONS = [
   "Boston, MA",
@@ -135,9 +121,7 @@ export function generateProjects(count = 1000, ownerIds = []) {
   return Array.from({ length: count }, (_, index) => {
     const theme = randomItem(PROJECT_THEMES);
     const locationType = randomItem(LOCATION_TYPES);
-    const status = randomItem(
-      PROJECT_STATUSES.filter((value) => value !== "Completed"),
-    );
+    const status = "Recruiting";
 
     const selectedCategories = randomSubset(
       theme.categories.filter((category) =>
@@ -183,10 +167,7 @@ export function generateProjects(count = 1000, ownerIds = []) {
         ),
       }),
       weeklyCommitment: randomItem(WEEKLY_COMMITMENTS),
-      duration: randomItem(DURATIONS),
-      compensation: {
-        type: "Unpaid",
-      },
+      duration: randomItem(PROJECT_DURATIONS),
       createdAt: generateCreatedAt(index),
     };
   });

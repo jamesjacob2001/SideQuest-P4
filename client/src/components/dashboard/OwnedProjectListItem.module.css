@@ -52,11 +52,6 @@
   font-size: 0.85rem;
 }
 
-.status {
-  color: var(--color-accent);
-  font-weight: 700;
-}
-
 .actions {
   display: flex;
   flex-wrap: wrap;

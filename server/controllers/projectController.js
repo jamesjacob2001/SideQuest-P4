@@ -12,14 +12,11 @@ import {
 import { validateProject } from "../utils/validators/projectValidator.js";
 import { PROJECT_CATEGORIES } from "../constants/categories.js";
 import { TECHNOLOGY_LIST } from "../constants/technologyList.js";
-import { PROJECT_STATUSES } from "../constants/projectStatuses.js";
+import { BROWSEABLE_STATUSES } from "../constants/projectStatuses.js";
 import { LOCATION_TYPES } from "../constants/locationTypes.js";
 import { EXPERIENCE_LEVELS } from "../constants/experienceLevels.js";
-
-const BROWSEABLE_STATUSES = PROJECT_STATUSES.filter(
-  (status) => status !== "Completed",
-);
-const COMPENSATION_FILTERS = new Set(["paid", "unpaid"]);
+import { WEEKLY_COMMITMENTS } from "../constants/weeklyCommitments.js";
+import { PROJECT_DURATIONS } from "../constants/projectDurations.js";
 
 function pickAllowedValue(value, allowedValues) {
   if (typeof value !== "string") {
@@ -33,12 +30,6 @@ function pickAllowedValue(value, allowedValues) {
 function parseProjectListQuery(query) {
   const rawSearch = typeof query.search === "string" ? query.search : "";
 
-  const compensation =
-    typeof query.compensation === "string" &&
-    COMPENSATION_FILTERS.has(query.compensation.trim().toLowerCase())
-      ? query.compensation.trim().toLowerCase()
-      : "";
-
   return {
     search: rawSearch.trim().slice(0, 100),
     category: pickAllowedValue(query.category, PROJECT_CATEGORIES),
@@ -46,7 +37,11 @@ function parseProjectListQuery(query) {
     status: pickAllowedValue(query.status, BROWSEABLE_STATUSES),
     locationType: pickAllowedValue(query.locationType, LOCATION_TYPES),
     experienceLevel: pickAllowedValue(query.experienceLevel, EXPERIENCE_LEVELS),
-    compensation,
+    weeklyCommitment: pickAllowedValue(
+      query.weeklyCommitment,
+      WEEKLY_COMMITMENTS,
+    ),
+    duration: pickAllowedValue(query.duration, PROJECT_DURATIONS),
   };
 }
 

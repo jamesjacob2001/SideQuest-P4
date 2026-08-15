@@ -18,9 +18,9 @@ const EMPTY_DASHBOARD = {
   pendingIncoming: [],
   owned: [],
   recruiting: [],
-  active: [],
-  paused: [],
-  completed: [],
+  inProgress: [],
+  onHold: [],
+  finished: [],
 };
 
 function DashboardPage() {
@@ -40,9 +40,9 @@ function DashboardPage() {
           pendingIncoming: data.pendingIncoming ?? [],
           owned: data.owned ?? [],
           recruiting: data.recruiting ?? [],
-          active: data.active ?? [],
-          paused: data.paused ?? [],
-          completed: data.completed ?? [],
+          inProgress: data.inProgress ?? [],
+          onHold: data.onHold ?? [],
+          finished: data.finished ?? [],
         });
       } catch (error) {
         setErrorMessage(error.message);
@@ -133,9 +133,9 @@ function DashboardPage() {
     pendingIncoming,
     owned,
     recruiting,
-    active,
-    paused,
-    completed,
+    inProgress,
+    onHold,
+    finished,
   } = dashboard;
 
   return (
@@ -225,7 +225,7 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Looking for new teammates. Edit to update roles or status."
+          description="Looking for new teammates. These projects appear on Browse."
           emptyMessage="You have no recruiting projects."
           isEmpty={recruiting.length === 0}
           title="Recruiting"
@@ -242,13 +242,13 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Work is underway on these owned projects."
-          emptyMessage="You have no active projects."
-          isEmpty={active.length === 0}
-          title="Active"
+          description="Your team is working and not taking new people."
+          emptyMessage="You have no in-progress projects."
+          isEmpty={inProgress.length === 0}
+          title="In progress"
         >
           <ul className={styles.list}>
-            {active.map((project) => (
+            {inProgress.map((project) => (
               <OwnedProjectListItem
                 key={String(project._id)}
                 project={project}
@@ -259,13 +259,13 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Temporarily on hold."
-          emptyMessage="You have no paused projects."
-          isEmpty={paused.length === 0}
-          title="Paused"
+          description="Temporarily stopped."
+          emptyMessage="You have no projects on hold."
+          isEmpty={onHold.length === 0}
+          title="On hold"
         >
           <ul className={styles.list}>
-            {paused.map((project) => (
+            {onHold.map((project) => (
               <OwnedProjectListItem
                 key={String(project._id)}
                 project={project}
@@ -276,13 +276,13 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Finished projects you own."
-          emptyMessage="You have no completed projects."
-          isEmpty={completed.length === 0}
-          title="Completed"
+          description="Projects you own that are done."
+          emptyMessage="You have no finished projects."
+          isEmpty={finished.length === 0}
+          title="Finished"
         >
           <ul className={styles.list}>
-            {completed.map((project) => (
+            {finished.map((project) => (
               <OwnedProjectListItem
                 key={String(project._id)}
                 project={project}
