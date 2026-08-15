@@ -7,7 +7,7 @@ import ProjectOwner from "../components/projects/ProjectOwner.jsx";
 import ProjectRoleCard from "../components/projects/ProjectRoleCard.jsx";
 import { PROJECT_STATUS_DESCRIPTIONS } from "../constants/projectOptions.js";
 import { deleteProject, getProjectById } from "../services/projectApi.js";
-import { getProjectTeam } from "../services/MembershipApi.js";
+import { getProjectTeam } from "../services/membershipApi.js";
 import ui from "../styles/ui.module.css";
 import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
 import styles from "./ProjectDetailsPage.module.css";
