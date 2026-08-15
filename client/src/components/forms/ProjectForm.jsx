@@ -8,6 +8,8 @@ import {
   PROJECT_STATUS_OPTIONS,
   PROJECT_STATUSES,
   TECHNOLOGY_OPTIONS,
+  WEEKLY_COMMITMENTS,
+  PROJECT_DURATIONS,
 } from "../../constants/projectOptions.js";
 import {
   FieldLabel,
@@ -47,8 +49,7 @@ const initialFormData = {
   location: "",
   weeklyCommitment: "",
   duration: "",
-  compensation: "",
-  status: "Recruiting",
+  status: "Open",
 };
 
 function buildInitialFormData(project) {
@@ -94,8 +95,7 @@ function buildInitialFormData(project) {
     location: project.location ?? "",
     weeklyCommitment: project.weeklyCommitment ?? "",
     duration: project.duration ?? "",
-    compensation: project.compensation?.type ?? "",
-    status: project.status ?? "Recruiting",
+    status: project.status ?? "Open",
   };
 }
 
@@ -281,11 +281,6 @@ function ProjectForm({
       }),
       ...(formData.duration.trim() && {
         duration: formData.duration.trim(),
-      }),
-      ...(formData.compensation.trim() && {
-        compensation: {
-          type: formData.compensation.trim(),
-        },
       }),
     };
   }
@@ -805,64 +800,61 @@ function ProjectForm({
         <div className={styles.twoColumnFields}>
           <div className={styles.field}>
             <FieldLabel htmlFor="weeklyCommitment">Weekly commitment</FieldLabel>
-            <input
+            <select
               id="weeklyCommitment"
               name="weeklyCommitment"
-              type="text"
               value={formData.weeklyCommitment}
               onChange={handleFieldChange}
-              placeholder="Example: 4–7 hours"
-            />
+            >
+              <option value="">Select commitment</option>
+              {WEEKLY_COMMITMENTS.map((commitment) => (
+                <option key={commitment} value={commitment}>
+                  {commitment}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className={styles.field}>
             <FieldLabel htmlFor="duration">Expected duration</FieldLabel>
-            <input
+            <select
               id="duration"
               name="duration"
-              type="text"
               value={formData.duration}
               onChange={handleFieldChange}
-              placeholder="Example: 1–3 months"
-            />
-          </div>
-        </div>
-
-        <div className={styles.twoColumnFields}>
-          <div className={styles.field}>
-            <FieldLabel htmlFor="compensation">Compensation</FieldLabel>
-            <input
-              id="compensation"
-              name="compensation"
-              type="text"
-              value={formData.compensation}
-              onChange={handleFieldChange}
-              placeholder="Example: Unpaid"
-            />
-          </div>
-
-          <div className={styles.field}>
-            <FieldLabel htmlFor="status" required>
-              Project status
-            </FieldLabel>
-            <select
-              id="status"
-              name="status"
-              value={formData.status}
-              onChange={handleFieldChange}
-              required
             >
-              {PROJECT_STATUS_OPTIONS.map((status) => (
-                <option value={status.value} key={status.value}>
-                  {status.value} — {status.description}
+              <option value="">Select duration</option>
+              {PROJECT_DURATIONS.map((projectDuration) => (
+                <option key={projectDuration} value={projectDuration}>
+                  {projectDuration}
                 </option>
               ))}
             </select>
-            <p className={styles.helpText}>
-              Recruiting means you are looking for teammates. Active means work
-              is underway. Paused means the project is temporarily on hold.
-            </p>
           </div>
+        </div>
+
+        <div className={styles.field}>
+          <FieldLabel htmlFor="status" required>
+            Project status
+          </FieldLabel>
+          <select
+            id="status"
+            name="status"
+            value={formData.status}
+            onChange={handleFieldChange}
+            required
+          >
+            {PROJECT_STATUS_OPTIONS.map((status) => (
+              <option value={status.value} key={status.value}>
+                {status.value} — {status.description}
+              </option>
+            ))}
+          </select>
+          <p className={styles.helpText}>
+            Open means you are looking for teammates. In progress means the
+            team is working and not taking new people. On hold means the
+            project is temporarily stopped.
+          </p>
         </div>
       </section>
 
@@ -907,11 +899,6 @@ ProjectForm.propTypes = {
     location: PropTypes.string,
     weeklyCommitment: PropTypes.string,
     duration: PropTypes.string,
-    compensation: PropTypes.shape({
-      type: PropTypes.string,
-      amount: PropTypes.number,
-      currency: PropTypes.string,
-    }),
     status: PropTypes.string,
   }),
   onSubmit: PropTypes.func.isRequired,

@@ -101,7 +101,6 @@ function ProjectDetailsPage() {
     experienceLevel,
     weeklyCommitment,
     duration,
-    compensation,
     owner,
   } = project;
 
@@ -120,7 +119,11 @@ function ProjectDetailsPage() {
           <div className={styles.heroMain}>
             <div className={styles.identity}>
               <div className={styles.badges}>
-                <span className={styles.statusBadge} title={statusDescription}>
+                <span
+                  className={ui.statusBadge}
+                  data-status={status}
+                  title={statusDescription}
+                >
                   {status}
                 </span>
                 <span className={styles.metaBadge}>{locationType}</span>
@@ -256,18 +259,6 @@ function ProjectDetailsPage() {
                 <div>
                   <dt>Duration</dt>
                   <dd>{duration}</dd>
-                </div>
-              )}
-
-              {compensation && (
-                <div>
-                  <dt>Compensation</dt>
-                  <dd>
-                    {compensation.type}
-                    {compensation.amount !== undefined &&
-                      ` — ${compensation.amount}`}
-                    {compensation.currency && ` ${compensation.currency}`}
-                  </dd>
                 </div>
               )}
             </dl>

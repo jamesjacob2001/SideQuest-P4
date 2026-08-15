@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { PROJECTS_ORIGIN } from "../../utils/navigationOrigin.js";
 import { PROJECT_STATUS_DESCRIPTIONS } from "../../constants/projectOptions.js";
+import ui from "../../styles/ui.module.css";
 import ProjectOwner from "./ProjectOwner.jsx";
 import styles from "./ProjectCard.module.css";
 
@@ -26,7 +27,8 @@ function ProjectCard({ project }) {
         <div className={styles.identity}>
           <div className={styles.badges}>
             <span
-              className={styles.status}
+              className={ui.statusBadge}
+              data-status={status}
               title={PROJECT_STATUS_DESCRIPTIONS[status]}
             >
               {status}

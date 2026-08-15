@@ -41,7 +41,6 @@
   gap: 0.5rem;
 }
 
-.status,
 .locationBadge {
   display: inline-flex;
   padding: 0.35rem 0.7rem;
@@ -51,15 +50,6 @@
   letter-spacing: 0.06em;
   line-height: 1.2;
   text-transform: uppercase;
-}
-
-.status {
-  color: #ffffff;
-  background-color: #9879d9;
-  border: 0;
-}
-
-.locationBadge {
   color: var(--color-text-muted);
   background-color: transparent;
   border: 1px solid var(--color-border);

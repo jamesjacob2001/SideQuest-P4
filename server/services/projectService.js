@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 
 import { getDatabase } from "../config/database.js";
+import { BROWSEABLE_STATUSES } from "../constants/projectStatuses.js";
 
 function isValidObjectId(value) {
   if (value == null) {
@@ -87,7 +88,8 @@ function buildPublicProjectsFilter({
   status = "",
   locationType = "",
   experienceLevel = "",
-  compensation = "",
+  weeklyCommitment = "",
+  duration = "",
 } = {}) {
   const filter = {};
 
@@ -95,7 +97,7 @@ function buildPublicProjectsFilter({
     filter.status = status;
   } else {
     filter.status = {
-      $ne: "Completed",
+      $in: BROWSEABLE_STATUSES,
     };
   }
 
@@ -115,23 +117,12 @@ function buildPublicProjectsFilter({
     filter.experienceLevel = experienceLevel;
   }
 
-  if (compensation === "unpaid") {
-    filter.$and = [
-      ...(filter.$and ?? []),
-      {
-        $or: [
-          { compensation: null },
-          { compensation: { $exists: false } },
-          { "compensation.type": { $regex: /^unpaid$/i } },
-        ],
-      },
-    ];
-  } else if (compensation === "paid") {
-    filter.compensation = { $ne: null };
-    filter["compensation.type"] = {
-      $exists: true,
-      $not: /^unpaid$/i,
-    };
+  if (weeklyCommitment) {
+    filter.weeklyCommitment = weeklyCommitment;
+  }
+
+  if (duration) {
+    filter.duration = duration;
   }
 
   const trimmedSearch = typeof search === "string" ? search.trim() : "";

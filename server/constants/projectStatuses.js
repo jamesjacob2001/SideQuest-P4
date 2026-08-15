@@ -1,21 +1,24 @@
 export const PROJECT_STATUS_OPTIONS = [
   {
-    value: "Recruiting",
+    value: "Open",
     description: "Looking for new teammates",
   },
   {
-    value: "Active",
-    description: "Work is underway",
+    value: "In progress",
+    description: "Team is working; not taking new people",
   },
   {
-    value: "Paused",
-    description: "Temporarily on hold",
+    value: "On hold",
+    description: "Temporarily stopped",
   },
   {
-    value: "Completed",
-    description: "Finished",
+    value: "Finished",
+    description: "Project is done",
   },
 ];
+
+/** Only Open projects appear on Browse by default. */
+export const BROWSEABLE_STATUSES = ["Open"];
 
 export const PROJECT_STATUSES = PROJECT_STATUS_OPTIONS.map(
   (status) => status.value,

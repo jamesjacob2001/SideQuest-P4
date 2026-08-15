@@ -4,23 +4,19 @@ import {
   EXPERIENCE_LEVELS,
   LOCATION_TYPES,
   PROJECT_CATEGORIES,
-  PROJECT_STATUS_OPTIONS,
+  PROJECT_DURATIONS,
   TECHNOLOGY_OPTIONS,
+  WEEKLY_COMMITMENTS,
 } from "../../constants/projectOptions.js";
 import styles from "./ProjectFilters.module.css";
-
-const COMPENSATION_OPTIONS = [
-  { value: "paid", label: "Paid" },
-  { value: "unpaid", label: "Unpaid" },
-];
 
 const EMPTY_FILTERS = {
   category: "",
   technology: "",
-  status: "",
   locationType: "",
   experienceLevel: "",
-  compensation: "",
+  weeklyCommitment: "",
+  duration: "",
 };
 
 function ProjectFilters({ filters, onChange, onClear, hasActiveFilters }) {
@@ -63,34 +59,17 @@ function ProjectFilters({ filters, onChange, onClear, hasActiveFilters }) {
         </label>
 
         <label className={styles.filterField} htmlFor="filter-technology">
-          <span>Technology</span>
+          <span>Skill</span>
           <select
             id="filter-technology"
             name="technology"
             value={filters.technology}
             onChange={handleFilterChange}
           >
-            <option value="">All technologies</option>
+            <option value="">All skills</option>
             {TECHNOLOGY_OPTIONS.map((technology) => (
               <option key={technology} value={technology}>
                 {technology}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className={styles.filterField} htmlFor="filter-status">
-          <span>Status</span>
-          <select
-            id="filter-status"
-            name="status"
-            value={filters.status}
-            onChange={handleFilterChange}
-          >
-            <option value="">All statuses</option>
-            {PROJECT_STATUS_OPTIONS.map((status) => (
-              <option key={status.value} value={status.value}>
-                {status.value} — {status.description}
               </option>
             ))}
           </select>
@@ -130,18 +109,35 @@ function ProjectFilters({ filters, onChange, onClear, hasActiveFilters }) {
           </select>
         </label>
 
-        <label className={styles.filterField} htmlFor="filter-compensation">
-          <span>Compensation</span>
+        <label className={styles.filterField} htmlFor="filter-commitment">
+          <span>Weekly commitment</span>
           <select
-            id="filter-compensation"
-            name="compensation"
-            value={filters.compensation}
+            id="filter-commitment"
+            name="weeklyCommitment"
+            value={filters.weeklyCommitment}
             onChange={handleFilterChange}
           >
-            <option value="">Paid or unpaid</option>
-            {COMPENSATION_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
+            <option value="">Any commitment</option>
+            {WEEKLY_COMMITMENTS.map((commitment) => (
+              <option key={commitment} value={commitment}>
+                {commitment}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className={styles.filterField} htmlFor="filter-duration">
+          <span>Duration</span>
+          <select
+            id="filter-duration"
+            name="duration"
+            value={filters.duration}
+            onChange={handleFilterChange}
+          >
+            <option value="">Any duration</option>
+            {PROJECT_DURATIONS.map((projectDuration) => (
+              <option key={projectDuration} value={projectDuration}>
+                {projectDuration}
               </option>
             ))}
           </select>
@@ -155,10 +151,10 @@ ProjectFilters.propTypes = {
   filters: PropTypes.shape({
     category: PropTypes.string.isRequired,
     technology: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
     locationType: PropTypes.string.isRequired,
     experienceLevel: PropTypes.string.isRequired,
-    compensation: PropTypes.string.isRequired,
+    weeklyCommitment: PropTypes.string.isRequired,
+    duration: PropTypes.string.isRequired,
   }).isRequired,
   onChange: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,

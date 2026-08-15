@@ -31,7 +31,8 @@ function OwnedProjectListItem({ project, showManageActions }) {
         <div className={styles.meta}>
           {project.status ? (
             <span
-              className={styles.status}
+              className={ui.statusBadge}
+              data-status={project.status}
               title={PROJECT_STATUS_DESCRIPTIONS[project.status]}
             >
               {project.status}
