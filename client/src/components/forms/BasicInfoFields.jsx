@@ -18,7 +18,7 @@ function BasicInfoFields({ values, onChange }) {
       <div className={styles.fieldRow}>
         <div className={styles.field}>
           <FieldLabel htmlFor="profile-name" required>
-            Name
+            Full Name
           </FieldLabel>
           <input
             id="profile-name"

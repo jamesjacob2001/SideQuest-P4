@@ -24,7 +24,8 @@ export const ROLE_TEMPLATES = [
   },
   {
     title: "Photographer",
-    description: "Capture and organize photos for promotion, archives, or exhibits.",
+    description:
+      "Capture and organize photos for promotion, archives, or exhibits.",
     suggestedSkills: ["Photography", "Editing", "Content Creation"],
   },
   {
@@ -36,13 +37,23 @@ export const ROLE_TEMPLATES = [
     title: "Social Media Lead",
     description:
       "Grow awareness through posts, stories, and community engagement.",
-    suggestedSkills: ["Social Media", "Content Creation", "Copywriting", "Marketing"],
+    suggestedSkills: [
+      "Social Media",
+      "Content Creation",
+      "Copywriting",
+      "Marketing",
+    ],
   },
   {
     title: "Event Coordinator",
     description:
       "Plan venues, schedules, volunteers, and on-the-day logistics.",
-    suggestedSkills: ["Event Planning", "Logistics", "Organizing", "Customer Service"],
+    suggestedSkills: [
+      "Event Planning",
+      "Logistics",
+      "Organizing",
+      "Customer Service",
+    ],
   },
   {
     title: "Outreach Lead",
@@ -54,7 +65,12 @@ export const ROLE_TEMPLATES = [
     title: "Facilitator",
     description:
       "Guide workshops, meetings, or group conversations productively.",
-    suggestedSkills: ["Facilitation", "Public Speaking", "Leadership", "Mentoring"],
+    suggestedSkills: [
+      "Facilitation",
+      "Public Speaking",
+      "Leadership",
+      "Mentoring",
+    ],
   },
   {
     title: "Researcher",
@@ -84,13 +100,22 @@ export const ROLE_TEMPLATES = [
     title: "Content Creator",
     description:
       "Produce posts, newsletters, short videos, or other shareable media.",
-    suggestedSkills: ["Content Creation", "Writing", "Social Media", "Video Editing"],
+    suggestedSkills: [
+      "Content Creation",
+      "Writing",
+      "Social Media",
+      "Video Editing",
+    ],
   },
   {
     title: "Musician",
     description:
       "Perform, arrange, or produce music for live or recorded projects.",
-    suggestedSkills: ["Music Production", "Stage Management", "Public Speaking"],
+    suggestedSkills: [
+      "Music Production",
+      "Stage Management",
+      "Public Speaking",
+    ],
   },
   {
     title: "Cook",
@@ -102,13 +127,23 @@ export const ROLE_TEMPLATES = [
     title: "Coach",
     description:
       "Lead practice plans, encourage participants, and track progress.",
-    suggestedSkills: ["Fitness Coaching", "Mentoring", "Leadership", "Organizing"],
+    suggestedSkills: [
+      "Fitness Coaching",
+      "Mentoring",
+      "Leadership",
+      "Organizing",
+    ],
   },
   {
     title: "Producer",
     description:
       "Keep creative work moving from concept through final delivery.",
-    suggestedSkills: ["Project Management", "Organizing", "Leadership", "Budgeting"],
+    suggestedSkills: [
+      "Project Management",
+      "Organizing",
+      "Leadership",
+      "Budgeting",
+    ],
   },
   {
     title: "Host",

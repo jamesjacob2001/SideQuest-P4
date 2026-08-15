@@ -89,7 +89,10 @@ function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
         )}
 
         {applicationError && (
-          <p className={`${ui.errorBanner} ${styles.errorMessage}`} role="alert">
+          <p
+            className={`${ui.errorBanner} ${styles.errorMessage}`}
+            role="alert"
+          >
             {applicationError}
           </p>
         )}

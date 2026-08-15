@@ -179,7 +179,9 @@ function ProjectDetailsPage() {
 
       <div className={styles.layout}>
         <div className={styles.mainContent}>
-          <section className={`${styles.contentSection} ${styles.prioritySection}`}>
+          <section
+            className={`${styles.contentSection} ${styles.prioritySection}`}
+          >
             <h2>Open roles</h2>
             <p className={styles.sectionHint}>
               Choose a role to apply — this is how you join the project.

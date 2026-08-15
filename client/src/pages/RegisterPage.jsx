@@ -66,7 +66,7 @@ function RegisterPage() {
         ) : null}
 
         <div className={styles.field}>
-          <label htmlFor="register-name">Name</label>
+          <label htmlFor="register-name">Full Name</label>
           <input
             autoComplete="name"
             className={ui.textInput}

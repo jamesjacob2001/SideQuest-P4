@@ -14,11 +14,7 @@ function ProtectedRoute({ children }) {
 
   if (!isAuthenticated) {
     return (
-      <Navigate
-        replace
-        state={buildAuthRedirectState(location)}
-        to="/login"
-      />
+      <Navigate replace state={buildAuthRedirectState(location)} to="/login" />
     );
   }
 

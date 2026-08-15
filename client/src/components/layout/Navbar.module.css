@@ -21,7 +21,9 @@
   letter-spacing: -0.02em;
   text-decoration: none;
   white-space: nowrap;
-  transition: color var(--motion-soft), letter-spacing var(--motion-soft);
+  transition:
+    color var(--motion-soft),
+    letter-spacing var(--motion-soft);
 }
 
 .brand:hover {

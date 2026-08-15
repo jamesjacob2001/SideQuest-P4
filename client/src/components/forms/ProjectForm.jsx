@@ -437,6 +437,7 @@ function ProjectForm({
           </FieldLabel>
           <input
             id="tagline"
+            maxLength={150}
             name="tagline"
             type="text"
             value={formData.tagline}
@@ -444,7 +445,7 @@ function ProjectForm({
             required
           />
           <p className={styles.helpText}>
-            A concise sentence that summarizes the project.
+            A short one sentence pitch that appears on project cards.
           </p>
         </div>
       </section>
@@ -461,6 +462,7 @@ function ProjectForm({
           <FieldLabel htmlFor="overview" required>
             Overview
           </FieldLabel>
+
           <textarea
             id="overview"
             name="overview"
@@ -469,6 +471,11 @@ function ProjectForm({
             onChange={handleDescriptionChange}
             required
           />
+
+          <p className={styles.helpText}>
+            Give collaborators a fuller explanation of what the project does and
+            why it matters.
+          </p>
         </div>
 
         <div className={styles.field}>
@@ -516,7 +523,9 @@ function ProjectForm({
       <section className={styles.formSection}>
         <div className={styles.sectionHeading}>
           <h2>Categories and skills</h2>
-          <p>Help collaborators find projects that match what they can offer.</p>
+          <p>
+            Help collaborators find projects that match what they can offer.
+          </p>
         </div>
 
         <fieldset className={styles.fieldset}>
@@ -730,11 +739,7 @@ function ProjectForm({
           ))}
         </div>
 
-        <button
-          className={ui.secondaryButton}
-          type="button"
-          onClick={addRole}
-        >
+        <button className={ui.secondaryButton} type="button" onClick={addRole}>
           Add another role
         </button>
       </section>
@@ -797,7 +802,9 @@ function ProjectForm({
 
         <div className={styles.twoColumnFields}>
           <div className={styles.field}>
-            <FieldLabel htmlFor="weeklyCommitment">Weekly commitment</FieldLabel>
+            <FieldLabel htmlFor="weeklyCommitment">
+              Weekly commitment
+            </FieldLabel>
             <select
               id="weeklyCommitment"
               name="weeklyCommitment"

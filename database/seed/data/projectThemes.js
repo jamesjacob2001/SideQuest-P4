@@ -14,7 +14,11 @@ export const PROJECT_THEMES = [
       "Making local volunteering easier to discover and join.",
       "Building small acts of community care into something lasting.",
     ],
-    categories: ["Community Impact", "Events & Organizing", "Education & Mentoring"],
+    categories: [
+      "Community Impact",
+      "Events & Organizing",
+      "Education & Mentoring",
+    ],
     technologies: [
       "Community Outreach",
       "Organizing",
@@ -119,7 +123,13 @@ export const PROJECT_THEMES = [
       "Interviewing",
       "Content Creation",
     ],
-    roleTypes: ["Writer", "Editor", "Researcher", "Content Creator", "Producer"],
+    roleTypes: [
+      "Writer",
+      "Editor",
+      "Researcher",
+      "Content Creator",
+      "Producer",
+    ],
   },
   {
     name: "Food and Hospitality",
@@ -136,7 +146,11 @@ export const PROJECT_THEMES = [
       "Making cooking collaborative, welcoming, and community-minded.",
       "Turning hospitality into a project anyone can help build.",
     ],
-    categories: ["Food & Hospitality", "Community Impact", "Events & Organizing"],
+    categories: [
+      "Food & Hospitality",
+      "Community Impact",
+      "Events & Organizing",
+    ],
     technologies: [
       "Cooking",
       "Baking",
@@ -168,7 +182,11 @@ export const PROJECT_THEMES = [
       "Making wellness feel communal instead of solitary.",
       "Helping people build habits that fit real life.",
     ],
-    categories: ["Health & Wellness", "Education & Mentoring", "Sports & Recreation"],
+    categories: [
+      "Health & Wellness",
+      "Education & Mentoring",
+      "Sports & Recreation",
+    ],
     technologies: [
       "Facilitation",
       "Mentoring",
@@ -194,7 +212,11 @@ export const PROJECT_THEMES = [
       "Building regular gatherings around play, movement, and fun.",
       "Helping people find teammates for low-stakes recreation.",
     ],
-    categories: ["Sports & Recreation", "Events & Organizing", "Community Impact"],
+    categories: [
+      "Sports & Recreation",
+      "Events & Organizing",
+      "Community Impact",
+    ],
     technologies: [
       "Event Planning",
       "Organizing",

@@ -44,7 +44,9 @@ async function seedDatabase() {
     console.log(
       `Inserted ${result.insertedCount} synthetic projects owned by ${ownerIds.length} users.`,
     );
-    console.log("Cleared team memberships. Re-run seed-team-memberships if needed.");
+    console.log(
+      "Cleared team memberships. Re-run seed-team-memberships if needed.",
+    );
   } finally {
     await client.close();
   }

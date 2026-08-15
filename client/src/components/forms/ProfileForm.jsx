@@ -47,7 +47,7 @@ function validateProfileValues(values) {
   const errors = [];
 
   if (!isNonEmptyString(values.name)) {
-    errors.push("Name is required.");
+    errors.push("Full name is required.");
   }
 
   if (!isNonEmptyString(values.username)) {
