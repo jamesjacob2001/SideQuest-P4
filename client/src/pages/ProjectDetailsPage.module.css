@@ -188,6 +188,11 @@
   color: #e3e3e8;
 }
 
+.statusDescription {
+  color: #aeb0ba;
+  font-weight: 400;
+}
+
 .tagList {
   display: flex;
   flex-wrap: wrap;

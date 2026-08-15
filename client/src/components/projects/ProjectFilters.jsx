@@ -4,7 +4,7 @@ import {
   EXPERIENCE_LEVELS,
   LOCATION_TYPES,
   PROJECT_CATEGORIES,
-  PROJECT_STATUSES,
+  PROJECT_STATUS_OPTIONS,
   TECHNOLOGY_OPTIONS,
 } from "../../constants/projectOptions.js";
 import styles from "./ProjectFilters.module.css";
@@ -88,9 +88,9 @@ function ProjectFilters({ filters, onChange, onClear, hasActiveFilters }) {
             onChange={handleFilterChange}
           >
             <option value="">All statuses</option>
-            {PROJECT_STATUSES.map((status) => (
-              <option key={status} value={status}>
-                {status}
+            {PROJECT_STATUS_OPTIONS.map((status) => (
+              <option key={status.value} value={status.value}>
+                {status.value} — {status.description}
               </option>
             ))}
           </select>

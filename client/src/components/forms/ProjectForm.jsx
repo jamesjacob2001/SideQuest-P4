@@ -5,6 +5,7 @@ import {
   EXPERIENCE_LEVELS,
   LOCATION_TYPES,
   PROJECT_CATEGORIES,
+  PROJECT_STATUS_OPTIONS,
   PROJECT_STATUSES,
   TECHNOLOGY_OPTIONS,
 } from "../../constants/projectOptions.js";
@@ -841,7 +842,7 @@ function ProjectForm({
 
           <div className={styles.field}>
             <FieldLabel htmlFor="status" required>
-              Initial status
+              Project status
             </FieldLabel>
             <select
               id="status"
@@ -850,12 +851,16 @@ function ProjectForm({
               onChange={handleFieldChange}
               required
             >
-              {PROJECT_STATUSES.map((status) => (
-                <option value={status} key={status}>
-                  {status}
+              {PROJECT_STATUS_OPTIONS.map((status) => (
+                <option value={status.value} key={status.value}>
+                  {status.value} — {status.description}
                 </option>
               ))}
             </select>
+            <p className={styles.helpText}>
+              Recruiting means you are looking for teammates. Active means work
+              is underway. Paused means the project is temporarily on hold.
+            </p>
           </div>
         </div>
       </section>

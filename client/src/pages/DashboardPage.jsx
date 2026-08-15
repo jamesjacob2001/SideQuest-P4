@@ -168,7 +168,7 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Owned projects still looking for teammates. Edit to update roles or status."
+          description="Looking for new teammates. Edit to update roles or status."
           emptyMessage="You have no recruiting projects."
           isEmpty={recruiting.length === 0}
           title="Recruiting"
@@ -185,7 +185,7 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Owned projects currently in progress."
+          description="Work is underway on these owned projects."
           emptyMessage="You have no active projects."
           isEmpty={active.length === 0}
           title="Active"
@@ -202,7 +202,7 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Owned projects that are paused."
+          description="Temporarily on hold."
           emptyMessage="You have no paused projects."
           isEmpty={paused.length === 0}
           title="Paused"
@@ -219,7 +219,7 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Owned projects marked completed."
+          description="Finished projects you own."
           emptyMessage="You have no completed projects."
           isEmpty={completed.length === 0}
           title="Completed"

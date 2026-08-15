@@ -4,6 +4,7 @@ import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../components/auth/useAuth.js";
 import ProjectOwner from "../components/projects/ProjectOwner.jsx";
 import ProjectRoleCard from "../components/projects/ProjectRoleCard.jsx";
+import { PROJECT_STATUS_DESCRIPTIONS } from "../constants/projectOptions.js";
 import { getProjectById, deleteProject } from "../services/projectApi.js";
 import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
 import styles from "./ProjectDetailsPage.module.css";
@@ -105,6 +106,7 @@ function ProjectDetailsPage() {
 
   const allCategories = [...categories, ...customCategories];
   const isOwner = currentUser?._id?.toString() === String(project.ownerId);
+  const statusDescription = PROJECT_STATUS_DESCRIPTIONS[status];
 
   return (
     <main className={styles.page}>
@@ -115,7 +117,7 @@ function ProjectDetailsPage() {
       <header className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.badges}>
-            <span>{status}</span>
+            <span title={statusDescription}>{status}</span>
             <span>{locationType}</span>
           </div>
 
@@ -203,7 +205,15 @@ function ProjectDetailsPage() {
             <dl className={styles.detailList}>
               <div>
                 <dt>Status</dt>
-                <dd>{status}</dd>
+                <dd>
+                  {status}
+                  {statusDescription ? (
+                    <span className={styles.statusDescription}>
+                      {" "}
+                      — {statusDescription}
+                    </span>
+                  ) : null}
+                </dd>
               </div>
 
               <div>

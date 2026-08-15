@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { DASHBOARD_ORIGIN } from "../../utils/navigationOrigin.js";
+import { PROJECT_STATUS_DESCRIPTIONS } from "../../constants/projectOptions.js";
 import styles from "./OwnedProjectListItem.module.css";
 
 function OwnedProjectListItem({ project, showManageActions }) {
@@ -28,7 +29,12 @@ function OwnedProjectListItem({ project, showManageActions }) {
 
         <div className={styles.meta}>
           {project.status ? (
-            <span className={styles.status}>{project.status}</span>
+            <span
+              className={styles.status}
+              title={PROJECT_STATUS_DESCRIPTIONS[project.status]}
+            >
+              {project.status}
+            </span>
           ) : null}
           {project.locationType ? <span>{project.locationType}</span> : null}
         </div>

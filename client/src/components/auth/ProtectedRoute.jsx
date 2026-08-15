@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Navigate, useLocation } from "react-router-dom";
 
+import { buildAuthRedirectState } from "../../utils/authRedirect.js";
 import { useAuth } from "./useAuth.js";
 
 function ProtectedRoute({ children }) {
@@ -12,7 +13,13 @@ function ProtectedRoute({ children }) {
   }
 
   if (!isAuthenticated) {
-    return <Navigate replace state={{ from: location.pathname }} to="/login" />;
+    return (
+      <Navigate
+        replace
+        state={buildAuthRedirectState(location)}
+        to="/login"
+      />
+    );
   }
 
   return children;

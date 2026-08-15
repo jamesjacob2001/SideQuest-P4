@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
 import PasswordInput from "../components/forms/PasswordInput.jsx";
@@ -7,6 +7,7 @@ import styles from "./AuthPages.module.css";
 
 function RegisterPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { register } = useAuth();
 
   const [name, setName] = useState("");
@@ -15,6 +16,9 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const redirectTo = location.state?.from;
+  const authMessage = location.state?.authMessage;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -29,7 +33,7 @@ function RegisterPage() {
         password,
       });
 
-      navigate(`/profile/${user._id}`);
+      navigate(redirectTo || `/profile/${user._id}`);
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -46,6 +50,12 @@ function RegisterPage() {
           Join SideQuest to collaborate on projects across any field.
         </p>
       </header>
+
+      {authMessage ? (
+        <p className={styles.infoMessage} role="status">
+          {authMessage}
+        </p>
+      ) : null}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         {errorMessage ? (
@@ -112,7 +122,10 @@ function RegisterPage() {
       </form>
 
       <p className={styles.footerText}>
-        Already have an account? <Link to="/login">Log in</Link>
+        Already have an account?{" "}
+        <Link state={location.state} to="/login">
+          Log in
+        </Link>
       </p>
     </section>
   );

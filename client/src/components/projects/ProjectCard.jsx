@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { PROJECTS_ORIGIN } from "../../utils/navigationOrigin.js";
+import { PROJECT_STATUS_DESCRIPTIONS } from "../../constants/projectOptions.js";
 import ProjectOwner from "./ProjectOwner.jsx";
 import styles from "./ProjectCard.module.css";
 
@@ -30,7 +31,12 @@ function ProjectCard({ project }) {
   return (
     <article className={styles.card}>
       <div className={styles.header}>
-        <span className={styles.status}>{status}</span>
+        <span
+          className={styles.status}
+          title={PROJECT_STATUS_DESCRIPTIONS[status]}
+        >
+          {status}
+        </span>
         <span className={styles.location}>{locationType}</span>
       </div>
 

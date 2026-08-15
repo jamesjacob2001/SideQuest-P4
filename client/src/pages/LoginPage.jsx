@@ -16,6 +16,7 @@ function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const redirectTo = location.state?.from || "/projects";
+  const authMessage = location.state?.authMessage;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -41,6 +42,12 @@ function LoginPage() {
           Sign in to edit your profile and create projects.
         </p>
       </header>
+
+      {authMessage ? (
+        <p className={styles.infoMessage} role="status">
+          {authMessage}
+        </p>
+      ) : null}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         {errorMessage ? (
@@ -82,7 +89,10 @@ function LoginPage() {
       </form>
 
       <p className={styles.footerText}>
-        Need an account? <Link to="/register">Sign up</Link>
+        Need an account?{" "}
+        <Link state={location.state} to="/register">
+          Sign up
+        </Link>
       </p>
     </section>
   );
