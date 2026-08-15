@@ -161,8 +161,8 @@ function ProjectsPage() {
           <p className={ui.eyebrow}>Project discovery</p>
           <h1 className={ui.pageTitle}>Browse Projects</h1>
           <p className={ui.pageIntro}>
-            Explore open projects looking for teammates — filter by skills,
-            location, and commitment to find a fit.
+            Explore recruiting projects looking for teammates — filter by
+            skills, location, and commitment to find a fit.
           </p>
         </div>
 

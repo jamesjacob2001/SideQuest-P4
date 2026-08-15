@@ -49,7 +49,7 @@ const initialFormData = {
   location: "",
   weeklyCommitment: "",
   duration: "",
-  status: "Open",
+  status: "Recruiting",
 };
 
 function buildInitialFormData(project) {
@@ -95,7 +95,7 @@ function buildInitialFormData(project) {
     location: project.location ?? "",
     weeklyCommitment: project.weeklyCommitment ?? "",
     duration: project.duration ?? "",
-    status: project.status ?? "Open",
+    status: project.status ?? "Recruiting",
   };
 }
 
@@ -851,8 +851,8 @@ function ProjectForm({
             ))}
           </select>
           <p className={styles.helpText}>
-            Open means you are looking for teammates. In progress means the
-            team is working and not taking new people. On hold means the
+            Recruiting means you are looking for teammates. In progress means
+            the team is working and not taking new people. On hold means the
             project is temporarily stopped.
           </p>
         </div>

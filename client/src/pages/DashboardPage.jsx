@@ -17,7 +17,7 @@ const EMPTY_DASHBOARD = {
   pendingOutgoing: [],
   pendingIncoming: [],
   owned: [],
-  open: [],
+  recruiting: [],
   inProgress: [],
   onHold: [],
   finished: [],
@@ -39,7 +39,7 @@ function DashboardPage() {
           pendingOutgoing: data.pendingOutgoing ?? [],
           pendingIncoming: data.pendingIncoming ?? [],
           owned: data.owned ?? [],
-          open: data.open ?? [],
+          recruiting: data.recruiting ?? [],
           inProgress: data.inProgress ?? [],
           onHold: data.onHold ?? [],
           finished: data.finished ?? [],
@@ -132,7 +132,7 @@ function DashboardPage() {
     pendingOutgoing,
     pendingIncoming,
     owned,
-    open,
+    recruiting,
     inProgress,
     onHold,
     finished,
@@ -226,12 +226,12 @@ function DashboardPage() {
 
         <DashboardSection
           description="Looking for new teammates. These projects appear on Browse."
-          emptyMessage="You have no open projects."
-          isEmpty={open.length === 0}
-          title="Open"
+          emptyMessage="You have no recruiting projects."
+          isEmpty={recruiting.length === 0}
+          title="Recruiting"
         >
           <ul className={styles.list}>
-            {open.map((project) => (
+            {recruiting.map((project) => (
               <OwnedProjectListItem
                 key={String(project._id)}
                 project={project}

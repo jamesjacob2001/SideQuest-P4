@@ -78,7 +78,7 @@ export const PROJECT_DURATIONS = [
 
 export const PROJECT_STATUS_OPTIONS = [
   {
-    value: "Open",
+    value: "Recruiting",
     description: "Looking for new teammates",
   },
   {

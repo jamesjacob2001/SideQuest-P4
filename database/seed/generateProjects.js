@@ -3,7 +3,6 @@ import { randomUUID } from "node:crypto";
 import { PROJECT_CATEGORIES } from "../../server/constants/categories.js";
 import { EXPERIENCE_LEVELS } from "../../server/constants/experienceLevels.js";
 import { LOCATION_TYPES } from "../../server/constants/locationTypes.js";
-import { PROJECT_STATUSES } from "../../server/constants/projectStatuses.js";
 import { TECHNOLOGY_LIST } from "../../server/constants/technologyList.js";
 
 import { WEEKLY_COMMITMENTS } from "../../server/constants/weeklyCommitments.js";
@@ -122,7 +121,7 @@ export function generateProjects(count = 1000, ownerIds = []) {
   return Array.from({ length: count }, (_, index) => {
     const theme = randomItem(PROJECT_THEMES);
     const locationType = randomItem(LOCATION_TYPES);
-    const status = randomItem(PROJECT_STATUSES);
+    const status = "Recruiting";
 
     const selectedCategories = randomSubset(
       theme.categories.filter((category) =>

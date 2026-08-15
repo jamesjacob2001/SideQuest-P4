@@ -1,6 +1,6 @@
 export const PROJECT_STATUS_OPTIONS = [
   {
-    value: "Open",
+    value: "Recruiting",
     description: "Looking for new teammates",
   },
   {
@@ -17,8 +17,8 @@ export const PROJECT_STATUS_OPTIONS = [
   },
 ];
 
-/** Only Open projects appear on Browse by default. */
-export const BROWSEABLE_STATUSES = ["Open"];
+/** Only Recruiting projects appear on Browse by default. */
+export const BROWSEABLE_STATUSES = ["Recruiting"];
 
 export const PROJECT_STATUSES = PROJECT_STATUS_OPTIONS.map(
   (status) => status.value,

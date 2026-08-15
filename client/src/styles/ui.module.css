@@ -205,7 +205,7 @@
   text-transform: uppercase;
 }
 
-.statusBadge[data-status="Open"] {
+.statusBadge[data-status="Recruiting"] {
   background-color: #9879d9;
 }
 
