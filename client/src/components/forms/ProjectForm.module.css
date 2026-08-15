@@ -167,47 +167,6 @@
   font-weight: 500;
 }
 
-.secondaryButton,
-.dangerButton,
-.submitButton {
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-md);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.secondaryButton {
-  align-self: flex-start;
-  color: var(--color-text);
-  background-color: transparent;
-  border: 1px solid var(--color-border);
-}
-
-.secondaryButton:hover {
-  background-color: rgb(255 255 255 / 5%);
-  border-color: var(--color-border-strong);
-}
-
-.dangerButton {
-  align-self: flex-start;
-  margin-top: 0.25rem;
-  color: var(--color-danger-text);
-  background-color: transparent;
-  border: 1px solid var(--color-danger);
-}
-
-.submitButton {
-  color: #ffffff;
-  background-color: var(--color-primary);
-  border: 0;
-}
-
-.submitButton:disabled {
-  cursor: not-allowed;
-  opacity: 0.65;
-}
-
 .formActions {
   display: flex;
   justify-content: flex-end;
@@ -220,13 +179,13 @@
 
 .errorSummary h2 {
   margin: 0;
-  color: #ffd8dc;
+  color: var(--color-danger-text);
 }
 
 .errorSummary p,
 .errorSummary li {
   margin: 0;
-  color: #f0c8cd;
+  color: var(--color-danger-text);
 }
 
 .errorSummary ul {
@@ -242,9 +201,5 @@
   .inlineField {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .inlineField .secondaryButton {
-    width: 100%;
   }
 }

@@ -81,41 +81,12 @@
   border-top: 1px solid var(--color-border);
 }
 
-.applyButton,
-.loginLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  padding: 0.65rem 1rem;
-  color: #ffffff;
-  background-color: var(--color-primary);
-  border: none;
-  border-radius: var(--radius-md);
-  font: inherit;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.applyButton:hover,
-.loginLink:hover {
-  background-color: var(--color-primary-hover);
-}
-
-.applyButton:disabled {
-  cursor: not-allowed;
-  opacity: 0.65;
-}
-
 .ownerMessage,
-.successMessage,
-.errorMessage {
+.successMessage {
   display: inline-flex;
   align-items: center;
-  min-height: 42px;
   margin: 0;
-  padding: 0.65rem 1rem;
+  padding: var(--control-padding-y) var(--control-padding-x);
   border-radius: var(--radius-md);
   font-size: 0.95rem;
   font-weight: 600;
@@ -123,20 +94,17 @@
 }
 
 .ownerMessage {
-  color: #ffffff;
+  color: var(--color-text);
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-border-strong);
+}
+
+.successMessage {
+  color: var(--color-text);
   background-color: var(--color-surface-muted);
   border-color: var(--color-primary);
 }
 
-.successMessage {
-  color: #ffffff;
-  background-color: #2d5b42;
-  border-color: #4caf7a;
-}
-
 .errorMessage {
   margin-top: 0.75rem;
-  color: #ffffff;
-  background-color: #6b2d2d;
-  border-color: #d66a6a;
 }

@@ -1,35 +1,19 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: var(--space-section);
 }
 
 .sections {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: var(--layout-column-gap);
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-}
-
-.editLink {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.7rem 1rem;
-  color: #ffffff;
-  background-color: var(--color-primary);
-  border-radius: var(--radius-md);
-  font: inherit;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.editLink:hover {
-  background-color: var(--color-primary-hover);
 }
 
 .message,

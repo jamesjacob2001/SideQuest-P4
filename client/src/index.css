@@ -5,7 +5,9 @@
   --layout-column-gap: 1.25rem;
   --space-tight: 0.45rem;
   --space-group: 0.85rem;
+  --space-panel: 1.35rem 1.5rem;
   --space-section: 2.5rem;
+  --control-height: 2.85rem;
   --motion-rise: 420ms cubic-bezier(0.22, 1, 0.36, 1);
   --motion-soft: 280ms ease;
 

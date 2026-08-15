@@ -144,10 +144,6 @@ function DashboardPage() {
         <div>
           <p className={ui.eyebrow}>Your workspace</p>
           <h1 className={ui.pageTitle}>Dashboard</h1>
-          <p className={ui.pageIntro}>
-            Review join requests first, then track the projects you are on and
-            the ones you own.
-          </p>
         </div>
 
         <Link className={ui.primaryButton} to="/projects/new">
