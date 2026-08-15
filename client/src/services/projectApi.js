@@ -58,3 +58,9 @@ export async function deleteProject(projectId) {
 
   return response;
 }
+
+export async function getProjectTeam(projectId) {
+  const response = await apiRequest(`${PROJECTS_ENDPOINT}/${projectId}/team`);
+
+  return response.data.members;
+}

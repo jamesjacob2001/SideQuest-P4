@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
+import CurrentTeam from "../components/projects/CurrentTeam.jsx";
 import ProjectOwner from "../components/projects/ProjectOwner.jsx";
 import ProjectRoleCard from "../components/projects/ProjectRoleCard.jsx";
 import { PROJECT_STATUS_DESCRIPTIONS } from "../constants/projectOptions.js";
-import { getProjectById, deleteProject } from "../services/projectApi.js";
-import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
+import { deleteProject, getProjectById } from "../services/projectApi.js";
+import { getProjectTeam } from "../services/MembershipApi.js";
 import ui from "../styles/ui.module.css";
+import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
 import styles from "./ProjectDetailsPage.module.css";
 
 function ProjectDetailsPage() {
@@ -23,12 +25,20 @@ function ProjectDetailsPage() {
   const [errorStatus, setErrorStatus] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState("");
+  const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
     async function loadProject() {
       try {
         const projectData = await getProjectById(projectId);
         setProject(projectData);
+
+        try {
+          const members = await getProjectTeam(projectId);
+          setTeamMembers(members);
+        } catch {
+          setTeamMembers([]);
+        }
       } catch (error) {
         setErrorMessage(error.message);
         setErrorStatus(error.status);
@@ -198,6 +208,10 @@ function ProjectDetailsPage() {
                 />
               ))}
             </div>
+          </section>
+
+          <section className={styles.contentSection}>
+            <CurrentTeam members={teamMembers} />
           </section>
 
           <section className={styles.contentSection}>

@@ -11,12 +11,11 @@ function TagListFields({
   onChange,
   placeholder,
   required = false,
+  suggestions = [],
 }) {
   const [draft, setDraft] = useState("");
 
-  function handleAdd(event) {
-    event.preventDefault();
-
+  function addDraftValue() {
     const nextValue = draft.trim();
 
     if (!nextValue) {
@@ -32,6 +31,13 @@ function TagListFields({
 
     onChange([...values, nextValue]);
     setDraft("");
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      addDraftValue();
+    }
   }
 
   function handleRemove(valueToRemove) {
@@ -64,12 +70,21 @@ function TagListFields({
       <div className={styles.addRow}>
         <input
           id={id}
+          list={`${id}-suggestions`}
           onChange={(event) => setDraft(event.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
           type="text"
           value={draft}
         />
-        <button onClick={handleAdd} type="button">
+
+        <datalist id={`${id}-suggestions`}>
+          {suggestions.map((suggestion) => (
+            <option key={suggestion} value={suggestion} />
+          ))}
+        </datalist>
+
+        <button onClick={addDraftValue} type="button">
           Add
         </button>
       </div>
@@ -84,6 +99,7 @@ TagListFields.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
+  suggestions: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default TagListFields;

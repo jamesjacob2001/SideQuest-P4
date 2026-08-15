@@ -10,6 +10,12 @@ import TagListFields from "./TagListFields.jsx";
 import styles from "./ProfileForm.module.css";
 import ui from "../../styles/ui.module.css";
 
+import {
+  INTEREST_SUGGESTIONS,
+  ROLE_SUGGESTIONS,
+  SKILL_SUGGESTIONS,
+} from "../../constants/userOptions.js";
+
 function buildInitialValues(user) {
   return {
     name: user.name ?? "",
@@ -158,6 +164,7 @@ function ProfileForm({ user, onSubmit, isSubmitting }) {
           label="Skills"
           onChange={(technicalSkills) => updateValues({ technicalSkills })}
           placeholder="Add a skill"
+          suggestions={SKILL_SUGGESTIONS}
           values={values.technicalSkills}
         />
 
@@ -166,6 +173,7 @@ function ProfileForm({ user, onSubmit, isSubmitting }) {
           label="Interests"
           onChange={(interests) => updateValues({ interests })}
           placeholder="Add an interest"
+          suggestions={INTEREST_SUGGESTIONS}
           values={values.interests}
         />
 
@@ -174,6 +182,7 @@ function ProfileForm({ user, onSubmit, isSubmitting }) {
           label="Preferred roles"
           onChange={(rolePreferences) => updateValues({ rolePreferences })}
           placeholder="Add a preferred role"
+          suggestions={ROLE_SUGGESTIONS}
           values={values.rolePreferences}
         />
       </section>

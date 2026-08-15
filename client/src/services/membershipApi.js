@@ -31,3 +31,11 @@ export async function withdrawMembership(membershipId) {
     method: "DELETE",
   });
 }
+
+export async function getProjectTeam(projectId) {
+  const response = await apiRequest(
+    `${MEMBERSHIPS_ENDPOINT}/project/${projectId}/team`,
+  );
+
+  return response.data.members;
+}

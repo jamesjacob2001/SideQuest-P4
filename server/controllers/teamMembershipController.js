@@ -10,6 +10,7 @@ import {
   getProjectMembershipsWithApplicants,
   getTeamMembershipById,
   updateTeamMembershipStatus,
+  getAcceptedProjectMembers,
 } from "../services/teamMembershipService.js";
 
 export async function addTeamMembership(request, response, next) {
@@ -287,5 +288,41 @@ export async function withdrawMembership(request, response, next) {
     return response.status(204).send();
   } catch (error) {
     next(error);
+  }
+}
+
+export async function listCurrentProjectTeam(request, response, next) {
+  try {
+    const { projectId } = request.params;
+
+    if (!ObjectId.isValid(projectId)) {
+      return response.status(400).json({
+        success: false,
+        data: null,
+        message: "The provided project ID is invalid.",
+      });
+    }
+
+    const project = await getProjectById(projectId);
+
+    if (!project) {
+      return response.status(404).json({
+        success: false,
+        data: null,
+        message: "Project not found.",
+      });
+    }
+
+    const members = await getAcceptedProjectMembers(projectId);
+
+    return response.status(200).json({
+      success: true,
+      data: {
+        members,
+      },
+      message: "Current team retrieved successfully.",
+    });
+  } catch (error) {
+    return next(error);
   }
 }

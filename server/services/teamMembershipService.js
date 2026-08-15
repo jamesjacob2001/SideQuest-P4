@@ -316,3 +316,49 @@ export async function getIncomingMembershipsForOwner(ownerId) {
     ),
   }));
 }
+
+export async function getAcceptedProjectMembers(projectId) {
+  const database = getDatabase();
+
+  const memberships = await database
+    .collection("team_memberships")
+    .find({
+      projectId: toObjectId(projectId),
+      status: "accepted",
+    })
+    .sort({
+      joinedAt: 1,
+    })
+    .toArray();
+
+  if (memberships.length === 0) {
+    return [];
+  }
+
+  const applicantIds = [
+    ...new Set(
+      memberships.map((membership) => membership.applicantId.toString()),
+    ),
+  ];
+
+  const users = await database
+    .collection("users")
+    .find({
+      _id: {
+        $in: applicantIds.map((id) => new ObjectId(id)),
+      },
+    })
+    .toArray();
+
+  const usersById = new Map(users.map((user) => [user._id.toString(), user]));
+
+  return memberships.map((membership) => ({
+    _id: membership._id,
+    roleId: membership.roleId,
+    roleTitle: membership.roleTitle,
+    joinedAt: membership.joinedAt,
+    member: summarizeApplicant(
+      usersById.get(membership.applicantId.toString()),
+    ),
+  }));
+}
