@@ -6,10 +6,11 @@
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  animation: riseIn var(--motion-rise) both;
   transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    box-shadow 160ms ease;
+    transform var(--motion-soft),
+    border-color var(--motion-soft),
+    box-shadow var(--motion-soft);
 }
 
 .card:hover {

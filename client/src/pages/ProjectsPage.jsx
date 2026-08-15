@@ -161,8 +161,8 @@ function ProjectsPage() {
           <p className={ui.eyebrow}>Project discovery</p>
           <h1 className={ui.pageTitle}>Browse Projects</h1>
           <p className={ui.pageIntro}>
-            Explore projects, discover open roles, and find a team that
-            matches your interests and skills.
+            Explore open projects looking for teammates — filter by skills,
+            location, and commitment to find a fit.
           </p>
         </div>
 
@@ -188,7 +188,7 @@ function ProjectsPage() {
             type="search"
             value={searchInput}
             onChange={(event) => setSearchInput(event.target.value)}
-            placeholder="Search by title, description, technology, or category"
+            placeholder="Search by title, description, skill, or category"
             maxLength={100}
           />
           <div className={styles.searchActions}>

@@ -39,6 +39,18 @@
   line-height: 1.65;
 }
 
+.metaText {
+  color: var(--color-text-subtle);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.chromeText {
+  color: var(--color-text-faint);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 .surface {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
