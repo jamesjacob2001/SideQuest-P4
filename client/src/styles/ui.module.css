@@ -1,8 +1,9 @@
 /* Repeated page chrome, surfaces, and controls used across SideQuest. */
 
 .eyebrow {
-  margin: 0 0 0.45rem;
+  margin: 0 0 var(--space-tight);
   color: var(--color-accent);
+  font-family: var(--font-body);
   font-size: var(--font-size-eyebrow);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-eyebrow);
@@ -13,27 +14,27 @@
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.5vw, 3.25rem);
+  font-size: clamp(2.35rem, 4.8vw, 3.4rem);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.08;
 }
 
 .pageTitleCompact {
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+  font-size: clamp(1.95rem, 3.2vw, 2.55rem);
   font-weight: 400;
   letter-spacing: -0.01em;
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
 .pageIntro {
   max-width: 640px;
-  margin: 0.65rem 0 0;
+  margin: 0.7rem 0 0;
   color: var(--color-text-muted);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.65;
 }
@@ -202,8 +203,8 @@
 .infoBanner {
   margin: 0;
   padding: 0.95rem 1rem;
-  color: #e4e6ff;
-  background-color: #1e2140;
+  color: var(--color-text);
+  background-color: var(--color-surface-muted);
   border: 1px solid var(--color-primary);
   border-left-width: 4px;
   border-radius: var(--radius-md);

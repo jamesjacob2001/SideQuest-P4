@@ -123,8 +123,8 @@
 
 .ownerMessage {
   color: #ffffff;
-  background-color: #3f4254;
-  border-color: #696cff;
+  background-color: var(--color-surface-muted);
+  border-color: var(--color-primary);
 }
 
 .successMessage {

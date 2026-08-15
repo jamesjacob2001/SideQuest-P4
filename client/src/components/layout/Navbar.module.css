@@ -14,9 +14,9 @@
 }
 
 .brand {
-  color: #ffffff;
+  color: var(--color-text);
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: 1.55rem;
   font-weight: 400;
   letter-spacing: -0.02em;
   text-decoration: none;
@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1.5rem;
+  gap: 1.75rem;
   min-width: 0;
 }
 
@@ -35,7 +35,7 @@
 .accountLinks {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--space-group);
 }
 
 .primaryLinks a,

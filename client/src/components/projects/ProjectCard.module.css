@@ -15,7 +15,9 @@
 .card:hover {
   transform: translateY(-3px);
   border-color: var(--color-primary);
-  box-shadow: 0 16px 36px rgb(0 0 0 / 35%);
+  box-shadow:
+    0 16px 36px rgb(0 0 0 / 45%),
+    0 0 0 1px rgb(47 98 255 / 25%);
 }
 
 .header {

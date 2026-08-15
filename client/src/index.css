@@ -1,33 +1,45 @@
 :root {
-  /* Layout */
+  /* Layout — shared alignment + spacing system */
   --layout-max-width: 1200px;
   --layout-gutter: 1.5rem;
   --layout-column-gap: 1.25rem;
+  --space-tight: 0.45rem;
+  --space-group: 0.85rem;
+  --space-section: 2.5rem;
 
-  /* Color — strong steps, not near-neighbors */
-  --color-bg: #101118;
-  --color-surface: #262838;
-  --color-surface-raised: #1a1b26;
-  --color-surface-sunken: #0c0d13;
-  --color-surface-muted: #323448;
-  --color-surface-nav: #161722;
-  --color-border: #343646;
-  --color-border-strong: #3f4254;
-  --color-border-input: #3c3f50;
+  /* Color — galaxy palette with deliberate contrast steps
+     identical roles stay identical; different roles are clearly different */
+  --color-bg: #03050c;
+  --color-surface: #141c38;
+  --color-surface-raised: #0a1020;
+  --color-surface-sunken: #010208;
+  --color-surface-muted: #1c2748;
+  --color-surface-nav: #0a1020;
+  --color-border: #243056;
+  --color-border-strong: #3a4d7a;
+  --color-border-input: #3a4d7a;
+
+  /* Type hierarchy: starlight → readable secondary → quiet meta */
   --color-text: #ffffff;
-  --color-text-muted: #9b9daf;
-  --color-text-subtle: #9b9daf;
-  --color-text-faint: #6d7084;
-  --color-accent: #c2c4ff;
-  --color-accent-strong: #aeb1ff;
-  --color-primary: #6f73e8;
-  --color-primary-hover: #8589f2;
-  --color-focus: #a0a3ff;
-  --color-danger: #d15b6a;
-  --color-danger-text: #ffd2d7;
-  --color-danger-surface: #3a1d24;
-  --color-tag: #5a5fc4;
-  --color-tag-text: #eef0ff;
+  --color-text-muted: #aeb8d4;
+  --color-text-subtle: #aeb8d4;
+  --color-text-faint: #7a849f;
+
+  /* Cobalt = primary action; core lavender = accent/links — not near-twins */
+  --color-accent: #c5b4ff;
+  --color-accent-strong: #d9ccff;
+  --color-primary: #2f62ff;
+  --color-primary-hover: #4d7aff;
+  --color-focus: #c5b4ff;
+
+  /* Danger stays in a different hue family than primary/accent */
+  --color-danger: #e85a6b;
+  --color-danger-text: #ffd6db;
+  --color-danger-surface: #2a1218;
+
+  /* Filled category chips use cobalt; outline tech chips use border */
+  --color-tag: #2f62ff;
+  --color-tag-text: #ffffff;
 
   /* Radius */
   --radius-sm: 6px;
@@ -35,7 +47,7 @@
   --radius-lg: 16px;
   --radius-pill: 999px;
 
-  /* Type */
+  /* Type — Metal display vs EB Garamond body (clear pairing contrast) */
   --font-body: "EB Garamond", Georgia, "Times New Roman", serif;
   --font-display: Metal, Georgia, "Times New Roman", serif;
   --font-size-eyebrow: 0.75rem;
@@ -47,7 +59,7 @@
   --control-padding-y: 0.75rem;
   --control-padding-x: 1rem;
   --input-padding: 0.8rem 0.9rem;
-  --focus-ring: 2px solid rgb(160 163 255 / 35%);
+  --focus-ring: 2px solid rgb(197 180 255 / 40%);
 
   font-family: var(--font-body);
   color: var(--color-text);
@@ -64,14 +76,27 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  color: var(--color-text);
   background-color: var(--color-bg);
+  background-image:
+    radial-gradient(
+      ellipse 90% 55% at 50% -15%,
+      rgb(47 98 255 / 18%),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 85% 110%,
+      rgb(197 180 255 / 10%),
+      transparent 50%
+    );
 }
 
 button,
 input,
 select,
 textarea {
-  font: inherit;
+  font-family: var(--font-body);
+  font-size: inherit;
 }
 
 main {
