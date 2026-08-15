@@ -138,6 +138,11 @@ function DashboardPage() {
     finished,
   } = dashboard;
 
+  const pendingApplications = pendingOutgoing.length;
+  const pendingRequests = pendingIncoming.length;
+  const ownedProjects = owned.length;
+  const joinedProjects = joined.length;
+
   return (
     <section className={styles.page}>
       <header className={styles.pageHeader}>
@@ -150,6 +155,28 @@ function DashboardPage() {
           Create project
         </Link>
       </header>
+
+      <section className={styles.summary} aria-label="Dashboard summary">
+        <div className={styles.summaryCard}>
+          <span className={styles.summaryValue}>{ownedProjects}</span>
+          <span className={styles.summaryLabel}>Projects created</span>
+        </div>
+
+        <div className={styles.summaryCard}>
+          <span className={styles.summaryValue}>{joinedProjects}</span>
+          <span className={styles.summaryLabel}>Teams joined</span>
+        </div>
+
+        <div className={styles.summaryCard}>
+          <span className={styles.summaryValue}>{pendingApplications}</span>
+          <span className={styles.summaryLabel}>Pending applications</span>
+        </div>
+
+        <div className={styles.summaryCard}>
+          <span className={styles.summaryValue}>{pendingRequests}</span>
+          <span className={styles.summaryLabel}>Incoming requests</span>
+        </div>
+      </section>
 
       <div className={styles.sections}>
         <DashboardSection

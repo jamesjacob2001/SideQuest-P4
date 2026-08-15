@@ -8,9 +8,10 @@ function DashboardSection({
   children,
   emptyMessage,
   isEmpty,
+  variant = "default",
 }) {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-variant={variant}>
       <header className={styles.header}>
         <h2>{title}</h2>
         {description ? (
@@ -29,6 +30,17 @@ DashboardSection.propTypes = {
   children: PropTypes.node,
   emptyMessage: PropTypes.string,
   isEmpty: PropTypes.bool,
+  variant: PropTypes.oneOf([
+    "default",
+    "requests",
+    "applications",
+    "joined",
+    "recruiting",
+    "active",
+    "paused",
+    "finished",
+    "owned",
+  ]),
 };
 
 export default DashboardSection;

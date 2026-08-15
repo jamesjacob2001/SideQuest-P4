@@ -6,6 +6,48 @@
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background-color: var(--color-border);
+}
+
+.section[data-variant="requests"]::before {
+  background-color: var(--color-accent);
+}
+
+.section[data-variant="applications"]::before {
+  background-color: var(--color-primary);
+}
+
+.section[data-variant="joined"]::before {
+  background-color: var(--color-accent-strong);
+}
+
+.section[data-variant="recruiting"]::before {
+  background-color: var(--color-primary-hover);
+}
+
+.section[data-variant="active"]::before {
+  background-color: var(--color-primary);
+}
+
+.section[data-variant="paused"]::before {
+  background-color: var(--color-text-subtle);
+}
+
+.section[data-variant="finished"]::before {
+  background-color: var(--color-text-faint);
+}
+
+.section[data-variant="owned"]::before {
+  background-color: var(--color-border-strong);
 }
 
 .header h2 {
