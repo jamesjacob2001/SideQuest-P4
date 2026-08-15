@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import ProjectForm from "../components/forms/ProjectForm.jsx";
 import { createProject } from "../services/projectApi.js";
+import ui from "../styles/ui.module.css";
 import styles from "./CreateProjectPage.module.css";
 
 function CreateProjectPage() {
@@ -21,18 +22,18 @@ function CreateProjectPage() {
   }
 
   return (
-    <main className={styles.page}>
+    <section className={styles.page}>
       <header className={styles.pageHeader}>
-        <p className={styles.eyebrow}>Start a SideQuest</p>
-        <h1>Create a Project</h1>
-        <p>
+        <p className={ui.eyebrow}>Start a SideQuest</p>
+        <h1 className={ui.pageTitle}>Create a Project</h1>
+        <p className={ui.pageIntro}>
           Describe your idea, define the contributors you need, and publish the
           project for others to discover.
         </p>
       </header>
 
       <ProjectForm onSubmit={handleCreateProject} isSubmitting={isSubmitting} />
-    </main>
+    </section>
   );
 }
 

@@ -10,6 +10,7 @@ import ProfileHeader from "../components/profiles/ProfileHeader.jsx";
 import RolePreferencesList from "../components/profiles/RolePreferencesList.jsx";
 import SkillsList from "../components/profiles/SkillsList.jsx";
 import { getUserById } from "../services/userApi.js";
+import ui from "../styles/ui.module.css";
 import styles from "./ProfilePage.module.css";
 
 function ProfilePage() {
@@ -69,7 +70,7 @@ function ProfilePage() {
 
       {isOwner ? (
         <div className={styles.actions}>
-          <Link className={styles.editLink} to={`/profile/${id}/edit`}>
+          <Link className={ui.primaryButton} to={`/profile/${id}/edit`}>
             Edit profile
           </Link>
           <DeleteAccountButton userId={String(user._id)} userName={user.name} />

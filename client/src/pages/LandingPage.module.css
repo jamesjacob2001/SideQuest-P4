@@ -1,62 +1,40 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.35rem;
   max-width: 720px;
-  padding: 2rem 0 4rem;
+  width: 100%;
+  padding: 0.5rem 0 2rem;
 }
 
 .brand {
   margin: 0;
-  color: #adafff;
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--color-accent);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  line-height: 1;
 }
 
 .headline {
   margin: 0;
-  color: #f4f4f7;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  line-height: 1.25;
+  color: var(--color-text);
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .introduction {
   margin: 0;
-  color: #c6c7d0;
-  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  font-weight: 400;
   line-height: 1.7;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-}
-
-.primaryLink,
-.secondaryLink {
-  padding: 0.75rem 1.1rem;
-  border-radius: 8px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.primaryLink {
-  color: #ffffff;
-  background-color: #6669c5;
-}
-
-.primaryLink:hover {
-  background-color: #7578d8;
-}
-
-.secondaryLink {
-  color: #dedff4;
-  border: 1px solid #6669c5;
-}
-
-.secondaryLink:hover {
-  background-color: rgb(102 105 197 / 18%);
+  gap: 0.85rem;
+  margin-top: 0.65rem;
 }

@@ -7,6 +7,7 @@ import ProjectRoleCard from "../components/projects/ProjectRoleCard.jsx";
 import { PROJECT_STATUS_DESCRIPTIONS } from "../constants/projectOptions.js";
 import { getProjectById, deleteProject } from "../services/projectApi.js";
 import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
+import ui from "../styles/ui.module.css";
 import styles from "./ProjectDetailsPage.module.css";
 
 function ProjectDetailsPage() {
@@ -79,7 +80,7 @@ function ProjectDetailsPage() {
 
         <p>{errorMessage}</p>
 
-        <Link className={styles.backLink} to={backNavigation.to}>
+        <Link className={ui.accentLink} to={backNavigation.to}>
           {backNavigation.shortLabel}
         </Link>
       </section>
@@ -110,30 +111,34 @@ function ProjectDetailsPage() {
 
   return (
     <main className={styles.page}>
-      <Link className={styles.backLink} to={backNavigation.to}>
+      <Link className={ui.accentLink} to={backNavigation.to}>
         {backNavigation.label}
       </Link>
 
       <header className={styles.hero}>
         <div className={styles.heroContent}>
-          <div className={styles.badges}>
-            <span title={statusDescription}>{status}</span>
-            <span>{locationType}</span>
-          </div>
-
-          <h1>{title}</h1>
-          <p className={styles.tagline}>{tagline}</p>
-
-          {owner ? (
-            <div className={styles.ownerRow}>
-              <ProjectOwner owner={owner} />
+          <div className={styles.identity}>
+            <div className={styles.badges}>
+              <span className={styles.statusBadge} title={statusDescription}>
+                {status}
+              </span>
+              <span className={styles.metaBadge}>{locationType}</span>
             </div>
-          ) : null}
+
+            <h1>{title}</h1>
+            <p className={styles.tagline}>{tagline}</p>
+
+            {owner ? (
+              <div className={styles.ownerRow}>
+                <ProjectOwner owner={owner} />
+              </div>
+            ) : null}
+          </div>
 
           {isOwner ? (
             <div className={styles.projectActions}>
               <Link
-                className={styles.editLink}
+                className={ui.primaryButton}
                 state={location.state}
                 to={`/projects/${projectId}/edit`}
               >
@@ -141,7 +146,7 @@ function ProjectDetailsPage() {
               </Link>
 
               <button
-                className={styles.deleteButton}
+                className={ui.dangerButton}
                 type="button"
                 onClick={handleDeleteProject}
                 disabled={isDeleting}
@@ -167,22 +172,15 @@ function ProjectDetailsPage() {
           </section>
 
           <section className={styles.contentSection}>
-            <h2>Goals</h2>
-            <p>{description.goals}</p>
-          </section>
-
-          <section className={styles.contentSection}>
-            <h2>Current progress</h2>
-            <p>{description.currentProgress}</p>
-          </section>
-
-          <section className={styles.contentSection}>
             <h2>Who the team is looking for</h2>
             <p>{description.lookingFor}</p>
           </section>
 
           <section className={styles.contentSection}>
             <h2>Open roles</h2>
+            <p className={styles.sectionHint}>
+              Choose a role to apply — this is how you join the project.
+            </p>
 
             <div className={styles.roleList}>
               {roles.map((role) => (
@@ -195,6 +193,16 @@ function ProjectDetailsPage() {
                 />
               ))}
             </div>
+          </section>
+
+          <section className={styles.contentSection}>
+            <h2>Goals</h2>
+            <p>{description.goals}</p>
+          </section>
+
+          <section className={styles.contentSection}>
+            <h2>Current progress</h2>
+            <p>{description.currentProgress}</p>
           </section>
         </div>
 

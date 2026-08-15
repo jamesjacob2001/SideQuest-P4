@@ -1,0 +1,219 @@
+/* Repeated page chrome, surfaces, and controls used across SideQuest. */
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--color-accent);
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-eyebrow);
+  text-transform: uppercase;
+}
+
+.pageTitle {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(2.2rem, 4.5vw, 3.25rem);
+  font-weight: var(--font-weight-black);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.pageTitleCompact {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+  font-weight: var(--font-weight-black);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.pageIntro {
+  max-width: 640px;
+  margin: 0.65rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.surface {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.surfaceMessage {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.surfaceMessage p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+/* Filled = primary action */
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  color: #ffffff;
+  background-color: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.primaryButton:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.primaryButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Outline/neutral = secondary — intentionally not primary-colored */
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  color: var(--color-text);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.secondaryButton:hover {
+  background-color: rgb(255 255 255 / 5%);
+  border-color: var(--color-border-strong);
+}
+
+/* Danger stays unmistakably separate from primary/secondary */
+.dangerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  color: var(--color-danger-text);
+  background-color: transparent;
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+}
+
+.dangerButton:hover {
+  background-color: rgb(209 91 106 / 16%);
+}
+
+.dangerButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Quiet utility control — low emphasis */
+.mutedButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  color: var(--color-text-faint);
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18rem;
+}
+
+.mutedButton:hover {
+  color: var(--color-text-muted);
+  background-color: transparent;
+}
+
+.textInput {
+  width: 100%;
+  min-height: 2.85rem;
+  padding: var(--input-padding);
+  color: var(--color-text);
+  background-color: var(--color-surface-sunken);
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+  font: inherit;
+}
+
+.textInput:focus {
+  border-color: var(--color-focus);
+  outline: var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.accentLink {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+  text-decoration: none;
+}
+
+.accentLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+/* Filled tags for categories */
+.tag {
+  padding: 0.35rem 0.7rem;
+  color: var(--color-tag-text);
+  background-color: var(--color-tag);
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Outline tags for technologies — clearly different treatment */
+.tagMuted {
+  padding: 0.3rem 0.65rem;
+  color: var(--color-text-muted);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.infoBanner {
+  margin: 0;
+  padding: 0.95rem 1rem;
+  color: #e4e6ff;
+  background-color: #1e2140;
+  border: 1px solid var(--color-primary);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  line-height: 1.5;
+}
+
+.errorBanner {
+  margin: 0;
+  padding: 0.95rem 1rem;
+  color: var(--color-danger-text);
+  background-color: var(--color-danger-surface);
+  border: 1px solid var(--color-danger);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+}

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { DASHBOARD_ORIGIN } from "../../utils/navigationOrigin.js";
 import { PROJECT_STATUS_DESCRIPTIONS } from "../../constants/projectOptions.js";
+import ui from "../../styles/ui.module.css";
 import styles from "./OwnedProjectListItem.module.css";
 
 function OwnedProjectListItem({ project, showManageActions }) {
@@ -41,23 +42,23 @@ function OwnedProjectListItem({ project, showManageActions }) {
       </div>
 
       <div className={styles.actions}>
-        <Link
-          className={styles.viewLink}
-          state={DASHBOARD_ORIGIN}
-          to={`/projects/${projectId}`}
-        >
-          View
-        </Link>
-
         {showManageActions ? (
           <Link
-            className={styles.editLink}
+            className={ui.primaryButton}
             state={DASHBOARD_ORIGIN}
             to={`/projects/${projectId}/edit`}
           >
             Edit
           </Link>
         ) : null}
+
+        <Link
+          className={showManageActions ? ui.secondaryButton : ui.primaryButton}
+          state={DASHBOARD_ORIGIN}
+          to={`/projects/${projectId}`}
+        >
+          View
+        </Link>
       </div>
     </li>
   );

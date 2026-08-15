@@ -14,13 +14,13 @@
 
 .pageHeader h1 {
   margin: 0;
-  color: #f4f4f7;
+  color: var(--color-text);
   font-size: clamp(1.8rem, 3vw, 2.4rem);
 }
 
 .eyebrow {
   margin: 0 0 0.5rem;
-  color: #adafff;
+  color: var(--color-accent);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -30,12 +30,12 @@
 .introduction {
   max-width: 640px;
   margin: 0.7rem 0 0;
-  color: #c6c7d0;
+  color: var(--color-text-muted);
   line-height: 1.6;
 }
 
 .link {
-  color: #adafff;
+  color: var(--color-accent);
   font-weight: 700;
   text-decoration: none;
 }
@@ -48,9 +48,9 @@
 .message {
   padding: 3rem 1.5rem;
   text-align: center;
-  background-color: #22232f;
-  border: 1px solid #343645;
-  border-radius: 16px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
 }
 
 .message h1 {
@@ -58,5 +58,5 @@
 }
 
 .message p {
-  color: #c6c7d0;
+  color: var(--color-text-muted);
 }

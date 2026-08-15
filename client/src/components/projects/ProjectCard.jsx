@@ -41,7 +41,7 @@ function ProjectCard({ project }) {
       </div>
 
       <div className={styles.content}>
-        <div>
+        <div className={styles.identity}>
           <h2 className={styles.title}>
             <Link state={PROJECTS_ORIGIN} to={`/projects/${_id}`}>
               {title}
@@ -50,6 +50,13 @@ function ProjectCard({ project }) {
 
           <p className={styles.tagline}>{tagline}</p>
 
+          <p className={styles.openRoles}>
+            {roles.length} {roles.length === 1 ? "open role" : "open roles"}
+            {" · "}
+            {totalPositions}{" "}
+            {totalPositions === 1 ? "position" : "positions"}
+          </p>
+
           {owner ? (
             <div className={styles.ownerRow}>
               <ProjectOwner owner={owner} />
@@ -57,46 +64,40 @@ function ProjectCard({ project }) {
           ) : null}
         </div>
 
-        <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>Categories</h3>
+        <div className={styles.metaSections}>
+          <div className={styles.section}>
+            <h3 className={styles.sectionTitle}>Categories</h3>
 
-          <div className={styles.tagList}>
-            {categories.map((category) => (
-              <span className={styles.categoryTag} key={category}>
-                {category}
-              </span>
-            ))}
+            <div className={styles.tagList}>
+              {categories.map((category) => (
+                <span className={styles.categoryTag} key={category}>
+                  {category}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className={styles.section}>
-          <h3 className={styles.sectionTitle}>Technologies</h3>
+          <div className={styles.section}>
+            <h3 className={styles.sectionTitle}>Technologies</h3>
 
-          <div className={styles.tagList}>
-            {visibleTechnologies.map((technology) => (
-              <span className={styles.technologyTag} key={technology}>
-                {technology}
-              </span>
-            ))}
+            <div className={styles.tagList}>
+              {visibleTechnologies.map((technology) => (
+                <span className={styles.technologyTag} key={technology}>
+                  {technology}
+                </span>
+              ))}
 
-            {additionalTechnologyCount > 0 && (
-              <span className={styles.moreTag}>
-                +{additionalTechnologyCount} more
-              </span>
-            )}
+              {additionalTechnologyCount > 0 && (
+                <span className={styles.moreTag}>
+                  +{additionalTechnologyCount} more
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       <div className={styles.footer}>
-        <span>
-          {roles.length} {roles.length === 1 ? "role" : "roles"}
-        </span>
-
-        <span>
-          {totalPositions} {totalPositions === 1 ? "position" : "positions"}
-        </span>
-
         <Link
           className={styles.detailsLink}
           state={PROJECTS_ORIGIN}

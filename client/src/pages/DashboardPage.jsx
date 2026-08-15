@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import DashboardSection from "../components/dashboard/DashboardSection.jsx";
 import MembershipListItem from "../components/dashboard/MembershipListItem.jsx";
@@ -8,6 +9,7 @@ import {
   updateMembershipStatus,
   withdrawMembership,
 } from "../services/membershipApi.js";
+import ui from "../styles/ui.module.css";
 import styles from "./DashboardPage.module.css";
 
 const EMPTY_DASHBOARD = {
@@ -140,28 +142,83 @@ function DashboardPage() {
     <section className={styles.page}>
       <header className={styles.pageHeader}>
         <div>
-          <p className={styles.eyebrow}>Your workspace</p>
-          <h1>Dashboard</h1>
-          <p className={styles.introduction}>
-            Manage projects you created, track memberships, and review join
-            requests.
+          <p className={ui.eyebrow}>Your workspace</p>
+          <h1 className={ui.pageTitle}>Dashboard</h1>
+          <p className={ui.pageIntro}>
+            Review join requests first, then track the projects you are on and
+            the ones you own.
           </p>
         </div>
+
+        <Link className={ui.primaryButton} to="/projects/new">
+          Create project
+        </Link>
       </header>
 
       <div className={styles.sections}>
         <DashboardSection
-          description="All projects you own."
-          emptyMessage="You have not created any projects yet."
-          isEmpty={owned.length === 0}
-          title="Projects you created"
+          description="People asking to join projects you own — respond here first."
+          emptyMessage="No pending applications on your projects."
+          isEmpty={pendingIncoming.length === 0}
+          title="Incoming requests"
         >
           <ul className={styles.list}>
-            {owned.map((project) => (
-              <OwnedProjectListItem
-                key={String(project._id)}
-                project={project}
-                showManageActions
+            {pendingIncoming.map((membership) => {
+              const membershipId = String(membership._id);
+
+              return (
+                <MembershipListItem
+                  key={membershipId}
+                  actionError={actionErrors[membershipId]}
+                  isUpdating={updatingId === membershipId}
+                  membership={membership}
+                  onAccept={() =>
+                    handleIncomingDecision(membershipId, "accepted")
+                  }
+                  onReject={() =>
+                    handleIncomingDecision(membershipId, "rejected")
+                  }
+                  showApplicant
+                />
+              );
+            })}
+          </ul>
+        </DashboardSection>
+
+        <DashboardSection
+          description="Join requests you have sent that are still waiting."
+          emptyMessage="You have no outgoing requests."
+          isEmpty={pendingOutgoing.length === 0}
+          title="Outgoing requests"
+        >
+          <ul className={styles.list}>
+            {pendingOutgoing.map((membership) => {
+              const membershipId = String(membership._id);
+
+              return (
+                <MembershipListItem
+                  key={membershipId}
+                  actionError={actionErrors[membershipId]}
+                  isUpdating={updatingId === membershipId}
+                  membership={membership}
+                  onWithdraw={() => handleWithdraw(membershipId)}
+                />
+              );
+            })}
+          </ul>
+        </DashboardSection>
+
+        <DashboardSection
+          description="Projects where you are an accepted team member."
+          emptyMessage="You have not joined any projects yet."
+          isEmpty={joined.length === 0}
+          title="Joined projects"
+        >
+          <ul className={styles.list}>
+            {joined.map((membership) => (
+              <MembershipListItem
+                key={String(membership._id)}
+                membership={membership}
               />
             ))}
           </ul>
@@ -235,70 +292,19 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Projects where you are an accepted team member."
-          emptyMessage="You have not joined any projects yet."
-          isEmpty={joined.length === 0}
-          title="Joined projects"
+          description="Full list of every project you own."
+          emptyMessage="You have not created any projects yet."
+          isEmpty={owned.length === 0}
+          title="All owned projects"
         >
           <ul className={styles.list}>
-            {joined.map((membership) => (
-              <MembershipListItem
-                key={String(membership._id)}
-                membership={membership}
+            {owned.map((project) => (
+              <OwnedProjectListItem
+                key={String(project._id)}
+                project={project}
+                showManageActions
               />
             ))}
-          </ul>
-        </DashboardSection>
-
-        <DashboardSection
-          description="Join requests you have sent that are still waiting."
-          emptyMessage="You have no outgoing requests."
-          isEmpty={pendingOutgoing.length === 0}
-          title="Outgoing requests"
-        >
-          <ul className={styles.list}>
-            {pendingOutgoing.map((membership) => {
-              const membershipId = String(membership._id);
-
-              return (
-                <MembershipListItem
-                  key={membershipId}
-                  actionError={actionErrors[membershipId]}
-                  isUpdating={updatingId === membershipId}
-                  membership={membership}
-                  onWithdraw={() => handleWithdraw(membershipId)}
-                />
-              );
-            })}
-          </ul>
-        </DashboardSection>
-
-        <DashboardSection
-          description="People asking to join projects you own."
-          emptyMessage="No pending applications on your projects."
-          isEmpty={pendingIncoming.length === 0}
-          title="Incoming requests"
-        >
-          <ul className={styles.list}>
-            {pendingIncoming.map((membership) => {
-              const membershipId = String(membership._id);
-
-              return (
-                <MembershipListItem
-                  key={membershipId}
-                  actionError={actionErrors[membershipId]}
-                  isUpdating={updatingId === membershipId}
-                  membership={membership}
-                  onAccept={() =>
-                    handleIncomingDecision(membershipId, "accepted")
-                  }
-                  onReject={() =>
-                    handleIncomingDecision(membershipId, "rejected")
-                  }
-                  showApplicant
-                />
-              );
-            })}
           </ul>
         </DashboardSection>
       </div>

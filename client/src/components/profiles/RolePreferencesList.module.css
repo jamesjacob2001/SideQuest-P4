@@ -6,7 +6,7 @@
 
 .heading {
   margin: 0;
-  color: #f4f4f7;
+  color: var(--color-text);
   font-size: 1.25rem;
 }
 
@@ -22,8 +22,8 @@
 .tag {
   padding: 0.35rem 0.65rem;
   color: #e8e8ed;
-  background-color: #3d3f4d;
+  background-color: var(--color-border-strong);
   border: 1px solid #55576a;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font-size: 0.85rem;
 }

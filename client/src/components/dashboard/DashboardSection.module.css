@@ -1,27 +1,31 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
-  background-color: #22232f;
-  border: 1px solid #343645;
-  border-radius: 16px;
+  gap: 0.85rem;
+  padding: 1.35rem 1.5rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
 }
 
 .header h2 {
   margin: 0;
-  color: #f4f4f7;
-  font-size: 1.25rem;
+  color: var(--color-text);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .description {
-  margin: 0.45rem 0 0;
-  color: #c6c7d0;
+  margin: 0.4rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  font-weight: 400;
   line-height: 1.5;
 }
 
 .empty {
   margin: 0;
-  color: #a8a9b5;
+  color: var(--color-text-faint);
   line-height: 1.5;
 }

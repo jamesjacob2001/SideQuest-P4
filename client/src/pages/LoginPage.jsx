@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
 import PasswordInput from "../components/forms/PasswordInput.jsx";
+import ui from "../styles/ui.module.css";
 import styles from "./AuthPages.module.css";
 
 function LoginPage() {
@@ -36,22 +37,22 @@ function LoginPage() {
   return (
     <section className={styles.page}>
       <header className={styles.pageHeader}>
-        <p className={styles.eyebrow}>Account</p>
-        <h1>Log in</h1>
-        <p className={styles.introduction}>
-          Sign in to edit your profile and create projects.
+        <p className={ui.eyebrow}>Account</p>
+        <h1 className={ui.pageTitleCompact}>Log in</h1>
+        <p className={ui.pageIntro}>
+          Sign in to apply to roles, create projects, and manage your teams.
         </p>
       </header>
 
       {authMessage ? (
-        <p className={styles.infoMessage} role="status">
+        <p className={ui.infoBanner} role="status">
           {authMessage}
         </p>
       ) : null}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         {errorMessage ? (
-          <p className={styles.errorMessage} role="alert">
+          <p className={ui.errorBanner} role="alert">
             {errorMessage}
           </p>
         ) : null}
@@ -60,6 +61,7 @@ function LoginPage() {
           <label htmlFor="login-email">Email</label>
           <input
             autoComplete="email"
+            className={ui.textInput}
             id="login-email"
             onChange={(event) => setEmail(event.target.value)}
             required
@@ -80,7 +82,7 @@ function LoginPage() {
         </div>
 
         <button
-          className={styles.submitButton}
+          className={ui.primaryButton}
           disabled={isSubmitting}
           type="submit"
         >
@@ -90,7 +92,7 @@ function LoginPage() {
 
       <p className={styles.footerText}>
         Need an account?{" "}
-        <Link state={location.state} to="/register">
+        <Link className={ui.accentLink} state={location.state} to="/register">
           Sign up
         </Link>
       </p>

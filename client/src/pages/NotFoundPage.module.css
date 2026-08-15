@@ -8,19 +8,19 @@
 
 .page h1 {
   margin: 0;
-  color: #f4f4f7;
+  color: var(--color-text);
 }
 
 .page p {
   margin: 0;
-  color: #c6c7d0;
+  color: var(--color-text-muted);
   line-height: 1.6;
 }
 
 .link {
   width: fit-content;
   margin-top: 0.5rem;
-  color: #adafff;
+  color: var(--color-accent);
   font-weight: 700;
   text-decoration: none;
 }

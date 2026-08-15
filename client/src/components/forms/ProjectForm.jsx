@@ -15,6 +15,7 @@ import {
   RequiredFieldsNote,
 } from "./FormFieldLabels.jsx";
 import styles from "./ProjectForm.module.css";
+import ui from "../../styles/ui.module.css";
 
 function createEmptyRole() {
   return {
@@ -700,7 +701,7 @@ function ProjectForm({
                 </div>
 
                 <button
-                  className={styles.secondaryButton}
+                  className={ui.secondaryButton}
                   type="button"
                   onClick={() => addCustomSkill(roleIndex)}
                 >
@@ -725,7 +726,7 @@ function ProjectForm({
 
               {formData.roles.length > 1 && (
                 <button
-                  className={styles.dangerButton}
+                  className={ui.dangerButton}
                   type="button"
                   onClick={() => removeRole(roleIndex)}
                 >
@@ -737,7 +738,7 @@ function ProjectForm({
         </div>
 
         <button
-          className={styles.secondaryButton}
+          className={ui.secondaryButton}
           type="button"
           onClick={addRole}
         >
@@ -867,7 +868,7 @@ function ProjectForm({
 
       <div className={styles.formActions}>
         <button
-          className={styles.submitButton}
+          className={ui.primaryButton}
           type="submit"
           disabled={isSubmitting}
         >

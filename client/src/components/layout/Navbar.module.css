@@ -1,51 +1,105 @@
 .header {
-  border-bottom: 1px solid #343746;
-  background-color: #1f2130;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-surface-nav);
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
+  gap: 1.5rem;
+  width: min(var(--layout-max-width), 100%);
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 1rem var(--layout-gutter);
 }
 
 .brand {
   color: #ffffff;
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .links {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  min-width: 0;
 }
 
-.links a {
-  color: #d7d8e0;
+.primaryLinks,
+.accountLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.primaryLinks a,
+.quietLink {
+  color: var(--color-text-faint);
+  font-size: 0.95rem;
+  font-weight: 500;
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.links a:hover,
-.links a:focus-visible {
+.primaryLinks a:hover,
+.primaryLinks a:focus-visible,
+.quietLink:hover,
+.quietLink:focus-visible {
   color: #ffffff;
+  font-weight: 600;
 }
 
-.logoutButton {
-  padding: 0.4rem 0.75rem;
-  color: #dedff4;
-  background-color: transparent;
-  border: 1px solid #6669c5;
-  border-radius: 8px;
-  font: inherit;
+.accountLinks a:not(.navCta) {
+  color: var(--color-text-faint);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.accountLinks a:not(.navCta):hover,
+.accountLinks a:not(.navCta):focus-visible {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.navCta {
+  padding: 0.5rem 0.9rem;
+  color: #ffffff;
+  font-size: 0.9rem;
   font-weight: 700;
-  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.logoutButton:hover {
-  background-color: rgb(102 105 197 / 18%);
+.navCta:hover,
+.navCta:focus-visible {
+  color: #ffffff;
+  background-color: var(--color-primary-hover);
+  font-weight: 700;
+}
+
+.navMuted {
+  padding: 0.5rem 0.35rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .links {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.85rem 1.25rem;
+  }
 }

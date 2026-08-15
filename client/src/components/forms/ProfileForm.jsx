@@ -8,6 +8,7 @@ import { RequiredFieldsNote } from "./FormFieldLabels.jsx";
 import PortfolioFields from "./PortfolioFields.jsx";
 import TagListFields from "./TagListFields.jsx";
 import styles from "./ProfileForm.module.css";
+import ui from "../../styles/ui.module.css";
 
 function buildInitialValues(user) {
   return {
@@ -184,7 +185,7 @@ function ProfileForm({ user, onSubmit, isSubmitting }) {
 
       <div className={styles.actions}>
         <button
-          className={styles.submitButton}
+          className={ui.primaryButton}
           disabled={isSubmitting}
           type="submit"
         >

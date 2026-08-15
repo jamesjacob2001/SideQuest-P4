@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
 import PasswordInput from "../components/forms/PasswordInput.jsx";
+import ui from "../styles/ui.module.css";
 import styles from "./AuthPages.module.css";
 
 function RegisterPage() {
@@ -44,22 +45,22 @@ function RegisterPage() {
   return (
     <section className={styles.page}>
       <header className={styles.pageHeader}>
-        <p className={styles.eyebrow}>Account</p>
-        <h1>Create an account</h1>
-        <p className={styles.introduction}>
-          Join SideQuest to collaborate on projects across any field.
+        <p className={ui.eyebrow}>Account</p>
+        <h1 className={ui.pageTitleCompact}>Create an account</h1>
+        <p className={ui.pageIntro}>
+          Join SideQuest to apply to open roles and start collaborating.
         </p>
       </header>
 
       {authMessage ? (
-        <p className={styles.infoMessage} role="status">
+        <p className={ui.infoBanner} role="status">
           {authMessage}
         </p>
       ) : null}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         {errorMessage ? (
-          <p className={styles.errorMessage} role="alert">
+          <p className={ui.errorBanner} role="alert">
             {errorMessage}
           </p>
         ) : null}
@@ -68,6 +69,7 @@ function RegisterPage() {
           <label htmlFor="register-name">Name</label>
           <input
             autoComplete="name"
+            className={ui.textInput}
             id="register-name"
             onChange={(event) => setName(event.target.value)}
             required
@@ -80,6 +82,7 @@ function RegisterPage() {
           <label htmlFor="register-username">Username</label>
           <input
             autoComplete="username"
+            className={ui.textInput}
             id="register-username"
             onChange={(event) => setUsername(event.target.value)}
             required
@@ -92,6 +95,7 @@ function RegisterPage() {
           <label htmlFor="register-email">Email</label>
           <input
             autoComplete="email"
+            className={ui.textInput}
             id="register-email"
             onChange={(event) => setEmail(event.target.value)}
             required
@@ -113,7 +117,7 @@ function RegisterPage() {
         </div>
 
         <button
-          className={styles.submitButton}
+          className={ui.primaryButton}
           disabled={isSubmitting}
           type="submit"
         >
@@ -123,7 +127,7 @@ function RegisterPage() {
 
       <p className={styles.footerText}>
         Already have an account?{" "}
-        <Link state={location.state} to="/login">
+        <Link className={ui.accentLink} state={location.state} to="/login">
           Log in
         </Link>
       </p>

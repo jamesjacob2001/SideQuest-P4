@@ -1,11 +1,11 @@
 .item {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 1.25rem;
+  row-gap: 0.85rem;
   padding: 1rem 0;
-  border-bottom: 1px solid #343645;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .item:last-child {
@@ -19,14 +19,13 @@
 
 .main {
   display: flex;
-  flex: 1;
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
 }
 
 .title {
-  color: #f4f4f7;
+  color: var(--color-text);
   font-weight: 700;
   text-decoration: none;
 }
@@ -38,7 +37,7 @@
 
 .tagline {
   margin: 0;
-  color: #c6c7d0;
+  color: var(--color-text-muted);
   line-height: 1.5;
 }
 
@@ -46,43 +45,57 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  color: #a8a9b5;
+  color: var(--color-text-faint);
   font-size: 0.85rem;
 }
 
 .status {
-  color: #adafff;
+  color: var(--color-accent);
   font-weight: 700;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.5rem;
 }
 
 .viewLink,
 .editLink {
   padding: 0.45rem 0.8rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-weight: 700;
   text-decoration: none;
+  text-align: center;
+  min-width: 4.5rem;
 }
 
 .viewLink {
-  color: #dedff4;
-  border: 1px solid #6669c5;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .viewLink:hover {
-  background-color: rgb(102 105 197 / 18%);
+  background-color: rgb(255 255 255 / 5%);
+  border-color: var(--color-border-strong);
 }
 
 .editLink {
   color: #ffffff;
-  background-color: #6669c5;
+  background-color: var(--color-primary);
 }
 
 .editLink:hover {
-  background-color: #7578d8;
+  background-color: var(--color-primary-hover);
+}
+
+@media (max-width: 640px) {
+  .item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
 }

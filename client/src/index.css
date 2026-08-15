@@ -1,4 +1,52 @@
 :root {
+  /* Layout */
+  --layout-max-width: 1200px;
+  --layout-gutter: 1.5rem;
+  --layout-column-gap: 1.25rem;
+
+  /* Color — strong steps, not near-neighbors */
+  --color-bg: #101118;
+  --color-surface: #262838;
+  --color-surface-raised: #1a1b26;
+  --color-surface-sunken: #0c0d13;
+  --color-surface-muted: #323448;
+  --color-surface-nav: #161722;
+  --color-border: #343646;
+  --color-border-strong: #3f4254;
+  --color-border-input: #3c3f50;
+  --color-text: #ffffff;
+  --color-text-muted: #9b9daf;
+  --color-text-subtle: #9b9daf;
+  --color-text-faint: #6d7084;
+  --color-accent: #c2c4ff;
+  --color-accent-strong: #aeb1ff;
+  --color-primary: #6f73e8;
+  --color-primary-hover: #8589f2;
+  --color-focus: #a0a3ff;
+  --color-danger: #d15b6a;
+  --color-danger-text: #ffd2d7;
+  --color-danger-surface: #3a1d24;
+  --color-tag: #5a5fc4;
+  --color-tag-text: #eef0ff;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Type */
+  --font-size-eyebrow: 0.75rem;
+  --letter-spacing-eyebrow: 0.14em;
+  --font-weight-bold: 700;
+  --font-weight-black: 800;
+
+  /* Control */
+  --control-padding-y: 0.75rem;
+  --control-padding-x: 1rem;
+  --input-padding: 0.8rem 0.9rem;
+  --focus-ring: 2px solid rgb(160 163 255 / 35%);
+
   font-family:
     Inter,
     system-ui,
@@ -6,8 +54,8 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  color: #f5f5f7;
-  background-color: #171821;
+  color: var(--color-text);
+  background-color: var(--color-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -20,7 +68,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background-color: #171821;
+  background-color: var(--color-bg);
 }
 
 button,
@@ -31,9 +79,9 @@ textarea {
 }
 
 main {
-  width: min(1200px, calc(100% - 3rem));
+  width: min(var(--layout-max-width), 100%);
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 2rem var(--layout-gutter);
 }
 
 a {

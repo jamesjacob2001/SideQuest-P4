@@ -6,8 +6,10 @@
 
 .heading {
   margin: 0;
-  color: #f4f4f7;
-  font-size: 1.25rem;
+  color: var(--color-text);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .list {
@@ -20,9 +22,10 @@
 }
 
 .tag {
-  padding: 0.35rem 0.65rem;
-  color: #d8d9df;
-  background-color: #343645;
-  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  color: var(--color-tag-text);
+  background-color: var(--color-tag);
+  border-radius: var(--radius-pill);
   font-size: 0.85rem;
+  font-weight: 600;
 }

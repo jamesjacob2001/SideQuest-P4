@@ -5,7 +5,7 @@
   justify-content: space-between;
   gap: 1.25rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #343645;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .identity {
@@ -21,48 +21,52 @@
   flex-shrink: 0;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #454756;
+  border: 1px solid var(--color-border-input);
 }
 
 .avatarFallback {
   display: grid;
   place-items: center;
-  color: #e6e6ff;
-  background-color: #4c4f9f;
+  color: var(--color-tag-text);
+  background-color: var(--color-tag);
   font-size: 1.4rem;
   font-weight: 700;
 }
 
 .name {
   margin: 0;
-  color: #f4f4f7;
-  font-size: clamp(1.75rem, 3vw, 2.4rem);
-  line-height: 1.2;
+  color: var(--color-text);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
 .username {
   margin: 0.35rem 0 0;
-  color: #adafff;
-  font-weight: 600;
+  color: var(--color-accent);
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .school {
   margin: 0.45rem 0 0;
-  color: #c6c7d0;
+  color: var(--color-text-muted);
+  font-weight: 400;
 }
 
 .recruiting {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.5rem 0.85rem;
-  color: #c8caff;
-  background-color: transparent;
-  border: 1px solid #6669c5;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  padding: 0.55rem 0.9rem;
+  color: var(--color-tag-text);
+  background-color: var(--color-tag);
+  border: 0;
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -70,6 +74,6 @@
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
-  background-color: #8d90f5;
+  background-color: #ffffff;
   content: "";
 }

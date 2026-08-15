@@ -1,29 +1,32 @@
 .pagination {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: center;
-  gap: 0.75rem 1rem;
-  margin-top: 2rem;
+  column-gap: 1rem;
+  row-gap: 0.75rem;
+  width: 100%;
 }
 
 .button,
 .pageButton {
   padding: 0.7rem 1rem;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font: inherit;
   font-weight: 700;
   cursor: pointer;
 }
 
+/* Prev/Next: outline secondary — not competing with active page */
 .button {
-  color: #ffffff;
-  background-color: #6669c5;
-  border: 0;
+  color: var(--color-text);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  white-space: nowrap;
 }
 
 .button:hover:not(:disabled) {
-  background-color: #7578d8;
+  background-color: rgb(255 255 255 / 5%);
+  border-color: var(--color-border-strong);
 }
 
 .pageList {
@@ -37,28 +40,32 @@
   list-style: none;
 }
 
+/* Inactive pages: quiet ghost */
 .pageButton {
   min-width: 2.6rem;
-  color: #d8d9df;
-  background-color: #292b38;
-  border: 1px solid #3d3f4d;
+  color: var(--color-text-faint);
+  background-color: transparent;
+  border: 1px solid transparent;
 }
 
 .pageButton:hover:not(:disabled) {
-  background-color: #343645;
+  color: var(--color-text);
+  background-color: rgb(255 255 255 / 6%);
+  border-color: var(--color-border);
 }
 
+/* Active page: solid fill — clearly different */
 .pageButtonActive {
   color: #ffffff;
-  background-color: #6669c5;
-  border-color: #6669c5;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
   cursor: default;
 }
 
 .button:disabled,
 .pageButton:disabled {
   cursor: not-allowed;
-  opacity: 0.45;
+  opacity: 0.4;
 }
 
 .pageButtonActive:disabled {
@@ -67,14 +74,19 @@
 
 .ellipsis {
   min-width: 1.5rem;
-  color: #8b8c98;
+  color: var(--color-text-faint);
   text-align: center;
   user-select: none;
 }
 
 @media (max-width: 700px) {
   .pagination {
-    gap: 0.75rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pageList {
+    grid-column: 1 / -1;
+    order: -1;
   }
 
   .button,

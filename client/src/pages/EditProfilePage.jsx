@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../components/auth/useAuth.js";
 import ProfileForm from "../components/forms/ProfileForm.jsx";
 import { getUserById, updateUser } from "../services/userApi.js";
+import ui from "../styles/ui.module.css";
 import styles from "./EditProfilePage.module.css";
 
 function EditProfilePage() {
@@ -61,7 +62,7 @@ function EditProfilePage() {
       <section className={styles.message} role="alert">
         <h1>Profile could not be loaded</h1>
         <p>{errorMessage || "User not found."}</p>
-        <Link className={styles.link} to="/">
+        <Link className={ui.accentLink} to="/">
           Return home
         </Link>
       </section>
@@ -72,14 +73,14 @@ function EditProfilePage() {
     <section className={styles.page}>
       <header className={styles.pageHeader}>
         <div>
-          <p className={styles.eyebrow}>Profiles</p>
-          <h1>Edit profile</h1>
-          <p className={styles.introduction}>
+          <p className={ui.eyebrow}>Profiles</p>
+          <h1 className={ui.pageTitleCompact}>Edit profile</h1>
+          <p className={ui.pageIntro}>
             Update your skills, interests, availability, and portfolio links.
           </p>
         </div>
 
-        <Link className={styles.link} to={`/profile/${id}`}>
+        <Link className={ui.accentLink} to={`/profile/${id}`}>
           Back to profile
         </Link>
       </header>

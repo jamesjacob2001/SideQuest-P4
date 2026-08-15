@@ -6,7 +6,7 @@
 
 .heading {
   margin: 0;
-  color: #f4f4f7;
+  color: var(--color-text);
   font-size: 1.25rem;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .link {
-  color: #adafff;
+  color: var(--color-accent);
   font-weight: 700;
   text-decoration: none;
 }

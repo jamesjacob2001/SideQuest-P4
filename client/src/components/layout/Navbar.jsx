@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 import { useAuth } from "../auth/useAuth.js";
+import ui from "../../styles/ui.module.css";
 import styles from "./Navbar.module.css";
 
 function Navbar() {
@@ -22,26 +23,44 @@ function Navbar() {
         </NavLink>
 
         <div className={styles.links}>
-          <NavLink to="/projects">Browse Projects</NavLink>
-          <NavLink to="/projects/new">Create Project</NavLink>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <div className={styles.primaryLinks}>
+            <NavLink to="/projects">Browse</NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </div>
 
-          {!isLoading && isAuthenticated ? (
-            <>
-              <NavLink to={`/profile/${user._id}`}>My Profile</NavLink>
-              <button
-                className={styles.logoutButton}
-                onClick={handleLogout}
-                type="button"
-              >
-                Log Out
-              </button>
-            </>
-          ) : (
-            <>
-              <NavLink to="/login">Log In</NavLink>
-              <NavLink to="/register">Sign Up</NavLink>
-            </>
+          {!isLoading && (
+            <div className={styles.accountLinks}>
+              {isAuthenticated ? (
+                <>
+                  <NavLink to={`/profile/${user._id}`}>Profile</NavLink>
+                  <NavLink
+                    className={`${ui.primaryButton} ${styles.navCta}`}
+                    to="/projects/new"
+                  >
+                    Create project
+                  </NavLink>
+                  <button
+                    className={`${ui.mutedButton} ${styles.navMuted}`}
+                    onClick={handleLogout}
+                    type="button"
+                  >
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <NavLink className={styles.quietLink} to="/login">
+                    Log in
+                  </NavLink>
+                  <NavLink
+                    className={`${ui.primaryButton} ${styles.navCta}`}
+                    to="/register"
+                  >
+                    Sign up
+                  </NavLink>
+                </>
+              )}
+            </div>
           )}
         </div>
       </nav>

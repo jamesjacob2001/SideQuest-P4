@@ -6,6 +6,7 @@ import ProjectFilters, {
 import ProjectGrid from "../components/projects/ProjectGrid.jsx";
 import ProjectPagination from "../components/projects/ProjectPagination.jsx";
 import { getProjects } from "../services/projectApi.js";
+import ui from "../styles/ui.module.css";
 import styles from "./ProjectsPage.module.css";
 
 const PROJECTS_PER_PAGE = 24;
@@ -157,95 +158,101 @@ function ProjectsPage() {
     <section className={styles.page}>
       <header className={styles.pageHeader}>
         <div>
-          <p className={styles.eyebrow}>Project discovery</p>
-          <h1>Browse Projects</h1>
-          <p className={styles.introduction}>
+          <p className={ui.eyebrow}>Project discovery</p>
+          <h1 className={ui.pageTitle}>Browse Projects</h1>
+          <p className={ui.pageIntro}>
             Explore student projects, discover open roles, and find a team that
             matches your interests and skills.
           </p>
         </div>
 
-        {!isLoading && !errorMessage && (
-          <p className={styles.projectCount}>
-            {pagination.totalProjects}{" "}
-            {pagination.totalProjects === 1 ? "project" : "projects"}
-            {queryActive ? " found" : ""}
-          </p>
-        )}
-      </header>
-
-      <form className={styles.searchForm} onSubmit={handleSearchSubmit}>
-        <label className={styles.visuallyHidden} htmlFor="project-search">
-          Search projects
-        </label>
-        <input
-          id="project-search"
-          className={styles.searchInput}
-          type="search"
-          value={searchInput}
-          onChange={(event) => setSearchInput(event.target.value)}
-          placeholder="Search by title, description, technology, or category"
-          maxLength={100}
-        />
-        <div className={styles.searchActions}>
-          <button
-            className={`${styles.filterToggle}${
-              areFiltersOpen || filtersActive ? ` ${styles.filterToggleActive}` : ""
-            }`}
-            type="button"
-            aria-expanded={areFiltersOpen}
-            aria-controls="project-filters"
-            aria-label={
-              areFiltersOpen ? "Hide project filters" : "Show project filters"
-            }
-            title="Filters"
-            onClick={() => setAreFiltersOpen((isOpen) => !isOpen)}
-          >
-            <svg
-              className={styles.filterIcon}
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                d="M4 6h16M7 12h10M10 18h4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-            {filtersActive && (
-              <span className={styles.filterBadge}>{activeFilterCount}</span>
-            )}
-          </button>
-          <button className={styles.searchButton} type="submit">
-            Search
-          </button>
-          {activeSearch && (
-            <button
-              className={styles.clearButton}
-              type="button"
-              onClick={handleClearSearch}
-            >
-              Clear
-            </button>
+        <div className={styles.headerActions}>
+          {!isLoading && !errorMessage && (
+            <p className={styles.projectCount}>
+              {pagination.totalProjects}{" "}
+              {pagination.totalProjects === 1 ? "project" : "projects"}
+              {queryActive ? " found" : ""}
+            </p>
           )}
         </div>
-      </form>
+      </header>
 
-      {areFiltersOpen && (
-        <div id="project-filters">
-          <ProjectFilters
-            filters={filters}
-            onChange={handleFilterChange}
-            onClear={handleClearFilters}
-            hasActiveFilters={filtersActive}
+      <div className={styles.discoveryTools}>
+        <form className={styles.searchForm} onSubmit={handleSearchSubmit}>
+          <label className={styles.visuallyHidden} htmlFor="project-search">
+            Search projects
+          </label>
+          <input
+            id="project-search"
+            className={styles.searchInput}
+            type="search"
+            value={searchInput}
+            onChange={(event) => setSearchInput(event.target.value)}
+            placeholder="Search by title, description, technology, or category"
+            maxLength={100}
           />
-        </div>
-      )}
+          <div className={styles.searchActions}>
+            <button className={ui.primaryButton} type="submit">
+              Search
+            </button>
+            <button
+              className={`${styles.filterToggle}${
+                areFiltersOpen || filtersActive
+                  ? ` ${styles.filterToggleActive}`
+                  : ""
+              }`}
+              type="button"
+              aria-expanded={areFiltersOpen}
+              aria-controls="project-filters"
+              aria-label={
+                areFiltersOpen ? "Hide project filters" : "Show project filters"
+              }
+              title="Filters"
+              onClick={() => setAreFiltersOpen((isOpen) => !isOpen)}
+            >
+              <svg
+                className={styles.filterIcon}
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M4 6h16M7 12h10M10 18h4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+              {filtersActive && (
+                <span className={styles.filterBadge}>{activeFilterCount}</span>
+              )}
+            </button>
+            {activeSearch && (
+              <button
+                className={ui.mutedButton}
+                type="button"
+                onClick={handleClearSearch}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </form>
 
-      {pageContent}
+        {areFiltersOpen && (
+          <div id="project-filters">
+            <ProjectFilters
+              filters={filters}
+              onChange={handleFilterChange}
+              onClear={handleClearFilters}
+              hasActiveFilters={filtersActive}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className={styles.results}>{pageContent}</div>
     </section>
   );
 }

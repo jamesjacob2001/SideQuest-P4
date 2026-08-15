@@ -1,16 +1,17 @@
 .requiredMark {
-  color: #f0a8b0;
-  font-weight: 700;
+  color: #ff8f9c;
+  font-weight: 800;
 }
 
 .optionalMark {
-  color: #9ea0ab;
+  color: var(--color-text-faint);
   font-weight: 500;
+  font-style: italic;
 }
 
 .requiredNote {
   margin: 0;
-  color: #c6c7d0;
+  color: var(--color-text-muted);
   font-size: 0.9rem;
   line-height: 1.4;
 }

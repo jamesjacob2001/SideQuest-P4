@@ -11,6 +11,7 @@ import { useAuth } from "../components/auth/useAuth.js";
 import ProjectForm from "../components/forms/ProjectForm.jsx";
 import { getProjectById, updateProject } from "../services/projectApi.js";
 import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
+import ui from "../styles/ui.module.css";
 import styles from "./EditProjectPage.module.css";
 
 function EditProjectPage() {
@@ -75,7 +76,7 @@ function EditProjectPage() {
 
         <p>{errorMessage}</p>
 
-        <Link className={styles.link} to={backNavigation.to}>
+        <Link className={ui.accentLink} to={backNavigation.to}>
           {backNavigation.shortLabel}
         </Link>
       </section>
@@ -91,9 +92,9 @@ function EditProjectPage() {
   }
 
   return (
-    <main className={styles.page}>
+    <section className={styles.page}>
       <Link
-        className={styles.link}
+        className={ui.accentLink}
         state={location.state}
         to={`/projects/${projectId}`}
       >
@@ -101,9 +102,9 @@ function EditProjectPage() {
       </Link>
 
       <header className={styles.pageHeader}>
-        <p className={styles.eyebrow}>Project management</p>
-        <h1>Edit Project</h1>
-        <p>
+        <p className={ui.eyebrow}>Project management</p>
+        <h1 className={ui.pageTitle}>Edit Project</h1>
+        <p className={ui.pageIntro}>
           Update the project information, open roles, and working arrangements.
         </p>
       </header>
@@ -116,7 +117,7 @@ function EditProjectPage() {
         submitLabel="Save Changes"
         errorTitle="Project could not be updated"
       />
-    </main>
+    </section>
   );
 }
 
