@@ -33,6 +33,7 @@
   max-width: 640px;
   margin: 0.7rem 0 0;
   color: var(--color-text-muted);
+  font-size: var(--font-size-body);
   line-height: 1.6;
 }
 

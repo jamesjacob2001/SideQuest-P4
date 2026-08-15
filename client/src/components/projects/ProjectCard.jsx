@@ -6,42 +6,34 @@ import { PROJECT_STATUS_DESCRIPTIONS } from "../../constants/projectOptions.js";
 import ProjectOwner from "./ProjectOwner.jsx";
 import styles from "./ProjectCard.module.css";
 
-function calculateTotalPositions(roles) {
-  return roles.reduce((total, role) => total + (role.totalPositions ?? 0), 0);
-}
-
 function ProjectCard({ project }) {
   const {
     _id,
     title,
     tagline,
     categories = [],
-    technologies = [],
-    roles = [],
     locationType,
     status,
     owner,
   } = project;
 
-  const totalPositions = calculateTotalPositions(roles);
-  const visibleTechnologies = technologies.slice(0, 4);
-  const additionalTechnologyCount =
-    technologies.length - visibleTechnologies.length;
+  const visibleCategories = categories.slice(0, 2);
+  const extraCategoryCount = categories.length - visibleCategories.length;
 
   return (
     <article className={styles.card}>
-      <div className={styles.header}>
-        <span
-          className={styles.status}
-          title={PROJECT_STATUS_DESCRIPTIONS[status]}
-        >
-          {status}
-        </span>
-        <span className={styles.location}>{locationType}</span>
-      </div>
-
       <div className={styles.content}>
         <div className={styles.identity}>
+          <div className={styles.badges}>
+            <span
+              className={styles.status}
+              title={PROJECT_STATUS_DESCRIPTIONS[status]}
+            >
+              {status}
+            </span>
+            <span className={styles.locationBadge}>{locationType}</span>
+          </div>
+
           <h2 className={styles.title}>
             <Link state={PROJECTS_ORIGIN} to={`/projects/${_id}`}>
               {title}
@@ -49,52 +41,26 @@ function ProjectCard({ project }) {
           </h2>
 
           <p className={styles.tagline}>{tagline}</p>
-
-          <p className={styles.openRoles}>
-            {roles.length} {roles.length === 1 ? "open role" : "open roles"}
-            {" · "}
-            {totalPositions}{" "}
-            {totalPositions === 1 ? "position" : "positions"}
-          </p>
-
-          {owner ? (
-            <div className={styles.ownerRow}>
-              <ProjectOwner owner={owner} />
-            </div>
-          ) : null}
         </div>
 
-        <div className={styles.metaSections}>
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Categories</h3>
-
-            <div className={styles.tagList}>
-              {categories.map((category) => (
-                <span className={styles.categoryTag} key={category}>
-                  {category}
-                </span>
-              ))}
-            </div>
+        {owner ? (
+          <div className={styles.ownerBlock}>
+            <ProjectOwner owner={owner} variant="featured" />
           </div>
+        ) : null}
 
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Technologies</h3>
-
-            <div className={styles.tagList}>
-              {visibleTechnologies.map((technology) => (
-                <span className={styles.technologyTag} key={technology}>
-                  {technology}
-                </span>
-              ))}
-
-              {additionalTechnologyCount > 0 && (
-                <span className={styles.moreTag}>
-                  +{additionalTechnologyCount} more
-                </span>
-              )}
-            </div>
+        {visibleCategories.length > 0 && (
+          <div className={styles.tags}>
+            {visibleCategories.map((category) => (
+              <span className={styles.categoryTag} key={category}>
+                {category}
+              </span>
+            ))}
+            {extraCategoryCount > 0 ? (
+              <span className={styles.moreTag}>+{extraCategoryCount}</span>
+            ) : null}
           </div>
-        </div>
+        )}
       </div>
 
       <div className={styles.footer}>
@@ -116,14 +82,6 @@ ProjectCard.propTypes = {
     title: PropTypes.string.isRequired,
     tagline: PropTypes.string.isRequired,
     categories: PropTypes.arrayOf(PropTypes.string),
-    technologies: PropTypes.arrayOf(PropTypes.string),
-    roles: PropTypes.arrayOf(
-      PropTypes.shape({
-        roleId: PropTypes.string,
-        title: PropTypes.string,
-        totalPositions: PropTypes.number,
-      }),
-    ),
     locationType: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     owner: PropTypes.shape({

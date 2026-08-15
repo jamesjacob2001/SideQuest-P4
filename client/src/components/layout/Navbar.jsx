@@ -26,13 +26,15 @@ function Navbar() {
           <div className={styles.primaryLinks}>
             <NavLink to="/projects">Browse</NavLink>
             <NavLink to="/dashboard">Dashboard</NavLink>
+            {isAuthenticated ? (
+              <NavLink to={`/profile/${user._id}`}>Profile</NavLink>
+            ) : null}
           </div>
 
           {!isLoading && (
             <div className={styles.accountLinks}>
               {isAuthenticated ? (
                 <>
-                  <NavLink to={`/profile/${user._id}`}>Profile</NavLink>
                   <NavLink
                     className={`${ui.primaryButton} ${styles.navCta}`}
                     to="/projects/new"

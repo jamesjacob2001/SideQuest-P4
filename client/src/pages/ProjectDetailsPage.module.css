@@ -23,11 +23,18 @@
   border-radius: var(--radius-lg);
 }
 
-.heroContent {
-  max-width: 850px;
+.heroTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(11rem, 14rem);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.heroMain {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  min-width: 0;
 }
 
 .identity {
@@ -36,33 +43,46 @@
   gap: 0.55rem;
 }
 
+.ownerCard {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.ownerCard > * {
+  flex: 1;
+  justify-content: center;
+}
+
 .badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.55rem 0.75rem;
 }
 
 .statusBadge,
 .metaBadge {
-  padding: 0.4rem 0.75rem;
-  border-radius: var(--radius-pill);
+  display: inline-flex;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-md);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .statusBadge {
-  color: var(--color-tag-text);
-  background-color: var(--color-tag);
+  color: #ffffff;
+  background-color: #9879d9;
   border: 0;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
 }
 
 .metaBadge {
   color: var(--color-text-muted);
   background-color: transparent;
   border: 1px solid var(--color-border);
-  font-weight: 600;
 }
 
 .hero h1 {
@@ -79,13 +99,9 @@
   max-width: 760px;
   margin: 0;
   color: var(--color-text-muted);
-  font-size: 1.05rem;
+  font-size: var(--font-size-body);
   font-weight: 400;
   line-height: 1.65;
-}
-
-.ownerRow {
-  margin: 0;
 }
 
 .projectActions {
@@ -171,6 +187,7 @@
 .contentSection p {
   margin: 0;
   color: var(--color-text-muted);
+  font-size: var(--font-size-body);
   line-height: 1.75;
   white-space: pre-line;
 }
@@ -274,6 +291,10 @@
 }
 
 @media (max-width: 900px) {
+  .heroTop {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .layout {
     grid-template-columns: 1fr;
   }

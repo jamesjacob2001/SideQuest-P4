@@ -26,6 +26,7 @@
 .introduction {
   margin: 0.45rem 0 0;
   color: var(--color-text-muted);
+  font-size: var(--font-size-body);
   line-height: 1.55;
 }
 

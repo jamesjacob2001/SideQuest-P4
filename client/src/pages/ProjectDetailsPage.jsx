@@ -116,51 +116,53 @@ function ProjectDetailsPage() {
       </Link>
 
       <header className={styles.hero}>
-        <div className={styles.heroContent}>
-          <div className={styles.identity}>
-            <div className={styles.badges}>
-              <span className={styles.statusBadge} title={statusDescription}>
-                {status}
-              </span>
-              <span className={styles.metaBadge}>{locationType}</span>
+        <div className={styles.heroTop}>
+          <div className={styles.heroMain}>
+            <div className={styles.identity}>
+              <div className={styles.badges}>
+                <span className={styles.statusBadge} title={statusDescription}>
+                  {status}
+                </span>
+                <span className={styles.metaBadge}>{locationType}</span>
+              </div>
+
+              <h1>{title}</h1>
+              <p className={styles.tagline}>{tagline}</p>
             </div>
 
-            <h1>{title}</h1>
-            <p className={styles.tagline}>{tagline}</p>
+            {isOwner ? (
+              <div className={styles.projectActions}>
+                <Link
+                  className={ui.primaryButton}
+                  state={location.state}
+                  to={`/projects/${projectId}/edit`}
+                >
+                  Edit Project
+                </Link>
 
-            {owner ? (
-              <div className={styles.ownerRow}>
-                <ProjectOwner owner={owner} />
+                <button
+                  className={ui.dangerButton}
+                  type="button"
+                  onClick={handleDeleteProject}
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? "Deleting..." : "Delete Project"}
+                </button>
               </div>
             ) : null}
+
+            {deleteError && (
+              <div className={styles.deleteError} role="alert">
+                {deleteError}
+              </div>
+            )}
           </div>
 
-          {isOwner ? (
-            <div className={styles.projectActions}>
-              <Link
-                className={ui.primaryButton}
-                state={location.state}
-                to={`/projects/${projectId}/edit`}
-              >
-                Edit Project
-              </Link>
-
-              <button
-                className={ui.dangerButton}
-                type="button"
-                onClick={handleDeleteProject}
-                disabled={isDeleting}
-              >
-                {isDeleting ? "Deleting..." : "Delete Project"}
-              </button>
+          {owner ? (
+            <div className={styles.ownerCard}>
+              <ProjectOwner owner={owner} variant="featured" />
             </div>
           ) : null}
-
-          {deleteError && (
-            <div className={styles.deleteError} role="alert">
-              {deleteError}
-            </div>
-          )}
         </div>
       </header>
 

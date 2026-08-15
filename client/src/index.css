@@ -37,9 +37,9 @@
   --color-danger-text: #ffd6db;
   --color-danger-surface: #2a1218;
 
-  /* Filled category chips use cobalt; outline tech chips use border */
-  --color-tag: #2f62ff;
-  --color-tag-text: #ffffff;
+  /* Tags = quiet lavender labels; primary cobalt stays for actions only */
+  --color-tag: #2a2450;
+  --color-tag-text: #d9ccff;
 
   /* Radius — sharp, square-leaning corners */
   --radius-sm: 2px;
@@ -50,6 +50,7 @@
   /* Type — Metal display vs EB Garamond body (clear pairing contrast) */
   --font-body: "EB Garamond", Georgia, "Times New Roman", serif;
   --font-display: Metal, Georgia, "Times New Roman", serif;
+  --font-size-body: 1.2rem;
   --font-size-eyebrow: 0.75rem;
   --letter-spacing-eyebrow: 0.14em;
   --font-weight-bold: 700;
@@ -77,6 +78,8 @@ body {
   min-height: 100vh;
   margin: 0;
   color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.5;
   background-color: var(--color-bg);
   background-image:
     radial-gradient(
@@ -96,7 +99,12 @@ input,
 select,
 textarea {
   font-family: var(--font-body);
-  font-size: inherit;
+  font-size: 1rem;
+}
+
+p {
+  font-size: var(--font-size-body);
+  line-height: 1.65;
 }
 
 main {
