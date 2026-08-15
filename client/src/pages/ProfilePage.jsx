@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
 import DeleteAccountButton from "../components/profiles/DeleteAccountButton.jsx";
@@ -7,18 +7,22 @@ import InterestsList from "../components/profiles/InterestsList.jsx";
 import PortfolioLinks from "../components/profiles/PortfolioLinks.jsx";
 import ProfileDetails from "../components/profiles/ProfileDetails.jsx";
 import ProfileHeader from "../components/profiles/ProfileHeader.jsx";
+import ProfileProjectsList from "../components/profiles/ProfileProjectsList.jsx";
 import RolePreferencesList from "../components/profiles/RolePreferencesList.jsx";
 import SkillsList from "../components/profiles/SkillsList.jsx";
 import { getUserById } from "../services/userApi.js";
+import { getProjectBackNavigation } from "../utils/navigationOrigin.js";
 import ui from "../styles/ui.module.css";
 import styles from "./ProfilePage.module.css";
 
 function ProfilePage() {
   const { id } = useParams();
+  const location = useLocation();
   const { user: currentUser } = useAuth();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const backNavigation = getProjectBackNavigation(location.state);
 
   useEffect(() => {
     async function loadUser() {
@@ -57,9 +61,18 @@ function ProfilePage() {
   }
 
   const isOwner = currentUser?._id?.toString() === String(user._id);
+  const showBackLink =
+    typeof location.state?.from === "string" &&
+    location.state.from.startsWith("/");
 
   return (
     <article className={styles.page}>
+      {showBackLink ? (
+        <Link className={ui.accentLink} to={backNavigation.to}>
+          {backNavigation.label}
+        </Link>
+      ) : null}
+
       <ProfileHeader
         isRecruiting={user.isRecruiting}
         major={user.major}
@@ -91,6 +104,13 @@ function ProfilePage() {
         <InterestsList interests={user.interests} />
         <RolePreferencesList roles={user.rolePreferences} />
         <PortfolioLinks portfolioLinks={user.portfolioLinks} />
+        <ProfileProjectsList
+          navigationState={{
+            from: `/profile/${id}`,
+            fromLabel: `${user.name}'s profile`,
+          }}
+          projects={user.ownedProjects}
+        />
       </div>
     </article>
   );

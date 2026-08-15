@@ -243,3 +243,31 @@ export async function deleteProjectById(projectId) {
 
   return true;
 }
+
+export async function getProjectsOwnedByUser(userId) {
+  if (!isValidObjectId(userId)) {
+    return [];
+  }
+
+  const objectId = new ObjectId(userId);
+  const database = getDatabase();
+
+  return database
+    .collection("projects")
+    .find({
+      ownerId: {
+        $in: [objectId, objectId.toString()],
+      },
+    })
+    .project({
+      title: 1,
+      tagline: 1,
+      status: 1,
+      locationType: 1,
+      createdAt: 1,
+    })
+    .sort({
+      createdAt: -1,
+    })
+    .toArray();
+}

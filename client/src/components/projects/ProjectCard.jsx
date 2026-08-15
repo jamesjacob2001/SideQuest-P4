@@ -47,7 +47,14 @@ function ProjectCard({ project }) {
 
         {owner ? (
           <div className={styles.ownerBlock}>
-            <ProjectOwner owner={owner} variant="featured" />
+            <ProjectOwner
+              linkState={{
+                from: `/projects/${_id}`,
+                fromLabel: title,
+              }}
+              owner={owner}
+              variant="featured"
+            />
           </div>
         ) : null}
 

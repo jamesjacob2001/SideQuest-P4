@@ -6,6 +6,7 @@ import {
   listUsers,
   updateUserById,
 } from "../services/userService.js";
+import { getProjectsOwnedByUser } from "../services/projectService.js";
 import { sanitizeUser, sanitizeUsers } from "../utils/sanitizeUser.js";
 import { validateProfileUpdate } from "../utils/validators/userValidator.js";
 
@@ -126,9 +127,14 @@ export async function showUser(request, response, next) {
       });
     }
 
+    const ownedProjects = await getProjectsOwnedByUser(request.params.id);
+
     return response.status(200).json({
       success: true,
-      data: sanitizeUser(user),
+      data: {
+        ...sanitizeUser(user),
+        ownedProjects,
+      },
       message: "User retrieved successfully.",
     });
   } catch (error) {
