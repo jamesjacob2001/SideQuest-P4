@@ -396,6 +396,12 @@ function ProjectForm({
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
       <RequiredFieldsNote />
 
+      <p className={styles.helpText}>
+        SideQuest is for collaborative side projects, not traditional job
+        postings. Focus on what you are building together and how teammates can
+        contribute.
+      </p>
+
       {formError && (
         <div className={styles.errorSummary} role="alert">
           <h2>{errorTitle}</h2>
@@ -453,8 +459,8 @@ function ProjectForm({
         <div className={styles.sectionHeading}>
           <h2>Project description</h2>
           <p>
-            Explain what the project is, where it is going, and what help is
-            needed.
+            Explain what the project is, where it is going, and how collaborators
+            can contribute.
           </p>
         </div>
 
@@ -508,7 +514,7 @@ function ProjectForm({
 
         <div className={styles.field}>
           <FieldLabel htmlFor="lookingFor" required>
-            Who is the team looking for?
+            How can collaborators contribute?
           </FieldLabel>
           <textarea
             id="lookingFor"
@@ -597,18 +603,20 @@ function ProjectForm({
       </section>
       <section className={styles.formSection}>
         <div className={styles.sectionHeading}>
-          <h2>Open roles</h2>
-          <p>Add at least one role for the contributors you need.</p>
+          <h2>Ways to contribute</h2>
+          <p>
+            Add at least one contribution role to show how teammates can get involved.
+          </p>
         </div>
 
         <div className={styles.roleList}>
           {formData.roles.map((role, roleIndex) => (
             <fieldset className={styles.roleCard} key={`role-${roleIndex}`}>
-              <legend>Role {roleIndex + 1}</legend>
+              <legend>Contribution role {roleIndex + 1}</legend>
 
               <div className={styles.field}>
                 <FieldLabel htmlFor={`role-title-${roleIndex}`} required>
-                  Role title
+                  Contribution role
                 </FieldLabel>
                 <input
                   id={`role-title-${roleIndex}`}
@@ -622,7 +630,7 @@ function ProjectForm({
 
               <div className={styles.field}>
                 <FieldLabel htmlFor={`role-description-${roleIndex}`}>
-                  Role description
+                  How will this person contribute?
                 </FieldLabel>
                 <textarea
                   id={`role-description-${roleIndex}`}
@@ -655,7 +663,7 @@ function ProjectForm({
 
                 <div className={styles.field}>
                   <FieldLabel htmlFor={`role-positions-${roleIndex}`} required>
-                    Number of positions
+                    Collaborators needed
                   </FieldLabel>
                   <input
                     id={`role-positions-${roleIndex}`}
@@ -732,7 +740,7 @@ function ProjectForm({
                   type="button"
                   onClick={() => removeRole(roleIndex)}
                 >
-                  Remove role
+                  Remove contribution role
                 </button>
               )}
             </fieldset>
@@ -740,7 +748,7 @@ function ProjectForm({
         </div>
 
         <button className={ui.secondaryButton} type="button" onClick={addRole}>
-          Add another role
+          Add another contribution role
         </button>
       </section>
       <section className={styles.formSection}>
@@ -856,9 +864,9 @@ function ProjectForm({
             ))}
           </select>
           <p className={styles.helpText}>
-            Recruiting means you are looking for teammates. In progress means
-            the team is working and not taking new people. On hold means the
-            project is temporarily stopped.
+            Recruiting means the project is open to new collaborators. In progress
+            means the current team is actively building and not seeking additional
+            teammates. On hold means the project is temporarily paused.
           </p>
         </div>
       </section>

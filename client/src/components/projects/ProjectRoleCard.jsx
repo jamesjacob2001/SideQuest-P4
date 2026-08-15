@@ -46,7 +46,8 @@ function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
         </div>
 
         <span className={styles.positions}>
-          {totalPositions} {totalPositions === 1 ? "position" : "positions"}
+          {totalPositions}{" "}
+          {totalPositions === 1 ? "collaborator needed" : "collaborators needed"}
         </span>
       </div>
 
@@ -69,7 +70,7 @@ function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
       <div className={styles.applicationSection}>
         {!isAuthenticated ? (
           <Link className={ui.primaryButton} to="/login">
-            Log in to apply
+            Log in to request to join
           </Link>
         ) : isOwner ? (
           <p className={styles.ownerMessage}>You own this project!</p>
@@ -84,7 +85,7 @@ function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
             onClick={handleApply}
             disabled={isApplying}
           >
-            {isApplying ? "Applying..." : "Apply for this role"}
+            {isApplying ? "Sending request..." : "Request to join"}
           </button>
         )}
 

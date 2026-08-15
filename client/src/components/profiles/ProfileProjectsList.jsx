@@ -70,7 +70,7 @@ function ProfileProjectsList({ projects, navigationState }) {
     <section className={styles.section}>
       <h2 className={styles.heading}>Projects</h2>
       <p className={styles.intro}>
-        Current and past projects this person owns — useful before you apply.
+        Current and past projects this person owns — useful when deciding whether to join.
       </p>
 
       {currentProjects.length > 0 ? (

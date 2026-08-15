@@ -50,7 +50,7 @@ export async function addTeamMembership(request, response, next) {
       return response.status(403).json({
         success: false,
         data: null,
-        message: "Project owners cannot apply to their own projects.",
+        message: "Project owners cannot request to join their own projects.",
       });
     }
 
@@ -120,7 +120,7 @@ export async function listMyTeamMemberships(request, response, next) {
       data: {
         memberships,
       },
-      message: "Applications retrieved successfully.",
+      message: "Join requests retrieved successfully.",
     });
   } catch (error) {
     return next(error);
@@ -136,7 +136,7 @@ export async function listIncomingTeamMemberships(request, response, next) {
       data: {
         memberships,
       },
-      message: "Incoming applications retrieved successfully.",
+      message: "Incoming join requests retrieved successfully.",
     });
   } catch (error) {
     return next(error);
@@ -174,7 +174,7 @@ export async function listProjectTeamMemberships(request, response, next) {
       return response.status(403).json({
         success: false,
         data: null,
-        message: "Only the project owner can view these applications.",
+        message: "Only the project owner can view these join requests.",
       });
     }
 
@@ -189,7 +189,7 @@ export async function listProjectTeamMemberships(request, response, next) {
         },
         memberships,
       },
-      message: "Project applications retrieved successfully.",
+      message: "Project join requests retrieved successfully.",
     });
   } catch (error) {
     return next(error);
@@ -236,7 +236,7 @@ export async function updateMembershipStatus(request, response, next) {
     if (project.ownerId.toString() !== request.user._id.toString()) {
       return response.status(403).json({
         success: false,
-        message: "Only the project owner may update applications.",
+        message: "Only the project owner may update join requests.",
       });
     }
 
@@ -248,14 +248,14 @@ export async function updateMembershipStatus(request, response, next) {
     if (!updatedMembership) {
       return response.status(409).json({
         success: false,
-        message: "Only pending applications may be updated.",
+        message: "Only pending join requests may be updated.",
       });
     }
 
     return response.status(200).json({
       success: true,
       data: updatedMembership,
-      message: "Application updated.",
+      message: "Join request updated.",
     });
   } catch (error) {
     return next(error);
@@ -281,7 +281,7 @@ export async function withdrawMembership(request, response, next) {
     if (!deleted) {
       return response.status(404).json({
         success: false,
-        message: "Pending application not found.",
+        message: "Pending join request not found.",
       });
     }
 

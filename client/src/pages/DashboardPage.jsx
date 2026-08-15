@@ -138,8 +138,8 @@ function DashboardPage() {
     finished,
   } = dashboard;
 
-  const pendingApplications = pendingOutgoing.length;
-  const pendingRequests = pendingIncoming.length;
+  const pendingJoinRequests = pendingOutgoing.length;
+  const incomingJoinRequests = pendingIncoming.length;
   const ownedProjects = owned.length;
   const joinedProjects = joined.length;
 
@@ -168,22 +168,22 @@ function DashboardPage() {
         </div>
 
         <div className={styles.summaryCard}>
-          <span className={styles.summaryValue}>{pendingApplications}</span>
-          <span className={styles.summaryLabel}>Pending applications</span>
+          <span className={styles.summaryValue}>{pendingJoinRequests}</span>
+          <span className={styles.summaryLabel}>Pending join requests</span>
         </div>
 
         <div className={styles.summaryCard}>
-          <span className={styles.summaryValue}>{pendingRequests}</span>
-          <span className={styles.summaryLabel}>Incoming requests</span>
+          <span className={styles.summaryValue}>{incomingJoinRequests}</span>
+          <span className={styles.summaryLabel}>Incoming join requests</span>
         </div>
       </section>
 
       <div className={styles.sections}>
         <DashboardSection
           description="People asking to join projects you own — respond here first."
-          emptyMessage="No pending applications on your projects."
+          emptyMessage="No pending join requests on your projects."
           isEmpty={pendingIncoming.length === 0}
-          title="Incoming requests"
+          title="Incoming join requests"
         >
           <ul className={styles.list}>
             {pendingIncoming.map((membership) => {
@@ -209,10 +209,10 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Join requests you have sent that are still waiting."
-          emptyMessage="You have no outgoing requests."
+          description="Requests you have sent to join other projects that are still waiting."
+          emptyMessage="You have no pending join requests."
           isEmpty={pendingOutgoing.length === 0}
-          title="Outgoing requests"
+          title="Your join requests"
         >
           <ul className={styles.list}>
             {pendingOutgoing.map((membership) => {
@@ -248,10 +248,10 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Looking for new teammates. These projects appear on Browse."
-          emptyMessage="You have no recruiting projects."
+          description="Projects that are open to new collaborators and appear on Browse."
+          emptyMessage="You have no projects currently open to collaborators."
           isEmpty={recruiting.length === 0}
-          title="Recruiting"
+          title="Open to collaborators"
         >
           <ul className={styles.list}>
             {recruiting.map((project) => (
@@ -265,7 +265,7 @@ function DashboardPage() {
         </DashboardSection>
 
         <DashboardSection
-          description="Your team is working and not taking new people."
+          description="Projects where the current team is actively building and not seeking additional collaborators."
           emptyMessage="You have no in-progress projects."
           isEmpty={inProgress.length === 0}
           title="In progress"

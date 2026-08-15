@@ -141,6 +141,12 @@ function ProjectDetailsPage() {
                 </span>
                 <span className={styles.metaBadge}>{locationType}</span>
               </div>
+
+              {!isOwner && roles.length > 0 ? (
+                <a className={ui.primaryButton} href="#ways-to-contribute">
+                  View ways to contribute
+                </a>
+              ) : null}
             </div>
 
             {isOwner ? (
@@ -191,10 +197,11 @@ function ProjectDetailsPage() {
         <div className={styles.mainContent}>
           <section
             className={`${styles.contentSection} ${styles.prioritySection}`}
+            id="ways-to-contribute"
           >
-            <h2>Open roles</h2>
+            <h2>Ways to contribute</h2>
             <p className={styles.sectionHint}>
-              Choose a role to apply — this is how you join the project.
+              Choose a contribution role that matches how you would like to help.
             </p>
 
             <div className={styles.roleList}>
@@ -220,7 +227,7 @@ function ProjectDetailsPage() {
           </section>
 
           <section className={styles.contentSection}>
-            <h2>Who the team is looking for</h2>
+            <h2>How collaborators can contribute</h2>
             <p>{description.lookingFor}</p>
           </section>
 
