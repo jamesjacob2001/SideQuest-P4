@@ -9,7 +9,9 @@
 .pageHeader h1 {
   margin: 0;
   color: var(--color-text);
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 400;
 }
 
 .eyebrow {
