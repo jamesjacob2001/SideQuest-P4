@@ -63,14 +63,14 @@ function ProjectFilters({ filters, onChange, onClear, hasActiveFilters }) {
         </label>
 
         <label className={styles.filterField} htmlFor="filter-technology">
-          <span>Technology</span>
+          <span>Skill</span>
           <select
             id="filter-technology"
             name="technology"
             value={filters.technology}
             onChange={handleFilterChange}
           >
-            <option value="">All technologies</option>
+            <option value="">All skills</option>
             {TECHNOLOGY_OPTIONS.map((technology) => (
               <option key={technology} value={technology}>
                 {technology}

@@ -43,13 +43,13 @@ const LOCATIONS = [
 
 const TITLE_SUFFIXES = [
   "",
-  "Beta",
-  "Campus Edition",
+  "Pilot",
   "Community Edition",
-  "Prototype",
-  "Student Edition",
-  "MVP",
-  "Labs",
+  "Open Call",
+  "Season One",
+  "Workshop Series",
+  "Collective",
+  "Launch",
 ];
 
 function generateProjectTitle(theme) {

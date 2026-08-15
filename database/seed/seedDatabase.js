@@ -24,6 +24,7 @@ async function seedDatabase() {
     const database = client.db(databaseName);
     const projectsCollection = database.collection("projects");
     const usersCollection = database.collection("users");
+    const membershipsCollection = database.collection("team_memberships");
 
     const users = await usersCollection
       .find({}, { projection: { _id: 1 } })
@@ -36,11 +37,14 @@ async function seedDatabase() {
     const ownerIds = users.map((user) => user._id);
     const projects = generateProjects(1000, ownerIds);
 
+    await membershipsCollection.deleteMany({});
+    await projectsCollection.deleteMany({});
     const result = await projectsCollection.insertMany(projects);
 
     console.log(
       `Inserted ${result.insertedCount} synthetic projects owned by ${ownerIds.length} users.`,
     );
+    console.log("Cleared team memberships. Re-run seed-team-memberships if needed.");
   } finally {
     await client.close();
   }

@@ -334,7 +334,7 @@ function ProjectForm({
       formData.technologies.length === 0 &&
       !formData.customTechnology.trim()
     ) {
-      errors.push("At least one technology is required.");
+      errors.push("At least one skill is required.");
     }
 
     if (formData.roles.length === 0) {
@@ -520,8 +520,8 @@ function ProjectForm({
       </section>
       <section className={styles.formSection}>
         <div className={styles.sectionHeading}>
-          <h2>Categories and technologies</h2>
-          <p>Help contributors find relevant projects.</p>
+          <h2>Categories and skills</h2>
+          <p>Help collaborators find projects that match what they can offer.</p>
         </div>
 
         <fieldset className={styles.fieldset}>
@@ -561,7 +561,7 @@ function ProjectForm({
         )}
 
         <fieldset className={styles.fieldset}>
-          <FieldLegend required>Technologies</FieldLegend>
+          <FieldLegend required>Skills</FieldLegend>
 
           <div className={styles.checkboxGrid}>
             {TECHNOLOGY_OPTIONS.map((technology) => (
@@ -581,9 +581,7 @@ function ProjectForm({
         </fieldset>
 
         <div className={styles.field}>
-          <FieldLabel htmlFor="customTechnology">
-            Additional technology
-          </FieldLabel>
+          <FieldLabel htmlFor="customTechnology">Additional skill</FieldLabel>
           <input
             id="customTechnology"
             name="customTechnology"

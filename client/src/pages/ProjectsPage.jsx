@@ -188,7 +188,7 @@ function ProjectsPage() {
             type="search"
             value={searchInput}
             onChange={(event) => setSearchInput(event.target.value)}
-            placeholder="Search by title, description, technology, or category"
+            placeholder="Search by title, description, skill, or category"
             maxLength={100}
           />
           <div className={styles.searchActions}>

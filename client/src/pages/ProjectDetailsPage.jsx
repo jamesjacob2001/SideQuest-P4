@@ -289,7 +289,7 @@ function ProjectDetailsPage() {
 
           {technologies.length > 0 && (
             <section className={styles.sidebarCard}>
-              <h2>Technologies</h2>
+              <h2>Skills</h2>
 
               <div className={styles.tagList}>
                 {technologies.map((technology) => (
