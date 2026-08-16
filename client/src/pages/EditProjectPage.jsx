@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import {
   Link,
   Navigate,
@@ -120,5 +121,7 @@ function EditProjectPage() {
     </section>
   );
 }
+
+EditProjectPage.propTypes = {};
 
 export default EditProjectPage;

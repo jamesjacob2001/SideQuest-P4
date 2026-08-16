@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
@@ -40,7 +41,8 @@ function LoginPage() {
         <p className={ui.eyebrow}>Account</p>
         <h1 className={ui.pageTitleCompact}>Log in</h1>
         <p className={ui.pageIntro}>
-          Sign in to request to join projects, create your own projects, and manage your teams.
+          Sign in to request to join projects, create your own projects, and
+          manage your teams.
         </p>
       </header>
 
@@ -99,5 +101,7 @@ function LoginPage() {
     </section>
   );
 }
+
+LoginPage.propTypes = {};
 
 export default LoginPage;

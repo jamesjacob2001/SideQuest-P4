@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
 import { useAuth } from "../auth/useAuth.js";
@@ -69,5 +70,7 @@ function Navbar() {
     </header>
   );
 }
+
+Navbar.propTypes = {};
 
 export default Navbar;

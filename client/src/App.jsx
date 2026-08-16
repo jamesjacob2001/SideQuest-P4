@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Route, Routes } from "react-router-dom";
 
 import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
@@ -65,5 +66,7 @@ function App() {
     </>
   );
 }
+
+App.propTypes = {};
 
 export default App;

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import ui from "../styles/ui.module.css";
 import styles from "./LandingPage.module.css";
@@ -31,5 +32,7 @@ function LandingPage() {
     </section>
   );
 }
+
+LandingPage.propTypes = {};
 
 export default LandingPage;

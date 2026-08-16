@@ -459,8 +459,8 @@ function ProjectForm({
         <div className={styles.sectionHeading}>
           <h2>Project description</h2>
           <p>
-            Explain what the project is, where it is going, and how collaborators
-            can contribute.
+            Explain what the project is, where it is going, and how
+            collaborators can contribute.
           </p>
         </div>
 
@@ -605,7 +605,8 @@ function ProjectForm({
         <div className={styles.sectionHeading}>
           <h2>Ways to contribute</h2>
           <p>
-            Add at least one contribution role to show how teammates can get involved.
+            Add at least one contribution role to show how teammates can get
+            involved.
           </p>
         </div>
 
@@ -864,9 +865,10 @@ function ProjectForm({
             ))}
           </select>
           <p className={styles.helpText}>
-            Recruiting means the project is open to new collaborators. In progress
-            means the current team is actively building and not seeking additional
-            teammates. On hold means the project is temporarily paused.
+            Recruiting means the project is open to new collaborators. In
+            progress means the current team is actively building and not seeking
+            additional teammates. On hold means the project is temporarily
+            paused.
           </p>
         </div>
       </section>

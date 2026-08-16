@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
@@ -48,7 +49,8 @@ function RegisterPage() {
         <p className={ui.eyebrow}>Account</p>
         <h1 className={ui.pageTitleCompact}>Create an account</h1>
         <p className={ui.pageIntro}>
-          Join SideQuest to find projects, request to join teams, and start collaborating.
+          Join SideQuest to find projects, request to join teams, and start
+          collaborating.
         </p>
       </header>
 
@@ -134,5 +136,7 @@ function RegisterPage() {
     </section>
   );
 }
+
+RegisterPage.propTypes = {};
 
 export default RegisterPage;

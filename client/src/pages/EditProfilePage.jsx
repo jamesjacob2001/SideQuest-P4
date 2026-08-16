@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
@@ -93,5 +94,7 @@ function EditProfilePage() {
     </section>
   );
 }
+
+EditProfilePage.propTypes = {};
 
 export default EditProfilePage;

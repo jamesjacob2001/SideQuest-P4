@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 import ProjectForm from "../components/forms/ProjectForm.jsx";
@@ -36,5 +37,7 @@ function CreateProjectPage() {
     </section>
   );
 }
+
+CreateProjectPage.propTypes = {};
 
 export default CreateProjectPage;

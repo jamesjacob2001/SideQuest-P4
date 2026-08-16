@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import styles from "./NotFoundPage.module.css";
 
@@ -13,5 +14,7 @@ function NotFoundPage() {
     </section>
   );
 }
+
+NotFoundPage.propTypes = {};
 
 export default NotFoundPage;

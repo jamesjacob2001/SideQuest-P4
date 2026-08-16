@@ -11,10 +11,10 @@
 
 ## Live App
 
-| Service | URL |
-| ------- | --- |
-| Frontend | https://side-quest-p4.vercel.app/ |
-| API | https://sidequest-p4-production.up.railway.app |
+| Service  | URL                                            |
+| -------- | ---------------------------------------------- |
+| Frontend | https://side-quest-p4.vercel.app/              |
+| API      | https://sidequest-p4-production.up.railway.app |
 
 ## Project Objective
 

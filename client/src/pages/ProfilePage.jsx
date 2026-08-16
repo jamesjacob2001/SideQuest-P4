@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
@@ -115,5 +116,7 @@ function ProfilePage() {
     </article>
   );
 }
+
+ProfilePage.propTypes = {};
 
 export default ProfilePage;

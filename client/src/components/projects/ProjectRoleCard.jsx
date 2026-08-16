@@ -47,7 +47,9 @@ function ProjectRoleCard({ role, projectId, isAuthenticated, isOwner }) {
 
         <span className={styles.positions}>
           {totalPositions}{" "}
-          {totalPositions === 1 ? "collaborator needed" : "collaborators needed"}
+          {totalPositions === 1
+            ? "collaborator needed"
+            : "collaborators needed"}
         </span>
       </div>
 

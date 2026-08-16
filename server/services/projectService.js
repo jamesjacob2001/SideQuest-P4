@@ -161,38 +161,6 @@ export async function getPublicProjects(page, limit, query = {}) {
   const filter = buildPublicProjectsFilter(query);
   const skip = (page - 1) * limit;
 
-  // #region agent log
-  fetch("http://127.0.0.1:7357/ingest/72510f6d-f5b6-45ba-ae6f-f2d8e8c97f05", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Debug-Session-Id": "812e1e",
-    },
-    body: JSON.stringify({
-      sessionId: "812e1e",
-      runId: "pre-fix",
-      hypothesisId: "B",
-      location: "projectService.js:getPublicProjects",
-      message: "mongo filter before find",
-      data: {
-        query,
-        filterKeys: Object.keys(filter),
-        filterPreview: {
-          status: filter.status,
-          categories: filter.categories ?? null,
-          technologies: filter.technologies ?? null,
-          locationType: filter.locationType ?? null,
-          experienceLevel: filter.experienceLevel ?? null,
-          weeklyCommitment: filter.weeklyCommitment ?? null,
-          duration: filter.duration ?? null,
-          hasSearchAnd: Boolean(filter.$and),
-        },
-      },
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {});
-  // #endregion
-
   const [projects, totalProjects] = await Promise.all([
     projectsCollection
       .find(filter)
@@ -205,78 +173,6 @@ export async function getPublicProjects(page, limit, query = {}) {
 
     projectsCollection.countDocuments(filter),
   ]);
-
-  const sample = projects.slice(0, 6).map((project) => {
-    const roleSkills = (project.roles ?? []).flatMap(
-      (role) => role.requiredSkills ?? [],
-    );
-    const search = typeof query.search === "string" ? query.search.trim() : "";
-    const haystack = [
-      project.title,
-      project.tagline,
-      project.description?.overview,
-      project.description?.goals,
-      project.description?.currentProgress,
-      project.description?.lookingFor,
-      ...(project.categories ?? []),
-      ...(project.customCategories ?? []),
-      ...(project.technologies ?? []),
-    ]
-      .filter(Boolean)
-      .join(" | ");
-
-    return {
-      title: project.title,
-      categories: project.categories ?? [],
-      customCategories: project.customCategories ?? [],
-      technologies: project.technologies ?? [],
-      roleSkills,
-      experienceLevel: project.experienceLevel ?? null,
-      locationType: project.locationType ?? null,
-      weeklyCommitment: project.weeklyCommitment ?? null,
-      duration: project.duration ?? null,
-      matchesCategory: query.category
-        ? (project.categories ?? []).includes(query.category) ||
-          (project.customCategories ?? []).includes(query.category)
-        : null,
-      matchesTechnology: query.technology
-        ? (project.technologies ?? []).includes(query.technology) ||
-          roleSkills.includes(query.technology)
-        : null,
-      searchInOverview: search
-        ? Boolean(project.description?.overview?.match(new RegExp(search, "i")))
-        : null,
-      searchInTitle: search
-        ? Boolean(project.title?.match(new RegExp(search, "i")))
-        : null,
-      haystackHasSearch: search
-        ? haystack.toLowerCase().includes(search.toLowerCase())
-        : null,
-    };
-  });
-
-  // #region agent log
-  fetch("http://127.0.0.1:7357/ingest/72510f6d-f5b6-45ba-ae6f-f2d8e8c97f05", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Debug-Session-Id": "812e1e",
-    },
-    body: JSON.stringify({
-      sessionId: "812e1e",
-      runId: "pre-fix",
-      hypothesisId: "C",
-      location: "projectService.js:getPublicProjects:results",
-      message: "sample results vs requested filters",
-      data: {
-        totalProjects,
-        returnedCount: projects.length,
-        sample,
-      },
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {});
-  // #endregion
 
   return {
     projects: await attachOwners(projects),

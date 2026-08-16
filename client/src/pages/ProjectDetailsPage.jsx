@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { useAuth } from "../components/auth/useAuth.js";
@@ -119,7 +120,7 @@ function ProjectDetailsPage() {
   const statusDescription = PROJECT_STATUS_DESCRIPTIONS[status];
 
   return (
-    <main className={styles.page}>
+    <article className={styles.page}>
       <Link className={ui.accentLink} to={backNavigation.to}>
         {backNavigation.label}
       </Link>
@@ -201,7 +202,8 @@ function ProjectDetailsPage() {
           >
             <h2>Ways to contribute</h2>
             <p className={styles.sectionHint}>
-              Choose a contribution role that matches how you would like to help.
+              Choose a contribution role that matches how you would like to
+              help.
             </p>
 
             <div className={styles.roleList}>
@@ -324,8 +326,10 @@ function ProjectDetailsPage() {
           )}
         </aside>
       </div>
-    </main>
+    </article>
   );
 }
+
+ProjectDetailsPage.propTypes = {};
 
 export default ProjectDetailsPage;

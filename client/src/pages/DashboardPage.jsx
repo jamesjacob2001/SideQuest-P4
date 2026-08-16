@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import DashboardSection from "../components/dashboard/DashboardSection.jsx";
@@ -334,5 +335,7 @@ function DashboardPage() {
     </section>
   );
 }
+
+DashboardPage.propTypes = {};
 
 export default DashboardPage;
