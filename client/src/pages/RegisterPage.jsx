@@ -137,6 +137,8 @@ function RegisterPage() {
   );
 }
 
-RegisterPage.propTypes = {};
+RegisterPage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default RegisterPage;

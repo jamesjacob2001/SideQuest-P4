@@ -38,6 +38,8 @@ function CreateProjectPage() {
   );
 }
 
-CreateProjectPage.propTypes = {};
+CreateProjectPage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default CreateProjectPage;

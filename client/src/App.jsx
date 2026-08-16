@@ -67,6 +67,8 @@ function App() {
   );
 }
 
-App.propTypes = {};
+App.propTypes = {
+  children: PropTypes.node,
+};
 
 export default App;

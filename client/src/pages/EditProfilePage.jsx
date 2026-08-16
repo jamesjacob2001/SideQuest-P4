@@ -95,6 +95,8 @@ function EditProfilePage() {
   );
 }
 
-EditProfilePage.propTypes = {};
+EditProfilePage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default EditProfilePage;

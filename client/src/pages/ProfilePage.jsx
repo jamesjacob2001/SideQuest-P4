@@ -117,6 +117,8 @@ function ProfilePage() {
   );
 }
 
-ProfilePage.propTypes = {};
+ProfilePage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default ProfilePage;

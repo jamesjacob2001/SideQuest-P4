@@ -336,6 +336,8 @@ function DashboardPage() {
   );
 }
 
-DashboardPage.propTypes = {};
+DashboardPage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default DashboardPage;

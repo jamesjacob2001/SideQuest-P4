@@ -102,6 +102,8 @@ function LoginPage() {
   );
 }
 
-LoginPage.propTypes = {};
+LoginPage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default LoginPage;

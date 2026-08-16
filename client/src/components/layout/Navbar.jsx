@@ -71,6 +71,8 @@ function Navbar() {
   );
 }
 
-Navbar.propTypes = {};
+Navbar.propTypes = {
+  children: PropTypes.node,
+};
 
 export default Navbar;

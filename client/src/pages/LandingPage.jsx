@@ -33,6 +33,8 @@ function LandingPage() {
   );
 }
 
-LandingPage.propTypes = {};
+LandingPage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default LandingPage;

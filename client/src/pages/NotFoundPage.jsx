@@ -15,6 +15,8 @@ function NotFoundPage() {
   );
 }
 
-NotFoundPage.propTypes = {};
+NotFoundPage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default NotFoundPage;

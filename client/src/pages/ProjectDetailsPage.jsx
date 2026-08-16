@@ -330,6 +330,8 @@ function ProjectDetailsPage() {
   );
 }
 
-ProjectDetailsPage.propTypes = {};
+ProjectDetailsPage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default ProjectDetailsPage;

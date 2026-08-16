@@ -122,6 +122,8 @@ function EditProjectPage() {
   );
 }
 
-EditProjectPage.propTypes = {};
+EditProjectPage.propTypes = {
+  children: PropTypes.node,
+};
 
 export default EditProjectPage;
