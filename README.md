@@ -24,7 +24,7 @@ The app is a React (Vite) frontend with a Node.js + Express API. Authentication 
 
 ## Screenshot
 
-![SideQuest Browse Projects page](assets/ReadmePhoto.png)
+![SideQuest Browse Projects page](assets/screenshot.png)
 
 ## How to Use the App
 
