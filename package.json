@@ -8,6 +8,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "start": "npm start --prefix server",
     "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
     "client": "npm run dev --prefix client",
     "server": "npm run dev --prefix server",
