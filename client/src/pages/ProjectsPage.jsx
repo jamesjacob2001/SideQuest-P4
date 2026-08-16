@@ -48,6 +48,34 @@ function ProjectsPage() {
           ...filters,
         });
 
+        // #region agent log
+        fetch("http://127.0.0.1:7357/ingest/72510f6d-f5b6-45ba-ae6f-f2d8e8c97f05", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Debug-Session-Id": "812e1e",
+          },
+          body: JSON.stringify({
+            sessionId: "812e1e",
+            runId: "pre-fix",
+            hypothesisId: "E",
+            location: "ProjectsPage.jsx:loadProjects",
+            message: "client filters and returned titles",
+            data: {
+              activeSearch,
+              filters,
+              totalProjects: projectData.pagination?.totalProjects,
+              titles: (projectData.projects ?? []).slice(0, 8).map((project) => ({
+                title: project.title,
+                categories: project.categories,
+                technologies: project.technologies,
+              })),
+            },
+            timestamp: Date.now(),
+          }),
+        }).catch(() => {});
+        // #endregion
+
         setProjects(projectData.projects);
         setPagination(projectData.pagination);
       } catch (error) {

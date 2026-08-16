@@ -18,17 +18,21 @@ import { EXPERIENCE_LEVELS } from "../constants/experienceLevels.js";
 import { WEEKLY_COMMITMENTS } from "../constants/weeklyCommitments.js";
 import { PROJECT_DURATIONS } from "../constants/projectDurations.js";
 
-function pickAllowedValue(value, allowedValues) {
-  if (typeof value !== "string") {
-    return "";
+function firstQueryValue(value) {
+  if (Array.isArray(value)) {
+    return firstQueryValue(value[0]);
   }
 
-  const trimmedValue = value.trim();
+  return typeof value === "string" ? value : "";
+}
+
+function pickAllowedValue(value, allowedValues) {
+  const trimmedValue = firstQueryValue(value).trim();
   return allowedValues.includes(trimmedValue) ? trimmedValue : "";
 }
 
 function parseProjectListQuery(query) {
-  const rawSearch = typeof query.search === "string" ? query.search : "";
+  const rawSearch = firstQueryValue(query.search);
 
   return {
     search: rawSearch.trim().slice(0, 100),
@@ -60,6 +64,85 @@ export async function listProjects(request, response, next) {
         : 24;
 
     const listQuery = parseProjectListQuery(request.query);
+
+    // #region agent log
+    fetch("http://127.0.0.1:7357/ingest/72510f6d-f5b6-45ba-ae6f-f2d8e8c97f05", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Debug-Session-Id": "812e1e",
+      },
+      body: JSON.stringify({
+        sessionId: "812e1e",
+        runId: "pre-fix",
+        hypothesisId: "A",
+        location: "projectController.js:parseProjectListQuery",
+        message: "incoming vs parsed filter query",
+        data: {
+          rawQuery: request.query,
+          parsedQuery: listQuery,
+          dropped: {
+            category:
+              Boolean(request.query.category) && !listQuery.category,
+            technology:
+              Boolean(request.query.technology) && !listQuery.technology,
+            locationType:
+              Boolean(request.query.locationType) && !listQuery.locationType,
+            experienceLevel:
+              Boolean(request.query.experienceLevel) &&
+              !listQuery.experienceLevel,
+            weeklyCommitment:
+              Boolean(request.query.weeklyCommitment) &&
+              !listQuery.weeklyCommitment,
+            duration:
+              Boolean(request.query.duration) && !listQuery.duration,
+          },
+        },
+        timestamp: Date.now(),
+      }),
+    }).catch(() => {});
+    // #endregion
+
+    // #region agent log
+    fetch("http://127.0.0.1:7357/ingest/72510f6d-f5b6-45ba-ae6f-f2d8e8c97f05", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Debug-Session-Id": "812e1e",
+      },
+      body: JSON.stringify({
+        sessionId: "812e1e",
+        runId: "post-fix",
+        hypothesisId: "F",
+        location: "projectController.js:listProjects",
+        message: "query value types after coerce",
+        data: {
+          originalUrl: request.originalUrl,
+          types: {
+            page: {
+              type: typeof request.query.page,
+              isArray: Array.isArray(request.query.page),
+            },
+            category: {
+              type: typeof request.query.category,
+              isArray: Array.isArray(request.query.category),
+            },
+            technology: {
+              type: typeof request.query.technology,
+              isArray: Array.isArray(request.query.technology),
+            },
+            search: {
+              type: typeof request.query.search,
+              isArray: Array.isArray(request.query.search),
+            },
+          },
+          parsedCategory: listQuery.category,
+          parsedSearch: listQuery.search,
+        },
+        timestamp: Date.now(),
+      }),
+    }).catch(() => {});
+    // #endregion
 
     const { projects, totalProjects } = await getPublicProjects(
       page,

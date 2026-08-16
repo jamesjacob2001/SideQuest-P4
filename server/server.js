@@ -15,14 +15,14 @@ dotenv.config({
   path: resolve(currentDirectory, "../.env"),
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number.parseInt(process.env.PORT, 10) || 3000;
 
 async function startServer() {
   try {
     await connectToDatabase();
 
-    const server = app.listen(PORT, () => {
-      console.log(`SideQuest server running on http://localhost:${PORT}`);
+    const server = app.listen(PORT, "0.0.0.0", () => {
+      console.log(`SideQuest server running on port ${PORT}`);
     });
 
     async function shutDown(signal) {
