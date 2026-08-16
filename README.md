@@ -9,6 +9,13 @@
 
 [Click here for class link](https://johnguerra.co/classes/webDevelopment_online_summer_2026/)
 
+## Live App
+
+| Service | URL |
+| ------- | --- |
+| Frontend | https://side-quest-p4.vercel.app/ |
+| API | https://sidequest-p4-production.up.railway.app |
+
 ## Project Objective
 
 SideQuest helps students discover side projects, find collaborators across fields, and manage teams. Users can browse projects, create and edit their own, maintain profiles, request to join roles, and track memberships from a personal dashboard.
@@ -23,7 +30,7 @@ Below is a screenshot of the SideQuest application running.
 
 ## How to Use the App
 
-1. Open the frontend (local: http://localhost:5173).
+1. Open the live app at [https://side-quest-p4.vercel.app/](https://side-quest-p4.vercel.app/) (or locally at http://localhost:5173).
 2. **Browse Projects** to explore public projects (no login required).
 3. **Sign Up** or **Log In** (seeded demo password: `Password123!`).
 4. Edit **My Profile**, **Create Project**, apply to roles, and manage requests on **Dashboard**.
