@@ -14,3 +14,17 @@ createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </StrictMode>,
 );
+
+function titleUntitledFrames() {
+  document.querySelectorAll("iframe").forEach((frame) => {
+    if (!frame.getAttribute("title")) {
+      frame.setAttribute("title", "Embedded content");
+    }
+  });
+}
+
+titleUntitledFrames();
+new MutationObserver(titleUntitledFrames).observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+});

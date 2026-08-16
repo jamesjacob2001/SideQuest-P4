@@ -74,7 +74,7 @@
 
 .helpText {
   margin: 0;
-  color: #9ea0ab;
+  color: var(--color-text-subtle);
   font-size: 0.85rem;
   line-height: 1.4;
 }

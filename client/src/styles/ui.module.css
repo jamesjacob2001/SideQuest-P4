@@ -206,15 +206,15 @@
 }
 
 .statusBadge[data-status="Recruiting"] {
-  background-color: #9879d9;
+  background-color: #5c3ca8;
 }
 
 .statusBadge[data-status="In progress"] {
-  background-color: #2f9d6e;
+  background-color: #176b45;
 }
 
 .statusBadge[data-status="On hold"] {
-  background-color: #c4923a;
+  background-color: #8a6418;
 }
 
 .statusBadge[data-status="Finished"] {
